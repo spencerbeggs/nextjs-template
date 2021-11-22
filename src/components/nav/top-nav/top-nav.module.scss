@@ -1,0 +1,27 @@
+.topNav {
+    height: 64px;
+    padding-left: 25px;
+    padding-right: 50px;
+    width: 100vw;
+    @apply fixed flex flex-row items-center bg-black filter drop-shadow-lg;
+}
+
+.menu {
+    cursor: pointer;
+    line-height: 0;
+    @apply flex flex-row items-center;
+    .foo {
+        color: red;
+    }
+}
+
+.menuTitle {
+    color: #fff;
+    padding-left: 25px;
+    @apply whitespace-nowrap;
+}
+
+.menuTitle {
+    composes: menuTitle;
+    @apply w-0;
+}

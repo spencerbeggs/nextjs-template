@@ -5,7 +5,8 @@
 		"editor.formatOnSave": false
 	},
 	"search.exclude": {
-		"**/node_modules": true
+		"**/node_modules": true,
+		"**/.next": true
 	},
 	"deno.enable": false,
 	"yaml.format.enable": true,
@@ -16,10 +17,11 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true,
 		"source.fixAll.markdownlint": true,
-		"source.addMissingImports": true
+		"source.addMissingImports": true,
+		"source.fixAll.stylelint": true
 	},
 	"eslint.options": {
-		"configFile": ".eslintrc"
+		"overrideConfigFile": ".eslintrc"
 	},
 	"prettier.enable": true,
 	"prettier.configPath": ".prettierrc",
@@ -27,11 +29,14 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
+	"[scss]": {
+		"editor.formatOnSave": true
+	},
 	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,
 	"npm.packageManager": "yarn",
-	"stylelint.enable": false,
+	"stylelint.enable": true,
 	"aws.sam.enableCodeLenses": false,
 	"typescript.tsdk": "node_modules/typescript/lib"
 }

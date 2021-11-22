@@ -1,3 +1,8 @@
 {
-	"recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "stevenhansel.vscode-nvm"]
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"stevenhansel.vscode-nvm",
+		"stylelint.vscode-stylelint"
+	]
 }

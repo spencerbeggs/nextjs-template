@@ -1,0 +1,5 @@
+.layout {
+    @apply flex flex-col items-center bg-white-default min-h-screen overflow-y-hidden;
+    min-height: calc(100vh - 64px);
+    padding-top: 64px;
+}
