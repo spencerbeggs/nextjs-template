@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"compilerOptions": {
-		"target": "esnext",
+		"target": "es2021",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"baseUrl": ".",
 		"allowJs": true,

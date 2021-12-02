@@ -1,7 +1,7 @@
 .wrapper {
+	@apply container flex flex-col md:mx-auto px-0 lg:px-20;
 	background-color: #fff;
 	min-height: 100vh;
-	@apply container flex flex-col md:mx-auto px-0 lg:px-20;
 	&:first-child {
 		min-height: calc(100vh - 64px);
 	}

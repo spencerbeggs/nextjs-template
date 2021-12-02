@@ -4,7 +4,7 @@ import styles from "./app.module.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<main>
+		<main className={styles.main}>
 			<Component {...pageProps} />
 		</main>
 	);

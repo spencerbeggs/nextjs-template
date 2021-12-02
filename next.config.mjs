@@ -1,38 +1,39 @@
-import { join } from "path";
+import { mkdirSync, writeFileSync } from "fs";
 import { env } from "process";
-import { dirname } from "dirname-filename-esm";
-import fs from "fs-extra";
 
 let wrotePackageJson = false;
 
 /** @type {import('next').NextConfig} */
 function config(phase, nextConfig = {}) {
 	const assetPrefix = process.env.SITE_DOMAIN;
-	const __dirname = dirname(import.meta);
-	console.log(join(__dirname, "src/util/scss"));
 	return Object.assign(
 		{
 			assetPrefix,
-			//swcMinify: true,
+			swcMinify: true,
 			reactStrictMode: true,
 			compress: true,
 			poweredByHeader: false,
-			// experimental: {
-			// 	concurrentFeatures: true,
-			// 	serverComponents: true,
-			// 	reactRoot: true
-			// },
+			experimental: {
+				//concurrentFeatures: true
+			},
 			sassOptions: {
-				includePaths: [join(__dirname, "src/util/scss")],
-				prependData:
-					["colors", "variables", "mixins", "fonts"].map((line) => `@import "_${line}.scss";`).join("\n") + "\n"
+				includePaths: [new URL("src/util/scss", import.meta.url).pathname],
+				prependData: `
+				@import "_colors.scss";
+				@import "_fonts.scss";
+				@import "_variables.scss";
+				@import "_mixins.scss";
+			  `
+					.trim()
+					.split("\n")
+					.map((line) => line.trim())
+					.join("\n")
+					.trim()
 			}
 		},
 		nextConfig,
 		{
 			webpack: (config, { webpack }) => {
-				config.infrastructureLogging = { debug: /PackFileCache/ };
-
 				config.plugins.push(
 					// provides commonly used modules and their exports as global variables
 					// when ever the global is refeferenced in a module
@@ -96,8 +97,11 @@ function config(phase, nextConfig = {}) {
 				// });
 				if (!wrotePackageJson) {
 					// eslint-disable-next-line import/no-named-as-default-member
-					fs.mkdirSync(join(__dirname, ".next"), { recursive: true });
-					fs.writeFileSync(join(__dirname, ".next/package.json"), JSON.stringify({ type: "commonjs" }));
+					mkdirSync(new URL(".next", import.meta.url), { recursive: true });
+					writeFileSync(
+						new URL(".next/package.json", import.meta.url).pathname,
+						JSON.stringify({ type: "commonjs" })
+					);
 					wrotePackageJson = true;
 				}
 				//console.log(config);
