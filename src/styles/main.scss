@@ -6,9 +6,10 @@
 
 /* Write you own custom component styles here */
 body {
-    overscroll-behavior-x: none;
-    overscroll-behavior-y: none;
+	overscroll-behavior-x: none;
+	overscroll-behavior-y: none;
 }
+
 /* Start purging... */
 @tailwind utilities;
 /* Stop purging. */

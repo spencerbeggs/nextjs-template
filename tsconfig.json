@@ -24,7 +24,7 @@
 			"@util/*": ["src/util/*"]
 		}
 	},
-	"include": ["types/*.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": ["types/*.d.ts", "**/*.ts", "**/*.tsx", "server.mjs", "tailwind.config.cjs"],
 	"exclude": ["node_modules"],
 	"ts-node": {
 		"require": ["tsconfig-paths/register"]

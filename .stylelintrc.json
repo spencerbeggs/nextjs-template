@@ -1,7 +1,13 @@
 {
+	"syntax": "post-scss",
 	"extends": "stylelint-config-recommended-scss",
 	"plugins": ["stylelint-order", "stylelint-scss"],
-	"syntax": "postcss-scss",
+	"overrides": [
+		{
+			"files": ["**/*.scss"],
+			"customSyntax": "postcss-scss"
+		}
+	],
 	"rules": {
 		"order/properties-alphabetical-order": true,
 		"scss/at-rule-no-unknown": null,
@@ -13,8 +19,13 @@
 			}
 		],
 		"indentation": "tab",
-		"baseIndentLevel": 3,
 		"declaration-block-trailing-semicolon": null,
-		"no-descending-specificity": null
+		"no-descending-specificity": null,
+		"property-no-unknown": [
+			true,
+			{
+				"ignoreProperties": ["composes"]
+			}
+		]
 	}
 }

@@ -6,14 +6,10 @@
 	},
 	"search.exclude": {
 		"**/node_modules": true,
-		"**/.next": true
+		"**/.next": true,
+		"**/.ssl": true
 	},
 	"deno.enable": false,
-	"yaml.format.enable": true,
-	"[yaml]": {
-		"editor.insertSpaces": true,
-		"editor.formatOnSave": true
-	},
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true,
 		"source.fixAll.markdownlint": true,
@@ -30,13 +26,15 @@
 		"editor.formatOnSave": true
 	},
 	"[scss]": {
-		"editor.formatOnSave": true
+		"editor.defaultFormatter": "stylelint.vscode-stylelint"
 	},
 	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,
 	"npm.packageManager": "yarn",
 	"stylelint.enable": true,
+	"stylelint.validate": ["css", "scss"],
+	"stylelint.configFile": ".stylelintrc.json",
 	"aws.sam.enableCodeLenses": false,
 	"typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,0 +1,22 @@
+@import "./fonts/neue-haas.scss";
+@import "./fonts/roslindale.scss";
+
+html {
+	font-size: 16px;
+}
+
+body {
+	@apply font-body;
+}
+
+a {
+	@apply text-cornflower-medium
+		underline;
+
+	&:hover {
+		// Important: similar to what we did for media queries, we must
+		// declare styles for pseudo-selectors using its own rule.
+		// Using `hover:text-white` will throw an error when styles compile.
+		@apply text-white-default;
+	}
+}
