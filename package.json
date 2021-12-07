@@ -12,14 +12,14 @@
 	},
 	"type": "module",
 	"scripts": {
-		"dev": "APP_ENV=local node --experimental-specifier-resolution=node server.mjs",
+		"dev": "APP_ENV=local node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node server.ts",
 		"build": "next build",
 		"next": "next start",
 		"engines": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node ./lib/scripts/engines.ts",
-		"lint": "eslint . --ext .ts,.cjs,.js",
-		"lint-fix": "eslint . --ext .ts,.cjs,.js --fix",
+		"lint": "eslint . --ext .ts,.cjs,.mjs,.js",
+		"lint-fix": "eslint . --ext .ts,.cjs,.mjs,.js --fix",
 		"start": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node index.ts",
-		"ssl": "node --no-warnings --loader ts-node/esm ./lib/scripts/ssl.ts",
+		"ssl": "node --no-warnings --loader ts-node/esm --experimental-import-meta-resolve --experimental-specifier-resolution=node ./lib/scripts/ssl.ts",
 		"test": "jest",
 		"test-ci": "TEST_ENV=ci jest --ci",
 		"travis": "jest --coverage --coverageReporters=text-lcov | coveralls"
@@ -55,11 +55,13 @@
 		"file-loader": "^6.2.0",
 		"finalhandler": "^1.1.2",
 		"fs-extra": "^10.0.0",
+		"image-webpack-loader": "^8.0.1",
 		"jest": "^27.4.3",
 		"jest-console": "^0.1.0",
 		"pem": "^1.14.4",
 		"prettier": "^2.5.0",
 		"sass": "^1.44.0",
+		"sass-loader": "^12.3.0",
 		"semver": "^7.3.5",
 		"serve-static": "^1.14.1",
 		"stylelint": "^14.1.0",
@@ -80,7 +82,7 @@
 		"lodash-es": "^4.17.21",
 		"next": "12.0.5-canary.13",
 		"next-redux-wrapper": "^7.0.5",
-		"postcss": "^8.4.4",
+		"postcss": "8.4.4",
 		"postcss-import": "^14.0.2",
 		"postcss-nested": "^5.0.6",
 		"postcss-scss": "^4.0.2",
@@ -97,6 +99,6 @@
 		"webpack": "^5.64.4"
 	},
 	"resolutions": {
-		"postcss": "8.2.15"
+		"postcss": "8"
 	}
 }

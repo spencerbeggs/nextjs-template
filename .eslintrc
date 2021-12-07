@@ -2,7 +2,7 @@
 	"root": true,
 	"parser": "@typescript-eslint/parser",
 	"plugins": ["@typescript-eslint", "prettier"],
-	"extends": ["plugin:import/recommended", "plugin:import/typescript", "prettier", "next"],
+	"extends": ["plugin:import/recommended", "plugin:import/typescript", "prettier", "plugin:@next/next/recommended"],
 	"parserOptions": {
 		"ecmaVersion": 2021,
 		"sourceType": "module"
@@ -42,7 +42,7 @@
 		]
 	},
 	"settings": {
-		"import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+		"import/extensions": [".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx"],
 		"import/parsers": {
 			"@typescript-eslint/parser": [".ts", ".tsx"]
 		},

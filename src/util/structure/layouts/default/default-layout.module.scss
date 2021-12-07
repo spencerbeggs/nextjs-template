@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap");
+
+.main {
+	@apply min-h-screen w-screen relative;
+	// Using Tailwind with `@apply` in rules
+}
+
 .layout {
 	@apply flex flex-col items-center bg-white-default min-h-screen overflow-y-hidden;
 	min-height: calc(100vh - 64px);

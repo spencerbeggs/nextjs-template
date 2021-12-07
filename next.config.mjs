@@ -8,7 +8,7 @@ function config(phase, nextConfig = {}) {
 	const assetPrefix = process.env.SITE_DOMAIN;
 	return Object.assign(
 		{
-			assetPrefix,
+			//assetPrefix,
 			swcMinify: true,
 			reactStrictMode: true,
 			compress: true,
@@ -100,7 +100,7 @@ function config(phase, nextConfig = {}) {
 					mkdirSync(new URL(".next", import.meta.url), { recursive: true });
 					writeFileSync(
 						new URL(".next/package.json", import.meta.url).pathname,
-						JSON.stringify({ type: "commonjs" })
+						JSON.stringify({ type: "commonjs" }, null, "\t")
 					);
 					wrotePackageJson = true;
 				}

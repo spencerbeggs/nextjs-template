@@ -24,10 +24,13 @@
 			"@util/*": ["src/util/*"]
 		}
 	},
-	"include": ["types/*.d.ts", "**/*.ts", "**/*.tsx", "server.mjs", "tailwind.config.cjs"],
+	"include": ["types/*.d.ts", "**/*.ts", "**/*.tsx", "server.ts", "tailwind.config.cjs"],
 	"exclude": ["node_modules"],
 	"ts-node": {
-		"require": ["tsconfig-paths/register"]
+		"require": ["tsconfig-paths/register"],
+		"moduleTypes": {
+			"next.config.mjs": "cjs"
+		}
 	},
 	"typeRoots": ["./node_modules/@types", "./types"]
 }

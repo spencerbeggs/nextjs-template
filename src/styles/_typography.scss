@@ -1,5 +1,5 @@
-//@import "./fonts/neue-haas.scss";
-//@import "./fonts/roslindale.scss";
+@import "./fonts/neue-haas";
+@import "./fonts/roslindale";
 
 html {
 	font-size: 16px;
@@ -10,8 +10,7 @@ body {
 }
 
 a {
-	@apply text-cornflower-medium
-		underline;
+	@apply text-cornflower-medium underline;
 
 	&:hover {
 		// Important: similar to what we did for media queries, we must

@@ -1,11 +1,21 @@
+import Head from "next/head";
+import React, { ReactElement } from "react";
+import { DefaultLayout } from "@util/structure/layouts/default";
 import styles from "./home.module.scss";
 
-const Home: React.FC = () => {
+export default function Home() {
 	return (
-		<div className={styles.home}>
-			<h1>Hello world!</h1>
-		</div>
+		<>
+			<Head>
+				<title key="title">Home</title>
+			</Head>
+			<div className={styles.home}>
+				<h1>Hello world!</h1>
+			</div>
+		</>
 	);
-};
+}
 
-export default Home;
+Home.getLayout = function getLayout(page: ReactElement) {
+	return <DefaultLayout>{page}</DefaultLayout>;
+};
