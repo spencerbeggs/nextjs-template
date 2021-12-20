@@ -1,17 +1,8 @@
 @tailwind base;
-
-/* Start purging... */
 @tailwind components;
-/* Stop purging. */
+@tailwind utilities;
 
-/* Write you own custom component styles here */
 body {
 	overscroll-behavior-x: none;
 	overscroll-behavior-y: none;
 }
-
-/* Start purging... */
-@tailwind utilities;
-/* Stop purging. */
-
-/* Your own custom utilities */

@@ -3,37 +3,46 @@ import { env } from "process";
 
 let wrotePackageJson = false;
 
+const sccsUtils = (filenames, folder) => {
+	return filenames
+		.reduce((acc, filename) => {
+			//const pathname = new URL(`src/styles/${folder}/${filename}`, import.meta.url).pathname;
+			acc.push(`@import "${filename}";`);
+			return acc;
+		}, [])
+		.join("\n");
+};
+
 /** @type {import('next').NextConfig} */
 function config(phase, nextConfig = {}) {
-	const assetPrefix = process.env.SITE_DOMAIN;
+	//const assetPrefix = process.env.SITE_DOMAIN;
 	return Object.assign(
 		{
 			//assetPrefix,
-			swcMinify: true,
+			swcMinify: process.env.APP_ENV !== "local",
 			reactStrictMode: true,
 			compress: true,
 			poweredByHeader: false,
 			experimental: {
+				outputFileTracingRoot: true,
+				disablePostcssPresetEnv: true
 				//concurrentFeatures: true
 			},
+			images: {
+				formats: ["image/avif", "image/webp"]
+			},
 			sassOptions: {
-				includePaths: [new URL("src/util/scss", import.meta.url).pathname],
-				prependData: `
-				@import "_colors.scss";
-				@import "_fonts.scss";
-				@import "_variables.scss";
-				@import "_mixins.scss";
-			  `
-					.trim()
-					.split("\n")
-					.map((line) => line.trim())
-					.join("\n")
-					.trim()
+				includePaths: [new URL("src/styles/utils", import.meta.url).pathname],
+				prependData: sccsUtils(["_variables.scss", "_colors.scss", "_fonts.scss", "_mixins.scss"]),
+				sourceMap: true
 			}
 		},
 		nextConfig,
 		{
-			webpack: (config, { webpack }) => {
+			webpack: (config, { webpack, isServer }) => {
+				// if (PHASE_DEVELOPMENT_SERVER) {
+				// 	config.resolve.fallback.fs = false;
+				// }
 				config.plugins.push(
 					// provides commonly used modules and their exports as global variables
 					// when ever the global is refeferenced in a module
@@ -56,6 +65,24 @@ function config(phase, nextConfig = {}) {
 						NextPageContext: ["next", "NextPageContext"]
 					})
 				);
+
+				// config.module.rules.unshift({
+				// 	test: /\.s[ac]ss$/i,
+				// 	use: [
+				// 		"style-loader",
+				// 		{
+				// 			loader: "css-loader",
+				// 			options: {
+				// 				sourceMap: process.env.APP_ENV === "local"
+				// 			}
+				// 		},
+				// 		{
+				// 			loader: "sass-loader",
+				// 			options: {
+				// 			}
+				// 		}
+				// 	]
+				// });
 
 				// config.module.rules.unshift({
 				// 	test: /\.(gif|png|svg|jpe?g)$/i,
@@ -95,7 +122,8 @@ function config(phase, nextConfig = {}) {
 				// Object.entries(compilerOptions.paths).forEach(([key, value]) => {
 				// 	config.resolve.alias[key.replace("*", "")] = join(__dirname, `${value[0].replace("*", "")}`);
 				// });
-				if (!wrotePackageJson) {
+
+				if (isServer && !wrotePackageJson) {
 					// eslint-disable-next-line import/no-named-as-default-member
 					mkdirSync(new URL(".next", import.meta.url), { recursive: true });
 					writeFileSync(
@@ -104,6 +132,7 @@ function config(phase, nextConfig = {}) {
 					);
 					wrotePackageJson = true;
 				}
+				//config.infrastructureLogging = { debug: /PackFileCache/ };
 				//console.log(config);
 				return config;
 			}

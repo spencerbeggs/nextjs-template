@@ -15,7 +15,19 @@
 		"at-rule-no-unknown": [
 			true,
 			{
-				"ignoreAtRules": ["/apply/", "/tailwind/", "/screen/", "/if/", "/else/", "/return/", "/function/", "/debug/"]
+				"ignoreAtRules": [
+					"/apply/",
+					"/tailwind/",
+					"/screen/",
+					"/if/",
+					"/else/",
+					"/return/",
+					"/function/",
+					"/debug/",
+					"/layer/",
+					"/mixin/",
+					"/include/"
+				]
 			}
 		],
 		"indentation": "tab",

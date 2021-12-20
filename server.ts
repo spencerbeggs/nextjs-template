@@ -65,11 +65,15 @@ server.on("request", (req: IncomingMessage, res: ServerResponse) => {
 	if (req.url && staticPaths.includes(req.url)) {
 		return staticServer(req, res, () => done);
 	}
-	console.log(req.url);
 });
 
 server.on("request", (req: IncomingMessage, res: ServerResponse) => {
-	if (req.url && !req.url.startsWith("/_next/") && !req.url.startsWith("/__nextjs_original-stack-frame")) {
+	if (
+		req.url &&
+		!req.url.startsWith("/_next/") &&
+		!req.url.startsWith("/__nextjs_original-stack-frame") &&
+		!staticPaths.includes(req.url)
+	) {
 		console.log(`[ ${chalk.green("GET")} ] ${req.url}`);
 	}
 	handle(req, res);

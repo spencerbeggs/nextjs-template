@@ -1,12 +1,12 @@
 module.exports = {
-	mode: "jit",
-	purge: ["./src/components/**/*.{js,ts,jsx,tsx}", "./src/pages/**/*.{js,ts,jsx,tsx}"],
+	content: ["./src/components/**/*.{js,ts,jsx,tsx}", "./src/pages/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		container: {
 			center: true
 		},
 		fontFamily: {
 			sans: [
+				"Neue Haas Grotesk Text Pro",
 				"ui-sans-serif",
 				"system-ui",
 				"-apple-system",
@@ -68,6 +68,5 @@ module.exports = {
 			}
 		}
 	},
-	variants: {},
-	plugins: []
+	plugins: ["@tailwindcss/typography", "@tailwindcss/forms", "@tailwindcss/aspect-ratio", "@tailwindcss/line-clamp"]
 };
