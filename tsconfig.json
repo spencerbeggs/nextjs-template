@@ -24,13 +24,10 @@
 			"@util/*": ["src/util/*"]
 		}
 	},
-	"include": ["types/*.d.ts", "**/*.ts", "**/*.tsx", "server.ts", "tailwind.config.mjs"],
+	"include": ["types/*.d.ts", "**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"],
 	"ts-node": {
-		"require": ["tsconfig-paths/register"],
-		"moduleTypes": {
-			"postcss-config.mjs": "cjs"
-		}
+		"require": ["tsconfig-paths/register"]
 	},
 	"typeRoots": ["./node_modules/@types", "./types"]
 }

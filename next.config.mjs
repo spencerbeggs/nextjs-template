@@ -1,9 +1,6 @@
-import { mkdirSync, writeFileSync } from "fs";
 import { env } from "process";
 
-let wrotePackageJson = false;
-
-const sccsUtils = (filenames, folder) => {
+const sccsUtils = (filenames) => {
 	return filenames
 		.reduce((acc, filename) => {
 			//const pathname = new URL(`src/styles/${folder}/${filename}`, import.meta.url).pathname;
@@ -15,21 +12,20 @@ const sccsUtils = (filenames, folder) => {
 
 /** @type {import('next').NextConfig} */
 function config(phase, nextConfig = {}) {
-	//const assetPrefix = process.env.SITE_DOMAIN;
+	//const assetPrefix = "https://local.next.com";
+	//console.log(assetPrefix);
 	return Object.assign(
 		{
-			//assetPrefix,
 			swcMinify: process.env.APP_ENV !== "local",
 			reactStrictMode: true,
-			compress: true,
+			compress: false,
 			poweredByHeader: false,
 			experimental: {
-				outputFileTracingRoot: true,
-				disablePostcssPresetEnv: true
-				//concurrentFeatures: true
+				outputFileTracingRoot: true
 			},
 			images: {
-				formats: ["image/avif", "image/webp"]
+				formats: ["image/avif", "image/webp"],
+				domains: ["local.next.com", "spencerbeggs.local"]
 			},
 			sassOptions: {
 				includePaths: [new URL("src/styles/utils", import.meta.url).pathname],
@@ -39,10 +35,7 @@ function config(phase, nextConfig = {}) {
 		},
 		nextConfig,
 		{
-			webpack: (config, { webpack, isServer }) => {
-				// if (PHASE_DEVELOPMENT_SERVER) {
-				// 	config.resolve.fallback.fs = false;
-				// }
+			webpack: (config, { webpack }) => {
 				config.plugins.push(
 					// provides commonly used modules and their exports as global variables
 					// when ever the global is refeferenced in a module
@@ -64,6 +57,10 @@ function config(phase, nextConfig = {}) {
 						GetServerSideProps: ["next", "GetServerSideProps"],
 						NextPageContext: ["next", "NextPageContext"]
 					})
+					// new MiniCssExtractPlugin({
+					// 	filename: "../css/[name].css",
+					// 	ignoreOrder: true
+					// })
 				);
 
 				// config.module.rules.unshift({
@@ -84,26 +81,50 @@ function config(phase, nextConfig = {}) {
 				// 	]
 				// });
 
-				// config.module.rules.unshift({
-				// 	test: /\.(gif|png|svg|jpe?g)$/i,
-				// 	issuer: /\.sc?ss$/,
+				// config.module.rules.unshift(
+				// 	{
+				// 		test: /\.(gif|png|svg|jpe?g)$/i,
+				// 		issuer: /\.jsx?$/,
+				// 		use: [
+				// 			{
+				// 				loader: "file-loader",
+				// 				options: {
+				// 					name: "[name].[hash].[ext]",
+				// 					outputPath: "./static/images",
+				// 					publicPath: "/_next/static/media/"
+				// 				}
+				// 			}
+				// {
+				// 	loader: "image-webpack-loader",
+				// 	options: {
+				// 		disable: process.env.APP_ENV === "local"
+				// 	}
+				// }
+				// 	]
+				// }
+				// {
+				// 	test: /\.css$/i,
+				// 	use: ["style-loader", "css-loader"]
+				// },
+				// {
+				// 	test: /\.scss$/,
 				// 	use: [
 				// 		{
-				// 			loader: "file-loader",
+				// 			loader: MiniCssExtractPlugin.loader,
 				// 			options: {
-				// 				name: "[name].[hash].[ext]",
-				// 				outputPath: "./static/images",
-				// 				publicPath: "/_next/static/media/"
+				// 				hot: process.env.APP_ENV === "local"
 				// 			}
 				// 		},
+				// 		"css-loader",
 				// 		{
-				// 			loader: "image-webpack-loader",
+				// 			loader: "sass-loader",
 				// 			options: {
-				// 				disable: process.env.APP_ENV === "local"
+				// 				sourceMap: true
 				// 			}
 				// 		}
 				// 	]
-				// });
+				// }
+				//);
 
 				// Mirror's Next.js environment variables configuration with
 				config.plugins.push(
@@ -123,15 +144,6 @@ function config(phase, nextConfig = {}) {
 				// 	config.resolve.alias[key.replace("*", "")] = join(__dirname, `${value[0].replace("*", "")}`);
 				// });
 
-				if (isServer && !wrotePackageJson) {
-					// eslint-disable-next-line import/no-named-as-default-member
-					mkdirSync(new URL(".next", import.meta.url), { recursive: true });
-					writeFileSync(
-						new URL(".next/package.json", import.meta.url).pathname,
-						JSON.stringify({ type: "commonjs" }, null, "\t")
-					);
-					wrotePackageJson = true;
-				}
 				//config.infrastructureLogging = { debug: /PackFileCache/ };
 				//console.log(config);
 				return config;

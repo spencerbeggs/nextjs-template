@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	overscroll-behavior-x: none;
-	overscroll-behavior-y: none;
+@layer base {
+	body {
+		@apply font-body;
+		background: #fff;
+		overscroll-behavior-x: none;
+		overscroll-behavior-y: none;
+	}
+	h1 {
+		@apply font-headline text-lg;
+	}
+	a {
+		@apply text-cornflower-medium underline;
+		&:hover {
+			@apply text-white-default;
+		}
+	}
 }
+
+
