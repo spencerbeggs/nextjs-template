@@ -12,16 +12,19 @@ const sccsUtils = (filenames) => {
 
 /** @type {import('next').NextConfig} */
 function config(phase, nextConfig = {}) {
-	//const assetPrefix = "https://local.next.com";
+	//console.log(phase);
+	const assetPrefix = "https://local.next.com";
 	//console.log(assetPrefix);
 	return Object.assign(
 		{
+			assetPrefix,
 			swcMinify: process.env.APP_ENV !== "local",
 			reactStrictMode: true,
 			compress: false,
 			poweredByHeader: false,
 			experimental: {
-				outputFileTracingRoot: true
+				outputFileTracingRoot: true,
+				disablePostcssPresetEnv: true
 			},
 			images: {
 				formats: ["image/avif", "image/webp"],
@@ -145,7 +148,7 @@ function config(phase, nextConfig = {}) {
 				// });
 
 				//config.infrastructureLogging = { debug: /PackFileCache/ };
-				//console.log(config);
+				//log(config);
 				return config;
 			}
 		}

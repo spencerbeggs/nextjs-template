@@ -13,18 +13,6 @@ type AppPropsWithLayout = AppProps & {
 	Component: NextPageWithLayout;
 };
 
-let ws: WebSocket;
-
-if (typeof window !== "undefined") {
-	ws = new WebSocket(window.location.origin.replace(/^http/i, "ws"));
-	// @ts-ignore
-	window.ws = ws;
-
-	ws.onmessage = (evt) => {
-		console.log(evt);
-	};
-}
-
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout || ((page) => page);
 	return getLayout(
