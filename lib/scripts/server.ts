@@ -37,7 +37,7 @@ const isHttp1Request = (req: any): req is IncomingMessage => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isHttp1Response = (res: any): res is ServerResponse => {
-	return res.httpVersion !== "2.0";
+	return res.req.httpVersion !== "2.0";
 };
 
 const server = createSecureServer({
@@ -52,13 +52,19 @@ server.on("unknownProtocol", (socket) => {
 	console.log("unknownProtocol", socket);
 });
 
-server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse) => {
+server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse & ServerResponse) => {
 	if (isHttp1Request(req) && isHttp1Response(res)) {
 		const url = new URL(req.url, site.origin);
+		const [, port] = req.headers.host?.split(":") ?? [];
+		if (port === "80") {
+			res.statusCode = 301;
+			res.setHeader("Location", url.toString());
+			res.end();
+		}
 		if (url.pathname.startsWith("/_next/image")) {
 			if (url.searchParams.has("url")) {
 				const target = new URL(url.searchParams.get("url") ?? "");
-				if (target.origin === `https://${hostname()}:${app.port}`) {
+				if (target.origin === `https://${app.hostname}:${app.port}`) {
 					url.searchParams.set("url", target.toString().replace(target.origin, ""));
 					req.url = url.toString().replace(url.origin, "");
 				}

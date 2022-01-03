@@ -1,5 +1,5 @@
 import useEventListener from "@use-it/event-listener";
-import { throttle } from "lodash-es";
+import throttle from "lodash-es/throttle";
 import { useState } from "react";
 
 export const useResize = (ms = 0, onResize?: (height: number, width: number) => void): [width: number, height: number] => {

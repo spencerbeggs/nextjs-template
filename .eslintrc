@@ -16,7 +16,7 @@
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
 		"semi": ["error", "always"],
-		"quotes": ["error", "double"],
+		"quotes": ["error", "double", { "avoidEscape": true, "allowTemplateLiterals": true }],
 		"comma-dangle": "off",
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/no-explicit-any": 1,

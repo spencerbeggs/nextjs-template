@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { ReactElement } from "react";
-import { DefaultLayout } from "@util/structure/layouts/default";
+import { DefaultLayout } from "@components/layouts/default";
 import styles from "./home.module.scss";
 
 export default function Home() {

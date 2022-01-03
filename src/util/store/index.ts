@@ -1,4 +1,4 @@
-import { IncomingHttpHeaders } from "http";
+import type { IncomingHttpHeaders } from "http";
 import { createRouterMiddleware, initialRouterState, routerReducer } from "connected-next-router";
 import type { RouterState } from "connected-next-router/types";
 import { Context, createWrapper, HYDRATE, MakeStore } from "next-redux-wrapper";
