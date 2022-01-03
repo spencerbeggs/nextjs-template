@@ -7,7 +7,7 @@
 			"name": "Start",
 			"skipFiles": ["<node_internals>/**"],
 			"runtimeArgs": ["--no-warnings", "--loader", "ts-node/esm", "--experimental-specifier-resolution=node"],
-			"args": ["${workspaceFolder}/index.ts"]
+			"args": ["${workspaceFolder}/lib/scripts/server.ts"]
 		}
 	]
 }

@@ -12,9 +12,7 @@ const sccsUtils = (filenames) => {
 
 /** @type {import('next').NextConfig} */
 function config(phase, nextConfig = {}) {
-	//console.log(phase);
-	const assetPrefix = "https://local.next.com";
-	//console.log(assetPrefix);
+	const assetPrefix = env.DEV_ASSET_PREFIX;
 	return Object.assign(
 		{
 			assetPrefix,
@@ -60,74 +58,7 @@ function config(phase, nextConfig = {}) {
 						GetServerSideProps: ["next", "GetServerSideProps"],
 						NextPageContext: ["next", "NextPageContext"]
 					})
-					// new MiniCssExtractPlugin({
-					// 	filename: "../css/[name].css",
-					// 	ignoreOrder: true
-					// })
 				);
-
-				// config.module.rules.unshift({
-				// 	test: /\.s[ac]ss$/i,
-				// 	use: [
-				// 		"style-loader",
-				// 		{
-				// 			loader: "css-loader",
-				// 			options: {
-				// 				sourceMap: process.env.APP_ENV === "local"
-				// 			}
-				// 		},
-				// 		{
-				// 			loader: "sass-loader",
-				// 			options: {
-				// 			}
-				// 		}
-				// 	]
-				// });
-
-				// config.module.rules.unshift(
-				// 	{
-				// 		test: /\.(gif|png|svg|jpe?g)$/i,
-				// 		issuer: /\.jsx?$/,
-				// 		use: [
-				// 			{
-				// 				loader: "file-loader",
-				// 				options: {
-				// 					name: "[name].[hash].[ext]",
-				// 					outputPath: "./static/images",
-				// 					publicPath: "/_next/static/media/"
-				// 				}
-				// 			}
-				// {
-				// 	loader: "image-webpack-loader",
-				// 	options: {
-				// 		disable: process.env.APP_ENV === "local"
-				// 	}
-				// }
-				// 	]
-				// }
-				// {
-				// 	test: /\.css$/i,
-				// 	use: ["style-loader", "css-loader"]
-				// },
-				// {
-				// 	test: /\.scss$/,
-				// 	use: [
-				// 		{
-				// 			loader: MiniCssExtractPlugin.loader,
-				// 			options: {
-				// 				hot: process.env.APP_ENV === "local"
-				// 			}
-				// 		},
-				// 		"css-loader",
-				// 		{
-				// 			loader: "sass-loader",
-				// 			options: {
-				// 				sourceMap: true
-				// 			}
-				// 		}
-				// 	]
-				// }
-				//);
 
 				// Mirror's Next.js environment variables configuration with
 				config.plugins.push(
@@ -140,12 +71,6 @@ function config(phase, nextConfig = {}) {
 						}, {})
 					})
 				);
-
-				// eslint-disable-next-line import/no-named-as-default-member
-				// const { compilerOptions } = fs.readJSONSync(join(__dirname, "./tsconfig.json"));
-				// Object.entries(compilerOptions.paths).forEach(([key, value]) => {
-				// 	config.resolve.alias[key.replace("*", "")] = join(__dirname, `${value[0].replace("*", "")}`);
-				// });
 
 				//config.infrastructureLogging = { debug: /PackFileCache/ };
 				//log(config);
