@@ -6,3 +6,5 @@ await makeSsl({
 	commonName: "local.next.com",
 	folder: new URL("../../../.ssl/", import.meta.url)
 });
+
+export {};

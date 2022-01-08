@@ -77,3 +77,4 @@ server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse & Server
 server.listen(app.port, app.hostname, () => {
 	log(`${chalk.green("ready")} - dev server available at https://${app.hostname}:${app.port} -> ${site.origin}`);
 });
+export {};

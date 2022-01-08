@@ -18,6 +18,8 @@ const customConfig = {
 	compress: process.env.APP_ENV !== "local",
 	poweredByHeader: false,
 	experimental: {
+		// concurrentFeatures: true,
+		// serverComponents: true,
 		outputFileTracingRoot: false,
 		disablePostcssPresetEnv: true,
 		swcFileReading: false
@@ -71,14 +73,6 @@ const customConfig = {
 			})
 		);
 
-		// config.module.rules.push({
-		// 	test: /\.m?js$/,
-		// 	type: "javascript/auto",
-		// 	resolve: {
-		// 		fullySpecified: false
-		// 	}
-		// });
-		console.log(config);
 		//config.infrastructureLogging = { debug: /PackFileCache/ };
 		return config;
 	}
