@@ -3,11 +3,12 @@ import type { NextPage } from "next";
 import type { AppContext, AppProps } from "next/app";
 import App from "next/app";
 import Head from "next/head";
-import { ReactElement, ReactNode, useEffect } from "react";
+import { ReactElement, ReactNode } from "react";
+import { Content } from "@components/content/content";
 import { DeviceProvider } from "@contexts/device.context";
-import { useResize } from "@hooks/use-resize";
+import { useAdaptive } from "@hooks/use-adaptive";
 import { wrapper } from "@util/store";
-import { detectDevice, DeviceState } from "@util/store/device";
+import { detectDevice, DeviceState, hydrate } from "@util/store/device";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -23,8 +24,7 @@ interface MyAppProps extends AppPropsWithLayout {
 
 const MyApp = ({ Component, pageProps, device }: MyAppProps) => {
 	const getLayout = Component.getLayout || ((page) => page);
-	const compare = useResize(200);
-	useEffect(() => compare(device), [device]);
+	useAdaptive();
 	return (
 		<DeviceProvider>
 			<Head>
@@ -40,10 +40,13 @@ const MyApp = ({ Component, pageProps, device }: MyAppProps) => {
 	);
 };
 
-MyApp.getInitialProps = async (context: AppContext) => {
-	const device = detectDevice(context?.ctx?.req?.headers);
-	const appProps = await App.getInitialProps(context);
-	return { ...appProps, device };
-};
+MyApp.getServerSideProps = wrapper.getServerSideProps((store) => {
+	const { dispatch } = store;
+	return async (context) => {
+		const device = detectDevice(context.req.headers);
+		dispatch(hydrate(device));
+		return { props: { device } };
+	};
+});
 
 export default wrapper.withRedux(MyApp);

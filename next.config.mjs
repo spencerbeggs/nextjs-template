@@ -14,7 +14,7 @@ const sccsUtils = (filenames) => {
 const customConfig = {
 	assetPrefix: process.env.APP_ENV === "local" ? process.env.DEV_ASSET_PREFIX : "",
 	swcMinify: process.env.APP_ENV !== "local",
-	reactStrictMode: true,
+	reactStrictMode: false,
 	compress: process.env.APP_ENV !== "local",
 	poweredByHeader: false,
 	experimental: {
@@ -34,8 +34,6 @@ const customConfig = {
 		sourceMap: true
 	},
 	webpack: (config, { webpack, isServer }) => {
-		console.log(`IS SERVER`, isServer);
-
 		if (isServer) {
 			// Mirror's Next.js environment variables configuration with
 			config.plugins.push(

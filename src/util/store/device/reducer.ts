@@ -1,5 +1,5 @@
 import { HYDRATE } from "next-redux-wrapper";
-import { DETECT_BROWSER_DEVICE, DETECT_SERVER_DEVICE, DeviceActionTypes, DeviceState } from "./types";
+import { DETECT_BROWSER_DEVICE, DETECT_SERVER_DEVICE, SET_DEVICE, DeviceActionTypes, DeviceState } from "./types";
 
 export const initialDeviceState: DeviceState = {
 	browser: null,
@@ -16,6 +16,8 @@ export function device(state = initialDeviceState, action: DeviceActionTypes): D
 		case DETECT_SERVER_DEVICE:
 			return action.payload;
 		case DETECT_BROWSER_DEVICE:
+			return action.payload;
+		case SET_DEVICE:
 			return action.payload;
 		default:
 			return state;
