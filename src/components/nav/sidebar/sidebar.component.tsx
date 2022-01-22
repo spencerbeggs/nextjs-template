@@ -86,24 +86,6 @@ export const Sidebar: React.FC = () => {
 						<Image alt="logo" src={logo} width={140} height={23} />
 					</a>
 				</Link>
-
-				<Subnav
-					title="Learn"
-					pages={["Research & Discovery", "Ideation", "Wireframe", "User Testing", "Final Design"]}
-				/>
-				<Subnav title="Newsletter" pages={["Research & Discovery", "User Testing", "Final Design"]} />
-				<Subnav title="About Us" pages={["Research & Discovery", "Ideation", "Wireframe", "Final Design"]} />
-				<Subnav
-					title="Homepage"
-					pages={["Research & Discovery", "Ideation", "User Testing", "Wireframe & Final Design"]}
-				/>
-				<Subnav
-					title="Price"
-					pages={["Research & Discovery", "Ideation", "Wireframe", "User Testing", "Final Design"]}
-				/>
-				<Subnav title="Article" pages={["Research & Discovery", "Ideation", "User Testing", "Final Design"]} />
-				<Subnav title="Typography Exploration" pages={["Research & Discovery", "User Testing", "Logo Design"]} />
-				<Subnav title="Podcast" pages={["Research & Discovery", "Wireframe"]} />
 			</div>
 		</nav>
 	);

@@ -1,3 +1,13 @@
 .home {
-	background-color: green;
+	.article {
+		@apply mt-8 prose prose-zinc mx-auto lg:prose-base sm:indent-0 px-4 sm:px-0;
+		.tout {
+			@apply prose-xl text-center;
+		}
+		ul {
+			@apply sm:columns-2;
+		}
+	}
+
 }
+

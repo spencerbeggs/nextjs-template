@@ -4,19 +4,8 @@
 
 @layer base {
 	body {
-		@apply font-body;
-		background: #000;
 		overscroll-behavior-x: none;
 		overscroll-behavior-y: none;
-	}
-	h1 {
-		@apply font-headline text-lg;
-	}
-	a {
-		@apply text-cornflower-medium underline;
-		&:hover {
-			@apply text-white-default;
-		}
 	}
 }
 

@@ -39,6 +39,12 @@
 					"caseInsensitive": true
 				}
 			}
+		],
+		"import/no-named-as-default-member": [
+			2,
+			{
+				"ignore": ["pem"]
+			}
 		]
 	},
 	"settings": {

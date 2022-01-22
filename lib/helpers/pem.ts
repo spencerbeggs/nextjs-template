@@ -1,11 +1,8 @@
 import { readFile } from "fs/promises";
 import os from "os";
 import { promisify } from "util";
-import * as fse from "fs-extra";
-import { CertificateCreationOptions, CertificateCreationResult, CSRCreationOptions, Pkcs12CreationOptions } from "pem";
-import * as pem from "pem";
-
-const { pathExists, outputFile } = fse;
+import { pathExists, outputFile } from "fs-extra";
+import pem, { CertificateCreationOptions, CertificateCreationResult, CSRCreationOptions, Pkcs12CreationOptions } from "pem";
 const { createCertificate, createPkcs12, createCSR } = pem;
 const createCSRAsync = promisify<CSRCreationOptions, { csr: string; clientKey: string }>(createCSR);
 const createCertificateAsync = promisify<CertificateCreationOptions, CertificateCreationResult>(createCertificate);

@@ -7,6 +7,7 @@ import { useSelector } from "@hooks/use-selector";
 import { closeSidebar, toggleSidebar } from "@util/actions";
 import menu from "./menu.svg";
 import styles from "./top-nav.module.scss";
+import { Adaptive } from "@components/globals/adaptive";
 
 const MenuTitle: React.FC = () => {
 	const isMobile = useSelector((state) => state.device.mobile);
@@ -39,7 +40,9 @@ export const TopNav: React.FC = () => {
 	return (
 		<nav className={styles.topNav}>
 			<div className={styles.menu}>
-				<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
+				<Adaptive>
+					<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
+				</Adaptive>
 				<MenuTitle />
 			</div>
 		</nav>

@@ -1,5 +1,5 @@
 import { throttle, isEqual } from "lodash-es";
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { DeviceContext } from "@contexts/device.context";
 import { hydrate } from "@util/actions";

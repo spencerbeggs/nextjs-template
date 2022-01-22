@@ -6,7 +6,6 @@ module.exports = {
 		},
 		fontFamily: {
 			sans: [
-				"Neue Haas Grotesk Text Pro",
 				"ui-sans-serif",
 				"system-ui",
 				"-apple-system",
@@ -33,9 +32,6 @@ module.exports = {
 				"Courier New",
 				"monospace"
 			],
-			// eslint-disable-next-line quotes
-			body: ["Neue Haas Grotesk Text Pro"],
-			headline: ["Roslindale"]
 		},
 		extend: {
 			colors: {
@@ -68,5 +64,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: ["@tailwindcss/typography", "@tailwindcss/forms", "@tailwindcss/aspect-ratio", "@tailwindcss/line-clamp"]
+	plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms"), require("@tailwindcss/aspect-ratio"), require("@tailwindcss/line-clamp")]
 };
