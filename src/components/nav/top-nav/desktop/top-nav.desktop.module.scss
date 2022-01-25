@@ -1,0 +1,15 @@
+.topNav {
+	@apply fixed flex flex-row items-center bg-black filter drop-shadow-lg h-16 pl-4 w-screen;
+}
+
+
+           
+.desktop {
+	@apply sm:container  items-center col-span-full;
+	a {
+		@apply flex items-center justify-center h-16 pr-4 pl-4 bg-white-default ;
+	}
+	.menu {
+		@apply flex flex-row items-center cursor-pointer container w-24;
+	}
+}

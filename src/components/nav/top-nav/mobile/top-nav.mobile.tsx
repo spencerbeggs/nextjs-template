@@ -1,28 +1,13 @@
 import Image from "next/image";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {useRef } from "react";
 import { useDispatch } from "react-redux";
-import { TopNavContext } from "@contexts/nav.context";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useSelector } from "@hooks/use-selector";
 import { closeSidebar, toggleSidebar } from "@util/actions";
 import menu from "./menu.svg";
 import styles from "./top-nav.module.scss";
 import { Adaptive } from "@components/globals/adaptive";
-
-const MenuTitle: React.FC = () => {
-	const isMobile = useSelector((state) => state.device.mobile);
-	const {
-		state: { section, title }
-	} = useContext(TopNavContext);
-	const [headline, setHeadline] = useState<string | null>(null);
-
-	useEffect(() => {
-		const newHeadline = [section, title].filter((str) => Boolean(str)).join(" — ");
-		setHeadline(newHeadline);
-	}, [section, title]);
-
-	return <h1 className={!isMobile ? styles.menuTitle : styles.menuTitleHidden}>{headline}</h1>;
-};
+import Link from "next/link";
 
 export const TopNav: React.FC = () => {
 	const dispatch = useDispatch();
@@ -38,12 +23,16 @@ export const TopNav: React.FC = () => {
 	});
 
 	return (
-		<nav className={styles.topNav}>
+		<nav className={styles.mobile}>
 			<div className={styles.menu}>
 				<Adaptive>
-					<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
+					<nav className={styles.mobile}>
+						<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
+                	</nav>
+					<nav className={styles.desktop}>
+						<Link href="/docs">Read the Docs</Link>
+					</nav>
 				</Adaptive>
-				<MenuTitle />
 			</div>
 		</nav>
 	);
