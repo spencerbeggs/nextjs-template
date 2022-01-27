@@ -42,8 +42,8 @@ const MyApp = ({ Component, pageProps, device }: MyAppProps) => {
 MyApp.getServerSideProps = wrapper.getServerSideProps((store) => {
 	const { dispatch } = store;
 	return async (context) => {
+		console.log(context.req.headers);
 		const device = detectDevice(context.req.headers);
-		context.res.setHeader("vary", "x-device");
 		let type = "desktop";
 		if (device.mobile) {
 			type = "mobile";
@@ -51,7 +51,7 @@ MyApp.getServerSideProps = wrapper.getServerSideProps((store) => {
 		if (device.tablet) {
 			type = "tablet";
 		}
-		context.res.setHeader("x-device", type);
+		context.res.setHeader("X-Device", type);
 		dispatch(hydrate(device));
 		return { props: { device } };
 	};
