@@ -40,9 +40,19 @@ const customConfig = {
 				has: [
 					{
 						type: "header",
-						key: "x-device"
+						key: "x-device",
+						value: "(?<device>.*)"
 					}
 				],
+				headers: [
+					{
+						key: "x-device",
+						value: ":device"
+					}
+				]
+			},
+			{
+				source: "/:path*",
 				headers: [
 					{
 						key: "vary",
