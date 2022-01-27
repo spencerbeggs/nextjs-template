@@ -8,5 +8,5 @@ export default async function middleware(req: NextRequest) {
 	const device = parser.getDevice();
 	url.searchParams.set("device", device.type ?? "desktop");
 	req.headers.set("x-device", device.type ?? "desktop");
-	return NextResponse.next();
+	return NextResponse.rewrite(url);
 }
