@@ -36,11 +36,19 @@ const customConfig = {
 	async headers() {
 		return [
 			{
-				source: "/*",
+				source: "/:path*",
 				headers: [
 					{
 						key: "vary",
 						value: "x-device"
+					},
+					{
+						key: "x-device",
+						value: "tablet"
+					},
+					{
+						key: "Strict-Transport-Security",
+						value: "max-age=63072000; includeSubDomains; preload"
 					}
 				]
 			}
