@@ -1,14 +1,13 @@
 import "../styles/main.scss";
 import type { NextPage } from "next";
-import type { AppContext, AppProps } from "next/app";
-import App from "next/app";
+import type {  AppProps } from "next/app";
 import Head from "next/head";
 import { ReactElement, ReactNode } from "react";
-import { Content } from "@components/content/content";
 import { DeviceProvider } from "@contexts/device.context";
 import { useAdaptive } from "@hooks/use-adaptive";
 import { wrapper } from "@util/store";
 import { detectDevice, DeviceState, hydrate } from "@util/store/device";
+import { IncomingMessage, ServerResponse } from "http";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -44,6 +43,15 @@ MyApp.getServerSideProps = wrapper.getServerSideProps((store) => {
 	const { dispatch } = store;
 	return async (context) => {
 		const device = detectDevice(context.req.headers);
+		context.res.setHeader("vary", "x-device");
+		let type = "desktop";
+		if (device.mobile) {
+			type = "mobile";
+		}
+		if (device.tablet) {
+			type = "tablet";
+		}
+		context.res.setHeader("x-device", type);
 		dispatch(hydrate(device));
 		return { props: { device } };
 	};

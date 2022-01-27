@@ -9,7 +9,4 @@ export default async function middleware(req: NextRequest) {
 	url.searchParams.set("device", device.type ?? "desktop");
 	req.headers.set("X-Device-Type", device.type ?? "desktop");
 	return NextResponse.rewrite(url);
-	const response = NextResponse.next();
-	response.headers.set("X-Device-Type", device.type ?? "desktop");
-	return response;
 }
