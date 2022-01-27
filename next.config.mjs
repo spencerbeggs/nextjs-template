@@ -39,9 +39,9 @@ const customConfig = {
 				source: "/:path*",
 				has: [
 					{
-						type: "query",
+						type: "header",
 						key: "device",
-						value: "(?<device>.*)"
+						value: "(?<device>)"
 					}
 				],
 				headers: [
