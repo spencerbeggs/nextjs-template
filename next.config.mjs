@@ -33,6 +33,19 @@ const customConfig = {
 		prependData: sccsUtils(["_variables.scss", "_colors.scss", "_fonts.scss", "_mixins.scss"]),
 		sourceMap: true
 	},
+	async headers() {
+		return [
+			{
+				source: "/*",
+				headers: [
+					{
+						key: "vary",
+						value: "x-device"
+					}
+				]
+			}
+		];
+	},
 	webpack: (config, { webpack, isServer }) => {
 		if (isServer) {
 			// Mirror's Next.js environment variables configuration with

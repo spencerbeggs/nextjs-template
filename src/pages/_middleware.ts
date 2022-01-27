@@ -7,6 +7,6 @@ export default async function middleware(req: NextRequest) {
 	const parser = new UAParser(req.headers.get("user-agent") || undefined);
 	const device = parser.getDevice();
 	url.searchParams.set("device", device.type ?? "desktop");
-	req.headers.set("X-Device-Type", device.type ?? "desktop");
-	return NextResponse.rewrite(url);
+	req.headers.set("x-device", device.type ?? "desktop");
+	return NextResponse.next();
 }
