@@ -5,11 +5,11 @@ import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useSelector } from "@hooks/use-selector";
 import { closeSidebar, toggleSidebar } from "@util/actions";
 import menu from "./menu.svg";
-import styles from "./top-nav.module.scss";
+import styles from "./top-nav.mobile.module.scss";
 import { Adaptive } from "@components/globals/adaptive";
 import Link from "next/link";
 
-export const TopNav: React.FC = () => {
+export const TopNavMobile: React.FC = () => {
 	const dispatch = useDispatch();
 	const ref = useRef<HTMLElement>(null);
 	const open = useSelector((state) => state.nav.sidebar.open);
