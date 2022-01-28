@@ -1,4 +1,5 @@
 import "./lib/dotenv/config.mjs";
+import UAParser from "ua-parser-js";
 
 const sccsUtils = (filenames) => {
 	return filenames
@@ -37,26 +38,10 @@ const customConfig = {
 		return [
 			{
 				source: "/:path*",
-				has: [
-					{
-						type: "header",
-						key: "device",
-						value: "(?<device>)"
-					}
-				],
 				headers: [
 					{
-						key: "x-device",
-						value: ":device"
-					}
-				]
-			},
-			{
-				source: "/:path*",
-				headers: [
-					{
-						key: "vary",
-						value: "x-device"
+						key: "Vary",
+						value: "x-device, Accept-Encoding"
 					},
 					{
 						key: "X-DNS-Prefetch-Control",
