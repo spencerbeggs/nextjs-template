@@ -1,5 +1,4 @@
 import "./lib/dotenv/config.mjs";
-import UAParser from "ua-parser-js";
 
 const sccsUtils = (filenames) => {
 	return filenames

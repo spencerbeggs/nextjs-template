@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"compilerOptions": {
-		"target": "es2021",
+		"target": "es2017",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"baseUrl": ".",
 		"allowJs": true,
@@ -25,7 +25,16 @@
 		},
 		"resolveJsonModule": true
 	},
-	"include": ["types/*.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+	"include": [
+		"types/**/*.d.ts",
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"lib/**/*.ts",
+		"lib/**/*.mjs",
+		"next.config.mjs",
+		"tailwind.config.js",
+		"postcss.config.js"
+	],
 	"exclude": ["node_modules"],
 	"ts-node": {
 		"require": ["tsconfig-paths/register"]

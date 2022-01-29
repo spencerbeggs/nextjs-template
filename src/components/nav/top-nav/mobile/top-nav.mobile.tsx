@@ -1,13 +1,11 @@
 import Image from "next/image";
-import React, {useRef } from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useSelector } from "@hooks/use-selector";
 import { closeSidebar, toggleSidebar } from "@util/actions";
 import menu from "./menu.svg";
 import styles from "./top-nav.mobile.module.scss";
-import { Adaptive } from "@components/globals/adaptive";
-import Link from "next/link";
 
 export const TopNavMobile: React.FC = () => {
 	const dispatch = useDispatch();
@@ -24,16 +22,7 @@ export const TopNavMobile: React.FC = () => {
 
 	return (
 		<nav className={styles.mobile}>
-			<div className={styles.menu}>
-				<Adaptive>
-					<nav className={styles.mobile}>
-						<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
-                	</nav>
-					<nav className={styles.desktop}>
-						<Link href="/docs">Read the Docs</Link>
-					</nav>
-				</Adaptive>
-			</div>
+			<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
 		</nav>
 	);
 };

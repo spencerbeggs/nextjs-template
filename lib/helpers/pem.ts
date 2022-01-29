@@ -2,8 +2,15 @@ import { readFile } from "fs/promises";
 import os from "os";
 import { promisify } from "util";
 import { pathExists, outputFile } from "fs-extra";
-import pem, { CertificateCreationOptions, CertificateCreationResult, CSRCreationOptions, Pkcs12CreationOptions } from "pem";
-const { createCertificate, createPkcs12, createCSR } = pem;
+import {
+	createCertificate,
+	createPkcs12,
+	createCSR,
+	CertificateCreationOptions,
+	CertificateCreationResult,
+	CSRCreationOptions,
+	Pkcs12CreationOptions
+} from "pem";
 const createCSRAsync = promisify<CSRCreationOptions, { csr: string; clientKey: string }>(createCSR);
 const createCertificateAsync = promisify<CertificateCreationOptions, CertificateCreationResult>(createCertificate);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

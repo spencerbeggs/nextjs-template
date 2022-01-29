@@ -11,11 +11,6 @@ import logo from "./coindesk-logo.svg";
 import expand from "./expand.svg";
 import styles from "./sidebar.module.scss";
 
-interface Subnav {
-	title: string;
-	pathname: string;
-}
-
 interface SubnavItemProps {
 	title: string;
 	base: string;
@@ -39,7 +34,7 @@ interface SubnavProps {
 	pages: string[];
 }
 
-const Subnav: React.FC<SubnavProps> = ({ title, pages }) => {
+export const Subnav: React.FC<SubnavProps> = ({ title, pages }) => {
 	const router = useRouter();
 	const base = slugify(title);
 	const [open, setOpen] = useState(router.asPath.split("/")[1] === base);

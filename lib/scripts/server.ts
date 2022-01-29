@@ -13,6 +13,7 @@ const site = new URL(process.env.SITE_DOMAIN as string);
 const port = Number(process.env.PORT) || 3000;
 process.env.DEV_ASSET_PREFIX = `https://${hostname()}:${port}`;
 
+// @ts-ignore
 const { credentials } = await sslCredentials({
 	name: "next",
 	commonName: site.host,
@@ -26,7 +27,9 @@ const app = next({
 	hostname: hostname(),
 	customServer: true
 });
+// @ts-ignore
 await cjsHack();
+// @ts-ignore
 await app.prepare();
 const handle = app.getRequestHandler();
 
@@ -77,4 +80,5 @@ server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse & Server
 server.listen(app.port, app.hostname, () => {
 	log(`${chalk.green("ready")} - dev server available at https://${app.hostname}:${app.port} -> ${site.origin}`);
 });
-export {};
+
+export { server };

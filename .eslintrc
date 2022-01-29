@@ -4,8 +4,8 @@
 	"plugins": ["@typescript-eslint", "prettier"],
 	"extends": ["plugin:import/recommended", "plugin:import/typescript", "prettier", "plugin:@next/next/recommended"],
 	"parserOptions": {
-		"ecmaVersion": 2021,
-		"sourceType": "module"
+		"project": "./tsconfig.json",
+		"extraFileExtensions": [".mjs"]
 	},
 	"env": {
 		"node": true,
@@ -38,12 +38,6 @@
 					"order": "asc",
 					"caseInsensitive": true
 				}
-			}
-		],
-		"import/no-named-as-default-member": [
-			2,
-			{
-				"ignore": ["pem"]
 			}
 		]
 	},

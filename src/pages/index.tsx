@@ -27,9 +27,7 @@ export default function Home() {
 					</p>
 					<h3>Features</h3>
 					<ul>
-						<li>
-							Next.js 12 with Server-Side Modules
-						</li>
+						<li>Next.js 12 with Server-Side Modules</li>
 						<li>Tailwind with all the plugins</li>
 						<li>Local SSL server</li>
 						<li>VSCode intergration</li>

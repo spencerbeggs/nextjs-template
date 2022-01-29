@@ -1,13 +1,12 @@
 import "../styles/main.scss";
 import type { NextPage } from "next";
-import type {  AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactElement, ReactNode } from "react";
 import { DeviceProvider } from "@contexts/device.context";
 import { useAdaptive } from "@hooks/use-adaptive";
 import { wrapper } from "@util/store";
 import { detectDevice, DeviceState, hydrate } from "@util/store/device";
-import { IncomingMessage, ServerResponse } from "http";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -21,7 +20,7 @@ interface MyAppProps extends AppPropsWithLayout {
 	device: DeviceState;
 }
 
-const MyApp = ({ Component, pageProps, device }: MyAppProps) => {
+const MyApp = ({ Component, pageProps }: MyAppProps) => {
 	const getLayout = Component.getLayout || ((page) => page);
 	useAdaptive();
 	return (
@@ -39,22 +38,19 @@ const MyApp = ({ Component, pageProps, device }: MyAppProps) => {
 	);
 };
 
-MyApp.getServerSideProps = wrapper.getServerSideProps((store) => {
+MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx: { req, res } }) => {
 	const { dispatch } = store;
-	return async (context) => {
-		console.log(context.req.headers);
-		const device = detectDevice(context.req.headers);
-		let type = "desktop";
-		if (device.mobile) {
-			type = "mobile";
-		}
-		if (device.tablet) {
-			type = "tablet";
-		}
-		context.res.setHeader("X-Device", type);
-		dispatch(hydrate(device));
-		return { props: { device } };
-	};
+	const device = detectDevice(req?.headers);
+	let type = "desktop";
+	if (device.mobile) {
+		type = "mobile";
+	}
+	if (device.tablet) {
+		type = "tablet";
+	}
+	res?.setHeader("X-Device", type);
+	dispatch(hydrate(device));
+	return { pageProps: {} };
 });
 
 export default wrapper.withRedux(MyApp);
