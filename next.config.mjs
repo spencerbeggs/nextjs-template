@@ -17,6 +17,10 @@ const customConfig = {
 	reactStrictMode: false,
 	compress: process.env.APP_ENV !== "local",
 	poweredByHeader: false,
+	i18n: {
+		locales: ["en"],
+		defaultLocale: "en"
+	},
 	experimental: {
 		// concurrentFeatures: true,
 		// serverComponents: true,
