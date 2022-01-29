@@ -42,7 +42,7 @@
 		]
 	},
 	"settings": {
-		"import/extensions": [".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx"],
+		"import/extensions": [".js", ".mjs", ".ts", ".tsx"],
 		"import/parsers": {
 			"@typescript-eslint/parser": [".ts", ".tsx"]
 		},
