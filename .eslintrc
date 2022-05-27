@@ -5,14 +5,14 @@
 	"extends": ["plugin:import/recommended", "plugin:import/typescript", "prettier", "plugin:@next/next/recommended"],
 	"parserOptions": {
 		"project": "./tsconfig.json",
-		"extraFileExtensions": [".mjs"]
+		"extraFileExtensions": [".mjs", ".css"],
+		"createDefaultProgram": true
 	},
 	"env": {
 		"node": true,
 		"es6": true
 	},
 	"rules": {
-		"prettier/prettier": "error",
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
 		"semi": ["error", "always"],

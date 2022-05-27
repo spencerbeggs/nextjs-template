@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { closeSidebar } from "@util/actions";
-import styles from "./top-nav.desktop.module.scss";
+import styles from "./top-nav.desktop.module.css";
 
 export const TopNavDesktop: React.FC = () => {
 	const dispatch = useDispatch();
@@ -17,7 +17,9 @@ export const TopNavDesktop: React.FC = () => {
 		<nav className={styles.topNav}>
 			<div className={styles.menu}>
 				<nav className={styles.desktop}>
-					<Link href="/docs">Read the Docs</Link>
+					<Link className="link" href="/docs">
+						Read the Docs
+					</Link>
 				</nav>
 			</div>
 		</nav>

@@ -9,7 +9,7 @@ import { useSelector } from "@hooks/use-selector";
 import { closeSidebar } from "@util/actions";
 import logo from "./coindesk-logo.svg";
 import expand from "./expand.svg";
-import styles from "./sidebar.module.scss";
+import styles from "./sidebar.module.css";
 
 interface SubnavItemProps {
 	title: string;

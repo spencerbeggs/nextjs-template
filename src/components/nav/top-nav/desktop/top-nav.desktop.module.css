@@ -6,7 +6,7 @@
            
 .desktop {
 	@apply sm:container  items-center col-span-full;
-	a {
+	a.link {
 		@apply flex items-center justify-center h-16 pr-4 pl-4 bg-white-default ;
 	}
 	.menu {

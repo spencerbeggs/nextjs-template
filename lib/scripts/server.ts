@@ -1,4 +1,4 @@
-import "../dotenv/config.mjs";
+import "./config";
 import { IncomingMessage, ServerResponse } from "http";
 import { createSecureServer, Http2ServerRequest, Http2ServerResponse } from "http2";
 import { hostname } from "os";

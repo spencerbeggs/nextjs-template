@@ -10,7 +10,7 @@ export const useAdaptive = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (process.browser) {
+		if (typeof window !== "undefined") {
 			const resize = throttle(
 				(evt) => {
 					const newDevice = parseUserAgent(evt.target.navigator.userAgent);

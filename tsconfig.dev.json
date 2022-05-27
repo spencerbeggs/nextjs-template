@@ -1,0 +1,12 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"module": "CommonJs",
+		"target": "ES2017",
+		"moduleResolution": "node",
+		"noEmit": false,
+		"declaration": false
+	},
+	"include": ["next.config.ts"],
+	"exclude": ["node_modules"]
+}

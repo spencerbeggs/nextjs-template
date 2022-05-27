@@ -1,0 +1,11 @@
+.home {
+	.article {
+		@apply prose  mx-auto mt-8 px-4 sm:px-0 sm:indent-0 lg:prose-base prose-zinc;
+		.tout {
+					@apply text-center prose-xl ;
+		} 
+		.ul {
+			@apply sm:columns-2;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { TopNavContext } from "@contexts/nav.context";
-import styles from "./content.module.scss";
+import styles from "./content.module.css";
 
 interface ContentProps {
 	section: string;

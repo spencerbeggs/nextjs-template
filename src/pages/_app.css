@@ -9,9 +9,9 @@
 	}
 
 	a {
-		@apply text-cornflower-medium underline;
+		@apply 		underline text-cornflower-medium;
 	}
 	a:hover {
-		@apply text-white-default;
+				@apply text-white-default;
 	}
 }

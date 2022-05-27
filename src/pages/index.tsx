@@ -3,7 +3,7 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { DefaultLayout } from "@components/layouts/default";
 import { State } from "@util/store";
-import styles from "./home.module.scss";
+import styles from "./home.module.css";
 
 export default function Home() {
 	const isMobile = useSelector<State, boolean>((state) => Boolean(state.device.mobile));
@@ -26,7 +26,7 @@ export default function Home() {
 						repo{" "}
 					</p>
 					<h3>Features</h3>
-					<ul>
+					<ul className={styles.ul}>
 						<li>Next.js 12 with Server-Side Modules</li>
 						<li>Tailwind with all the plugins</li>
 						<li>Local SSL server</li>

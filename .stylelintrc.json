@@ -1,23 +1,15 @@
 {
-	"syntax": "post-scss",
-	"extends": "stylelint-config-recommended-scss",
-	"plugins": ["stylelint-order", "stylelint-scss"],
-	"overrides": [
-		{
-			"files": ["**/*.scss"],
-			"customSyntax": "postcss-scss"
-		}
-	],
+	"syntax": "postcss",
+	"plugins": ["stylelint-order"],
+	"extends": "stylelint-config-prettier",
 	"rules": {
 		"order/properties-alphabetical-order": true,
-		"scss/at-rule-no-unknown": null,
-		"scss/at-import-no-partial-leading-underscore": null,
 		"at-rule-no-unknown": [
 			true,
 			{
 				"ignoreAtRules": [
-					"/apply/",
-					"/tailwind/",
+					"apply",
+					"tailwind",
 					"/screen/",
 					"/if/",
 					"/else/",
@@ -30,7 +22,6 @@
 				]
 			}
 		],
-		"indentation": "tab",
 		"declaration-block-trailing-semicolon": null,
 		"no-descending-specificity": null,
 		"property-no-unknown": [

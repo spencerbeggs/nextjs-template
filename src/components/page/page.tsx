@@ -1,6 +1,8 @@
-import styles from "./page.module.scss";
+import styles from "./page.module.css";
 
-export const Page: React.FC = ({ children }) => (
+type Props = { children: React.ReactNode };
+
+export const Page: React.FC<Props> = ({ children }) => (
 	<section className={styles.wrapper}>
 		<div className={styles.inner}>{children}</div>
 	</section>

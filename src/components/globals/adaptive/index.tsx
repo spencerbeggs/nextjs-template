@@ -44,7 +44,9 @@ const shouldRenderDesktop = (children: ReactNode, isDesktop: boolean, isTablet: 
 	}
 };
 
-export const Adaptive: React.FC = ({ children }) => {
+type Props = { children: React.ReactNode };
+
+export const Adaptive: React.FC<Props> = ({ children }) => {
 	const isDesktop = useSelector((state: State) => state.device.desktop);
 	const isTablet = useSelector((state: State) => state.device.tablet);
 	const isMobile = useSelector((state: State) => state.device.mobile);

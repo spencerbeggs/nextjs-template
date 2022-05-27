@@ -1,4 +1,4 @@
-import "../dotenv/config.mjs";
+import "./config";
 import { makeSsl } from "../helpers/pem";
 
 await makeSsl({

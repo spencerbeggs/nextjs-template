@@ -9,7 +9,6 @@
 		"**/.next": true,
 		"**/.ssl": true
 	},
-	"deno.enable": false,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true,
 		"source.fixAll.markdownlint": true,
@@ -25,9 +24,17 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
-	"[scss]": {
-		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
 	},
+	"[tailwindcss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"files.associations": {
+  		"*.css": "tailwindcss"
+	},	
 	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,
@@ -35,6 +42,5 @@
 	"stylelint.enable": true,
 	"stylelint.validate": ["css", "scss"],
 	"stylelint.configFile": ".stylelintrc.json",
-	"aws.sam.enableCodeLenses": false,
 	"typescript.tsdk": "node_modules/typescript/lib"
 }
