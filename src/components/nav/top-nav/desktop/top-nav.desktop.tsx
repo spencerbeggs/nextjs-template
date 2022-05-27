@@ -17,7 +17,7 @@ export const TopNavDesktop: React.FC = () => {
 		<nav className={styles.topNav}>
 			<div className={styles.menu}>
 				<nav className={styles.desktop}>
-					<Link className="link" href="/docs">
+					<Link className="link" href="/docs/adaptive-rendering">
 						Read the Docs
 					</Link>
 				</nav>
