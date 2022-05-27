@@ -15,6 +15,6 @@
 	],
 	"theme_color": "#ffffff",
 	"background_color": "#ffffff",
-	"display": "browser",
+	"display": "standalone",
 	"prefer_related_applications": false
 }
