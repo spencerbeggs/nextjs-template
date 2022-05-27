@@ -11,6 +11,7 @@ export default function Home() {
 		<>
 			<Head>
 				<title key="title">{isMobile ? "mobile" : "desktop"}</title>
+				<meta name="description" key="description" content="This repo is a GitHub template that can be used to deploy a barebones webapp with in minutes." />
 			</Head>
 			<div className={styles.home}>
 				<article className={styles.article}>
