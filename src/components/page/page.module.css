@@ -1,14 +1,14 @@
 .wrapper {
-	@apply container flex flex-col md:mx-auto px-0 lg:px-20;
+	@apply container flex flex-col px-0 md:mx-auto lg:px-20;
 	background-color: #fff;
 	min-height: 100vh;
-	/* :first-child {
+	&:first-child {
 		min-height: calc(100vh - 64px);
-	} */
+	}
 	.inner {
-		@apply sm:container flex flex-col;
-		/* :first-child {
+		@apply flex flex-col sm:container;
+		&:first-child {
 			min-height: calc(100vh - 64px);
-		} */
+		}
 	}
 }

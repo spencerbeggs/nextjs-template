@@ -1,9 +1,9 @@
 .home {
 	.article {
-		@apply prose  mx-auto mt-8 px-4 sm:px-0 sm:indent-0 lg:prose-base prose-zinc;
+		@apply prose prose-zinc mx-auto mt-8 px-4 sm:px-0 sm:indent-0 lg:prose-base;
 		.tout {
-					@apply text-center prose-xl ;
-		} 
+			@apply prose-xl text-center;
+		}
 		.ul {
 			@apply sm:columns-2;
 		}

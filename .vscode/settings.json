@@ -15,11 +15,8 @@
 		"source.addMissingImports": true,
 		"source.fixAll.stylelint": true
 	},
-	"eslint.options": {
-		"overrideConfigFile": ".eslintrc"
-	},
 	"prettier.enable": true,
-	"prettier.configPath": ".prettierrc",
+	"prettier.configPath": "prettier.config.js",
 	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
@@ -33,8 +30,8 @@
 		"editor.formatOnSave": true
 	},
 	"files.associations": {
-  		"*.css": "tailwindcss"
-	},	
+		"*.css": "tailwindcss"
+	},
 	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,

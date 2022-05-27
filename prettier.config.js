@@ -3,12 +3,12 @@ module.exports = {
 	"tabWidth": 4,
 	"trailingComma": "none",
 	"printWidth": 125,
-	"plugins": [require("plugin-prettier-tailwindcss"), require("stylelint-prettier")],
+	"plugins": [require("prettier-plugin-tailwindcss"), require("stylelint-prettier")],
 	"overrides": [{
-			"files": [".prettierrc", ".eslintrc"],
+			"files": [".eslintrc", "public/site.manifest"],
 			"options": {
 				"parser": "json"
 			}
 		}
 	]
-}
+};

@@ -7,11 +7,10 @@
 		overscroll-behavior-x: none;
 		overscroll-behavior-y: none;
 	}
-
 	a {
-		@apply 		underline text-cornflower-medium;
+		@apply text-cornflower-medium underline;
 	}
 	a:hover {
-				@apply text-white-default;
+		@apply text-white-default;
 	}
 }
