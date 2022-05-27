@@ -52,18 +52,5 @@
 				"project": "tsconfig.json"
 			}
 		}
-	},
-	"overrides": [
-		{
-			"files": [
-				"**/**/*.ts",
-				".github/**/*.ts",
-				"lib/**/*.ts",
-				"src/**/*.ts",
-				"test/**/*.ts",
-				"jest.config.ts",
-				"**/**/*.json"
-			]
-		}
-	]
+	}
 }

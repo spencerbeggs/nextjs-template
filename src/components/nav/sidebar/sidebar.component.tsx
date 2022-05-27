@@ -7,8 +7,6 @@ import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useSelector } from "@hooks/use-selector";
 import { closeSidebar } from "@util/actions";
-import logo from "./coindesk-logo.svg";
-import expand from "./expand.svg";
 import styles from "./sidebar.module.css";
 
 interface SubnavItemProps {
@@ -48,7 +46,7 @@ export const Subnav: React.FC<SubnavProps> = ({ title, pages }) => {
 			>
 				{title}
 				<span className={open ? styles.chevronDown : styles.chevronRight}>
-					<Image alt="foo" src={expand} width={12} height={9} />
+					<Image alt="foo" src={new URL("./expand.svg", import.meta.url).pathname} width={12} height={9} />
 				</span>
 			</li>
 			<li className={open ? styles.subnavItemsWrapperActive : styles.subnavItemsWrapper}>
@@ -78,7 +76,7 @@ export const Sidebar: React.FC = () => {
 			<div className={styles.sidebarInner}>
 				<Link href="/">
 					<a className={styles.logo}>
-						<Image alt="logo" src={logo} width={140} height={23} />
+						<Image alt="logo" src={new URL("./coindesk-logo.svg", import.meta.url).pathname} width={140} height={23} />
 					</a>
 				</Link>
 			</div>

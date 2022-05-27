@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useSelector } from "@hooks/use-selector";
 import { closeSidebar, toggleSidebar } from "@util/actions";
-import menu from "./menu.svg";
 import styles from "./top-nav.mobile.module.css";
 
 export const TopNavMobile: React.FC = () => {
@@ -22,7 +21,7 @@ export const TopNavMobile: React.FC = () => {
 
 	return (
 		<nav className={styles.mobile}>
-			<Image alt="logo" src={menu} width={20} height={18} onClick={() => toggle()} />
+			<Image alt="logo" src={new URL("./menu.svg", import.meta.url).pathname} width={20} height={18} onClick={() => toggle()} />
 		</nav>
 	);
 };
