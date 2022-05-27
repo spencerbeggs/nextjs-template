@@ -8,11 +8,11 @@
 	"private": true,
 	"engineStrict": true,
 	"engines": {
-		"node": "14.x || 16.13.1"
+		"node": "16.15.0"
 	},
 	"scripts": {
 		"dev": "yarn compile && PORT=3001 APP_ENV=local node --no-warnings --loader ts-paths-esm-loader/transpile-only --experimental-vm-modules --experimental-specifier-resolution=node ./lib/scripts/server.ts",
-		"build": "APP_ENV=production npx --node-options='--experimental-import-meta-resolve' next build",
+		"build": "yarn compile && APP_ENV=production npx --node-options='--experimental-import-meta-resolve' next build",
 		"compile": "npx --node-options='--experimental-import-meta-resolve' tsc -p tsconfig.dev.json",
 		"next": "next start",
 		"engines": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node ./lib/scripts/engines.ts",
@@ -21,7 +21,7 @@
 		"start": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node index.ts",
 		"ssl": "node --no-warnings --loader ts-node/esm --experimental-import-meta-resolve --experimental-specifier-resolution=node ./lib/scripts/ssl.ts",
 		"test": "jest",
-		    "stylelint-check": "stylelint-config-prettier-check",
+		"stylelint-check": "stylelint-config-prettier-check",
 		"test-ci": "TEST_ENV=ci jest --ci",
 		"travis": "jest --coverage --coverageReporters=text-lcov | coveralls"
 	},
@@ -93,7 +93,7 @@
 		"@use-it/event-listener": "^0.1.7",
 		"connected-next-router": "^4.1.1",
 		"lodash-es": "^4.17.21",
-		"next": "^12.1.6",
+		"next": "^12.1.7-canary",
 		"next-redux-wrapper": "^7.0.5",
 		"postcss": "^8.4.14",
 		"postcss-import": "^14.1.0",

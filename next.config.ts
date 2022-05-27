@@ -3,7 +3,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
 export default async (phase: string): Promise<NextConfig> => {
 	console.log(phase, PHASE_DEVELOPMENT_SERVER);
-	if (phase === PHASE_DEVELOPMENT_SERVER) {
+	//if (phase === PHASE_DEVELOPMENT_SERVER) {
 		return {
 			assetPrefix:
 				process.env.APP_ENV === "local"
@@ -110,9 +110,9 @@ export default async (phase: string): Promise<NextConfig> => {
 				return config;
 			}
 		} as NextConfig;
-	}
+	//}
 
-	return {
+	//return {
 		/* config options for all phases except development here */
-	};
+	//};
 };
