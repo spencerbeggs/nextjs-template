@@ -2,7 +2,7 @@ import "./_app.css";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { DeviceProvider } from "@contexts/device.context";
 import { useAdaptive } from "@hooks/use-adaptive";
 import { wrapper } from "@util/store";
@@ -23,6 +23,22 @@ interface MyAppProps extends AppPropsWithLayout {
 const MyApp = ({ Component, pageProps }: MyAppProps) => {
 	const getLayout = Component.getLayout || ((page) => page);
 	useAdaptive();
+
+	useEffect(() => {
+		if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+			window.addEventListener("load", function () {
+				navigator.serviceWorker.register("/sw.js").then(
+					function (registration) {
+						console.log("Service Worker registration successful with scope: ", registration.scope);
+					},
+					function (err) {
+						console.log("Service Worker registration failed: ", err);
+					}
+				);
+			});
+		}
+	}, []);
+
 	return (
 		<DeviceProvider>
 			<Head>
