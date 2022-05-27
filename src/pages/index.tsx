@@ -23,10 +23,9 @@ export default function Home() {
 						⚡ Local SSL ⚡ Vercel ⚡
 					</p>
 					<p>
-						This repo is a GitHub template that can be used to deploy a barebones webapp with in minutes. This
-						repo{" "}
+						This repo is a GitHub template that can be used to deploy a barebones webapp with in minutes.
 					</p>
-					<h3>Features</h3>
+					<h2>Features</h2>
 					<ul className={styles.ul}>
 						<li>Next.js 12 with Server-Side Modules</li>
 						<li>Tailwind with all the plugins</li>
