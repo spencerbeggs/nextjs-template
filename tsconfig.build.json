@@ -1,12 +1,12 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"module": "ES2022",
+		"module": "CommonJS",
 		"target": "ES2017",
 		"moduleResolution": "node",
-		"noEmit": true,
+		"noEmit": false,
 		"declaration": false,
 		"typeRoots": ["types", "node_modules/@types"]
 	},
-	"include": ["lib/**/*.ts", "tailwind.config.js", "postcss.config.js", "prettier.config.js"]
+	"include": ["next.config.ts", "next-env.d.ts"]
 }

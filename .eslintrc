@@ -4,9 +4,8 @@
 	"plugins": ["@typescript-eslint", "prettier"],
 	"extends": ["plugin:import/recommended", "plugin:import/typescript", "prettier", "plugin:@next/next/recommended"],
 	"parserOptions": {
-		"project": "./tsconfig.json",
-		"extraFileExtensions": [".mjs", ".css"],
-		"createDefaultProgram": true
+		"project": ["./tsconfig.json", "./tsconfig.dev.json", "./tsconfig.build.json"],
+		"extraFileExtensions": [".mjs", ".css"]
 	},
 	"env": {
 		"browser": true,
@@ -50,7 +49,7 @@
 		"import/resolver": {
 			"typescript": {
 				"alwaysTryTypes": true,
-				"project": "tsconfig.json"
+				"project": "./tsconfig.json"
 			}
 		}
 	}

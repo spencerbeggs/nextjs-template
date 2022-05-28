@@ -13,7 +13,7 @@
 	"scripts": {
 		"dev": "yarn compile && PORT=3001 APP_ENV=local node --no-warnings --loader ts-paths-esm-loader/transpile-only --experimental-vm-modules --experimental-specifier-resolution=node ./lib/scripts/server.ts",
 		"build": "yarn compile && APP_ENV=production npx --node-options='--experimental-import-meta-resolve' next build",
-		"compile": "npx --node-options='--experimental-import-meta-resolve' tsc -p tsconfig.dev.json",
+		"compile": "npx --node-options='--experimental-import-meta-resolve --experimental-vm-modules' tsc -p tsconfig.build.json",
 		"next": "next start",
 		"engines": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node ./lib/scripts/engines.ts",
 		"lint": "eslint . --ext .ts,.tsx,.cjs,.mjs,.js",
@@ -94,6 +94,7 @@
 		"connected-next-router": "^4.1.1",
 		"lodash-es": "^4.17.21",
 		"next": "^12.1.7-canary",
+		"next-pwa": "^5.5.2",
 		"next-redux-wrapper": "^7.0.5",
 		"postcss": "^8.4.14",
 		"postcss-import": "^14.1.0",
