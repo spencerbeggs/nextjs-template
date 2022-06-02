@@ -8,7 +8,7 @@
 	"private": true,
 	"engineStrict": true,
 	"engines": {
-		"node": "16.15.0"
+		"node": "16.x"
 	},
 	"scripts": {
 		"dev": "yarn compile && PORT=3001 APP_ENV=local node --no-warnings --loader ts-paths-esm-loader/transpile-only --experimental-import-meta-resolve --experimental-vm-modules --experimental-specifier-resolution=node ./lib/scripts/server.ts",
@@ -56,6 +56,7 @@
 		"css-loader": "^6.7.1",
 		"dotenv": "^16.0.1",
 		"dotenv-expand": "^8.0.3",
+		"dotenv-loader": "^2.0.1",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-import-resolver-alias": "^1.1.2",

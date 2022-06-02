@@ -2,7 +2,7 @@ import "./_app.css";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { ReactElement, ReactNode, useEffect } from "react";
+import { ReactElement, ReactNode } from "react";
 import { DeviceProvider } from "@contexts/device.context";
 import { useAdaptive } from "@hooks/use-adaptive";
 import { wrapper } from "@util/store";

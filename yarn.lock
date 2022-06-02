@@ -5184,6 +5184,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv-loader@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "dotenv-loader@npm:2.0.1"
+  dependencies:
+    last-callback: 2.0.0
+    typer: 1.1.0
+  checksum: ad130492b16a965ef34ab732fdf6e228da79002f1e2c9b58eae16cccf75149b147f3cba7021d2ab5cdd7f2ab15568f94a79376b3f277814a3a2c9317a0caf968
+  languageName: node
+  linkType: hard
+
 "dotenv@npm:^16.0.1":
   version: 16.0.1
   resolution: "dotenv@npm:16.0.1"
@@ -8614,6 +8624,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"last-callback@npm:2.0.0":
+  version: 2.0.0
+  resolution: "last-callback@npm:2.0.0"
+  checksum: f6d18a389a877610c8cc8ffa7775f71f20f0e5e515974a76f82937a84e5742360b81a6e4d377c38b31fa2c9d64987db758560428377bad01a54b239114e6335a
+  languageName: node
+  linkType: hard
+
 "leven@npm:^3.1.0":
   version: 3.1.0
   resolution: "leven@npm:3.1.0"
@@ -9372,6 +9389,7 @@ __metadata:
     css-loader: ^6.7.1
     dotenv: ^16.0.1
     dotenv-expand: ^8.0.3
+    dotenv-loader: ^2.0.1
     eslint: ^8.16.0
     eslint-config-prettier: ^8.5.0
     eslint-import-resolver-alias: ^1.1.2
@@ -13041,6 +13059,13 @@ __metadata:
   version: 2.13.0
   resolution: "type-fest@npm:2.13.0"
   checksum: 3492384f759fdeaec7eaa07e79f70e777bf825cf8892690642fa9350818df4a8c50fd697fd1239ae7026064af4dd94e4d5eca27e781e0952ff302af0708a2e69
+  languageName: node
+  linkType: hard
+
+"typer@npm:1.1.0":
+  version: 1.1.0
+  resolution: "typer@npm:1.1.0"
+  checksum: 5b4078bd8dea6a7dd5bb850a5936e3d8f883927e9097e1bd868635466dfa99b3028544bbe112d5564539057e3c560e6991926294a629dbb11213165c18adb069
   languageName: node
   linkType: hard
 

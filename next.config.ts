@@ -1,16 +1,16 @@
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
-import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
 import withPWA from "next-pwa";
 
 
 export default async (phase: string): Promise<NextConfig> => {
+	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const config = withPWA({
-		assetPrefix:
-			process.env.APP_ENV === "local" ? process.env.NEXT_PUBLIC_STATIC_DOMAIN : process.env.NEXT_PUBLIC_STATIC_DOMAIN,
-		swcMinify: phase !== PHASE_DEVELOPMENT_SERVER,
-		compress: phase !== PHASE_DEVELOPMENT_SERVER,
+		assetPrefix: process.env.SITE_DOMAIN,
+		swcMinify: phase === PHASE_PRODUCTION_BUILD,
+		compress: phase === PHASE_PRODUCTION_BUILD,
 		poweredByHeader: false,
 		i18n: {
 			locales: ["en"],
@@ -22,7 +22,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			skipWaiting: true,
 			runtimeCaching,
 			buildExcludes: [/middleware-manifest.json$/],
-			disable: phase === PHASE_DEVELOPMENT_SERVER
+			disable: isDev
 		},
 		reactStrictMode: true,
 		experimental: {
@@ -33,7 +33,7 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
-			domains: [new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN ?? "").hostname, "spencerbeggs.local"]
+			domains: [new URL(process.env.SITE_DOMAIN as string).hostname, "spencerbeggs.local"]
 		},
 		async headers() {
 			return [
