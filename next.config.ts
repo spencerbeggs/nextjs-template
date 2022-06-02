@@ -1,17 +1,17 @@
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
-import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
 import withPWA from "next-pwa";
 
 
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
-	const isProd = phase === PHASE_PRODUCTION_SERVER;
+	const isProd = phase === PHASE_PRODUCTION_BUILD;
 	const config = withPWA({
 		assetPrefix: process.env.SITE_DOMAIN,
-		swcMinify: phase === PHASE_PRODUCTION_BUILD,
-		compress: phase === PHASE_PRODUCTION_BUILD,
+		swcMinify: isProd,
+		compress: isProd,
 		poweredByHeader: false,
 		i18n: {
 			locales: ["en"],
