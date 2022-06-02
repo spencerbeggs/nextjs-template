@@ -1,24 +1,28 @@
 import type { NextConfig } from "next";
-import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
+//@ts-ignore
+import runtimeCaching from "next-pwa/cache.js";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 import withPWA from "next-pwa";
 
+
 export default async (phase: string): Promise<NextConfig> => {
-	console.log(phase, PHASE_DEVELOPMENT_SERVER);
-	//if (phase === PHASE_DEVELOPMENT_SERVER) {
-	return withPWA({
+	const config = withPWA({
 		assetPrefix:
 			process.env.APP_ENV === "local" ? process.env.NEXT_PUBLIC_STATIC_DOMAIN : process.env.NEXT_PUBLIC_STATIC_DOMAIN,
-		swcMinify: process.env.APP_ENV !== "local",
-		//reactStrictMode: true,
-		compress: process.env.APP_ENV !== "local",
+		swcMinify: phase !== PHASE_DEVELOPMENT_SERVER,
+		compress: phase !== PHASE_DEVELOPMENT_SERVER,
 		poweredByHeader: false,
 		i18n: {
 			locales: ["en"],
 			defaultLocale: "en"
 		},
 		pwa: {
-			dest: "./public",
-			sw: "sw.js",
+			dest: "public",
+			register: true,
+			skipWaiting: true,
+			runtimeCaching,
+			buildExcludes: [/middleware-manifest.json$/],
+			disable: phase === PHASE_DEVELOPMENT_SERVER
 		},
 		reactStrictMode: true,
 		experimental: {
@@ -105,13 +109,12 @@ export default async (phase: string): Promise<NextConfig> => {
 					NextPageContext: ["next", "NextPageContext"]
 				})
 			);
-			config.infrastructureLogging = { debug: /PackFileCache/ };
+
+			//config.infrastructureLogging = { debug: /PackFileCache/ };
 			return config;
 		}
 	});
-	//}
-
-	//return {
-	/* config options for all phases except development here */
-	//};
+	
+	//console.log(config);
+	return config;
 };

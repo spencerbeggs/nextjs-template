@@ -76,7 +76,7 @@ interface HttpsCredentialsResults {
 
 type HttpsCredentials = Promise<HttpsCredentialsResults>;
 
-export async function makeHttpsCredentials(options: HttpsCredentialsOptions): HttpsCredentials {
+export async function makeHttpsCredentials(options: HttpsCredentialsOptions): Promise<HttpsCredentials> {
 	const {
 		serviceKey,
 		serviceCertificate,

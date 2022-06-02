@@ -111,8 +111,11 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+next.config.mjs
 next.config.js
 dotenv/config.js
 **/public/workbox-*.js
+**/public/workbox-*.js.map
 **/public/sw.js
+**/public/sw.js.map
 **/public/fallback-*.js

@@ -13,6 +13,7 @@ export declare module "next-pwa" {
 			sw?: string;
 			publicExcludes?: string[];
 			buildExcludes?: Array<string | RegExp | (() => string | RegExp)>;
+			skipWaiting?: boolean;
 			runtimeCaching?: RuntimeCacheRule;
 			subdomainPrefix?: string;
 		};
@@ -36,6 +37,7 @@ export declare module "next-pwa" {
 			}
 		): ConfigOptions;
 	};
-
 	export default withPwa;
 }
+
+export declare module "next-pwa/cache.js"; 
