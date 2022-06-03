@@ -30,7 +30,9 @@ export default async (phase: string): Promise<NextConfig> => {
 			runtime: "edge",
 			reactRoot: true,
 			disablePostcssPresetEnv: false,
-			swcFileReading: true
+			swcFileReading: true,
+			browsersListForSwc: true,
+			newNextLinkBehavior: true
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],

@@ -3,6 +3,7 @@
 		"esbenp.prettier-vscode",
 		"dbaeumer.vscode-eslint",
 		"stevenhansel.vscode-nvm",
-		"stylelint.vscode-stylelint"
+		"stylelint.vscode-stylelint",
+		"webben.browserslist"
 	]
 }
