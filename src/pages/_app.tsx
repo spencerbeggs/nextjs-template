@@ -70,12 +70,4 @@ MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx: { re
 	return { pageProps: {} };
 });
 
-export async function getStaticProps({ params }) {
-	console.log(params);
-	return {
-		props: {},
-		revalidate: 60
-	};
-}
-
 export default wrapper.withRedux(MyApp);
