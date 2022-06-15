@@ -67,6 +67,7 @@
 		"finalhandler": "^1.2.0",
 		"fs-extra": "^10.1.0",
 		"image-webpack-loader": "^8.1.0",
+		"nanoid": "^4.0.0",
 		"pem": "^1.14.6",
 		"postcss": "^8.4.14",
 		"postcss-flexbugs-fixes": "^5.0.2",

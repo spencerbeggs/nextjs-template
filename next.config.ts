@@ -1,9 +1,11 @@
+import { nanoid } from "nanoid";
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
 import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
 import withPWA from "next-pwa";
 
+const nonce = nanoid();
 
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
@@ -26,6 +28,9 @@ export default async (phase: string): Promise<NextConfig> => {
 			disable: isDev
 		},
 		reactStrictMode: true,
+		env: {
+			NONCE: nonce
+		},
 		experimental: {
 			runtime: "edge",
 			reactRoot: true,
@@ -46,7 +51,7 @@ export default async (phase: string): Promise<NextConfig> => {
 				`connect-src 'self' https://vitals.vercel-insights.com;`,
 				`script-src 'self';`,
 				`child-src ${hostname};`,
-				`style-src 'self' ${hostname};`,
+				`style-src 'self' 'nonce-${nonce}';`,
 				`font-src 'self';`
 			];
 			return [
