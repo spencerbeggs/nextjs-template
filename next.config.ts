@@ -43,6 +43,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			const ContentSecurityPolicy = [
 				`img-src 'self' data:;`,
 				`default-src 'self';`,
+				`connect-src 'self' https://vitals.vercel-insights.com;`,
 				`script-src 'self';`,
 				`child-src ${hostname};`,
 				`style-src 'self' ${hostname};`,
