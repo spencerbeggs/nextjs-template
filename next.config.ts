@@ -75,20 +75,7 @@ export default async (phase: string): Promise<NextConfig> => {
 				}
 			];
 		},
-		webpack: (config, { webpack, isServer }) => {
-			if (isServer) {
-				// Mirror's Next.js environment variables configuration with
-				config.plugins.push(
-					new webpack.DefinePlugin({
-						"process.env": Object.entries(process.env as Record<string, string>).reduce((acc, [key, value]) => {
-							if (key.startsWith("NEXT_PUBLIC_")) {
-								acc[key.replace("NEXT_PUBLIC_", "")] = JSON.stringify(value);
-							}
-							return acc;
-						}, {} as Record<string, string>)
-					})
-				);
-			}
+		webpack: (config, { webpack }) => {
 
 			config.plugins.push(
 				// provides commonly used modules and their exports as global variables
