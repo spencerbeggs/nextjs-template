@@ -39,6 +39,15 @@ export default async (phase: string): Promise<NextConfig> => {
 			domains: [new URL(process.env.SITE_DOMAIN as string).hostname, "spencerbeggs.local"]
 		},
 		async headers() {
+			const { hostname } = new URL(process.env.SITE_DOMAIN as string);
+			const ContentSecurityPolicy = [
+				`img-src 'self' data:;`,
+				`default-src 'self';`,
+				`script-src 'self';`,
+				`child-src ${hostname};`,
+				`style-src 'self' ${hostname};`,
+				`font-src 'self';`
+			];
 			return [
 				{
 					source: "/:path*",
@@ -70,6 +79,12 @@ export default async (phase: string): Promise<NextConfig> => {
 						{
 							key: "Strict-Transport-Security",
 							value: "max-age=63072000; includeSubDomains; preload"
+						},
+						{
+							key: "Content-Security-Policy",
+							value: isDev
+								? `img-src 'self' data:; default-src 'self'; style-src 'unsafe-inline'; script-src 'self' 'unsafe-eval';`
+								: ContentSecurityPolicy.join(" ")
 						}
 					]
 				}
