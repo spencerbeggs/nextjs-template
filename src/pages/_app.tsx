@@ -65,7 +65,6 @@ MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx: { re
 	if (device.tablet) {
 		type = "tablet";
 	}
-	res?.setHeader("Cache-Control", "public, s-maxage=3000, stale-while-revalidate=60");
 	res?.setHeader("X-Device", type);
 	dispatch(hydrate(device));
 	return { pageProps: {} };

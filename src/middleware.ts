@@ -8,6 +8,7 @@ export default async function middleware(req: NextRequest) {
 	const parser = new UAParser(req.headers.get("user-agent") || undefined);
 	const device = parser.getDevice();
 	const res = NextResponse.next();
+	res.headers.append("Cache-Control", "public, s-maxage=300, stale-while-revalidate=59");
 	res.headers.append("X-Device", device.type ?? "desktop");
 	return res;
 }
