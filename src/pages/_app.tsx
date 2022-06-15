@@ -46,10 +46,31 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
 				<meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
 				<meta key="theme-color" name="theme-color" content="#fb31aa" />
 				<meta key="csp-nonce" property="csp-nonce" content={process.env.NONCE} />
-				<link key="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
-				<link key="icon-32x32" rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
-				<link key="icon-16x16" rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
-				<link key="manifest" rel="manifest" href="/site.webmanifest"></link>
+				<link
+					key="apple-touch-icon"
+					rel="apple-touch-icon"
+					sizes="180x180"
+					href={new URL("/apple-touch-icon.png", process.env.NEXT_PUBLIC_SITE_DOMAIN).href}
+				></link>
+				<link
+					key="icon-32x32"
+					rel="icon"
+					type="image/png"
+					sizes="32x32"
+					href={new URL("/favicon-32x32.png", process.env.NEXT_PUBLIC_SITE_DOMAIN).href}
+				></link>
+				<link
+					key="icon-16x16"
+					rel="icon"
+					type="image/png"
+					sizes="16x16"
+					href={new URL("/favicon-16x16.png", process.env.NEXT_PUBLIC_SITE_DOMAIN).href}
+				></link>
+				<link
+					key="manifest"
+					rel="manifest"
+					href={new URL("/site.webmanifest", process.env.NEXT_PUBLIC_SITE_DOMAIN).href}
+				></link>
 			</Head>
 			{getLayout(<Component {...pageProps} />)}
 		</DeviceProvider>
