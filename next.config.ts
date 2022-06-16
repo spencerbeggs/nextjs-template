@@ -72,7 +72,7 @@ export default async (phase: string): Promise<NextConfig> => {
 							"form-action": "'self'",
 							"frame-ancestors": "'none'",
 							"frame-src": "'none'",
-							"img-src": "'self'",
+							"img-src": "'self' data:",
 							"manifest-src": "'self'",
 							"media-src": "'self'",
 							"object-src": "'none'",
