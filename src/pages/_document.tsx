@@ -5,10 +5,10 @@ export default class extends Document {
 		//const { Head, NextScript } = provideComponents(this.props);
 		return (
 			<Html lang="en-US">
-				<Head />
+				<Head nonce={process.env.NONCE} />
 				<body>
 					<Main />
-					<NextScript />
+					<NextScript nonce={process.env.NONCE} />
 				</body>
 			</Html>
 		);

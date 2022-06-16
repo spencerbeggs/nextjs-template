@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
@@ -9,6 +10,7 @@ export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
 	const { hostname } = new URL(process.env.SITE_DOMAIN as string);
+	const nonce = nanoid();
 	const config = withPWA({
 		assetPrefix: process.env.SITE_DOMAIN,
 		swcMinify: isProd,
@@ -17,6 +19,9 @@ export default async (phase: string): Promise<NextConfig> => {
 		i18n: {
 			locales: ["en"],
 			defaultLocale: "en"
+		},
+		env: {
+			NONCE: nonce
 		},
 		pwa: {
 			dest: "public",
@@ -56,7 +61,34 @@ export default async (phase: string): Promise<NextConfig> => {
 				{
 					source: "/:path*",
 					//@ts-ignore
-					headers: nextSafe({ isDev: process.env.NODE_ENV !== "production" })
+					headers: nextSafe({
+						contentTypeOptions: "nosniff",
+						contentSecurityPolicy: {
+							"base-uri": "'none'",
+							"child-src": "'none'",
+							"connect-src": "'self' https://vitals.vercel-insights.com",
+							"default-src": "'self'",
+							"font-src": "'self'",
+							"form-action": "'self'",
+							"frame-ancestors": "'none'",
+							"frame-src": "'none'",
+							"img-src": "'self'",
+							"manifest-src": "'self'",
+							"media-src": "'self'",
+							"object-src": "'none'",
+							"prefetch-src": "'self'",
+							"script-src": "'self'",
+							"style-src": `'self' 'nonce-${nonce}`,
+							"worker-src": "'self'",
+							reportOnly: false
+						},
+						frameOptions: "DENY",
+						permissionsPolicy: {},
+						permissionsPolicyDirectiveSupport: ["proposed", "standard"],
+						isDev,
+						referrerPolicy: "no-referrer",
+						xssProtection: "1; mode=block"
+					})
 				}
 			];
 		},
