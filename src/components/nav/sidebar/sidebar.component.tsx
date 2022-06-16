@@ -5,8 +5,7 @@ import { useRouter } from "next/router";
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
-import { useSelector } from "@hooks/use-selector";
-import { closeSidebar } from "@util/actions";
+import { setOpen } from "@util/store/nav";
 import styles from "./sidebar.module.css";
 
 interface SubnavItemProps {
@@ -34,14 +33,15 @@ interface SubnavProps {
 
 export const Subnav: React.FC<SubnavProps> = ({ title, pages }) => {
 	const router = useRouter();
+	const dispatch = useDispatch();
 	const base = slugify(title);
-	const [open, setOpen] = useState(router.asPath.split("/")[1] === base);
+	const [open] = useState(router.asPath.split("/")[1] === base);
 	return (
 		<ul className={styles.subnav}>
 			<li
 				className={styles.subnavTitle}
 				onClick={() => {
-					setOpen(!open);
+					dispatch(setOpen(!open));
 				}}
 			>
 				{title}
@@ -61,13 +61,13 @@ export const Subnav: React.FC<SubnavProps> = ({ title, pages }) => {
 };
 
 export const Sidebar: React.FC = () => {
-	const dispatch = useDispatch();
+	//const dispatch = useDispatch();
 	const ref = useRef<HTMLElement>(null);
-	const open = useSelector((state) => state.nav.sidebar.open);
-
+	//const open = useSelector((state) => state.nav.sidebar.open);
+	const open = false;
 	useOnClickOutside(ref, () => {
 		if (open) {
-			dispatch(closeSidebar());
+			//dispatch(closeSidebar());
 		}
 	});
 

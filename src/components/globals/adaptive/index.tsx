@@ -1,6 +1,7 @@
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import { Children, ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { State } from "@util/store";
+import { AppState } from "@util/store";
 
 const shouldRenderMobile = (children: ReactNode, isMobile: boolean): ReactNode => {
 	const count = Children.count(children);
@@ -47,9 +48,10 @@ const shouldRenderDesktop = (children: ReactNode, isDesktop: boolean, isTablet: 
 type Props = { children: React.ReactNode };
 
 export const Adaptive: React.FC<Props> = ({ children }) => {
-	const isDesktop = useSelector((state: State) => state.device.desktop);
-	const isTablet = useSelector((state: State) => state.device.tablet);
-	const isMobile = useSelector((state: State) => state.device.mobile);
+	const selectSelf = (state: AppState) => state;
+	const isDesktop = useSelector(createDraftSafeSelector(selectSelf, (state) => state.device.desktop));
+	const isTablet = useSelector(createDraftSafeSelector(selectSelf, (state) => state.device.tablet));
+	const isMobile = useSelector(createDraftSafeSelector(selectSelf, (state) => state.device.mobile));
 	const Mobile = shouldRenderMobile(children, isMobile ?? false);
 	const Tablet = shouldRenderTablet(children, isTablet ?? false);
 	const Desktop = shouldRenderDesktop(children, isDesktop ?? false, isTablet ?? false);

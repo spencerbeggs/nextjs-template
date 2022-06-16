@@ -1,22 +1,23 @@
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import Image from "next/image";
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { useOnClickOutside } from "@hooks/use-on-click-outside";
-import { useSelector } from "@hooks/use-selector";
-import { closeSidebar, toggleSidebar } from "@util/actions";
+import type { AppState } from "@util/store";
+import { setOpen } from "@util/store/nav";
 import styles from "./top-nav.mobile.module.css";
 
 export const TopNavMobile: React.FC = () => {
 	const dispatch = useDispatch();
 	const ref = useRef<HTMLElement>(null);
-	const open = useSelector((state) => state.nav.sidebar.open);
-
+	const selectSelf = (state: AppState) => state;
+ 	const isOpen = useSelector(createDraftSafeSelector(selectSelf, (state) => state.nav.sidebar.open));
 	const toggle = () => {
-		dispatch(toggleSidebar(open));
+		dispatch(setOpen(!isOpen));
 	};
 
 	useOnClickOutside(ref, () => {
-		dispatch(closeSidebar());
+		dispatch(setOpen(false));
 	});
 
 	return (
