@@ -84,7 +84,7 @@ export default async (phase: string): Promise<NextConfig> => {
 						},
 						frameOptions: "DENY",
 						permissionsPolicy: {},
-						permissionsPolicyDirectiveSupport: ["proposed", "standard"],
+						permissionsPolicyDirectiveSupport: ["standard"],
 						isDev,
 						referrerPolicy: "no-referrer",
 						xssProtection: "1; mode=block"
