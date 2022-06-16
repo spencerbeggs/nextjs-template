@@ -78,7 +78,7 @@ export default async (phase: string): Promise<NextConfig> => {
 							"object-src": "'none'",
 							"prefetch-src": "'self'",
 							"script-src": `'nonce-${nonce}' ${hostname}`,
-							"style-src": `'self' ${hostname}`,
+							"style-src": `'nonce-${nonce}' ${hostname}`,
 							"worker-src": "'self'",
 							reportOnly: false
 						},
