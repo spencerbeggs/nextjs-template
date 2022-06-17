@@ -1,0 +1,29 @@
+.dialog {
+	@apply relative z-40 md:hidden;
+}
+
+.userMenu {
+	@apply flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+}
+
+.logo {
+	@apply relative flex flex-shrink-0 items-center px-4;
+}
+
+.sidebar {
+	&_desktop {
+		@apply hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col;
+		&_component {
+			@apply flex min-h-0 flex-1 flex-col bg-gray-800;
+			&_logo {
+				@apply box-content flex h-16 flex-shrink-0 items-center bg-gray-900 px-4;
+				&_image {
+					@apply relative flex h-full w-full;
+					&_img {
+						@apply h-8 w-auto object-contain;
+					}
+				}
+			}
+		}
+	}
+}

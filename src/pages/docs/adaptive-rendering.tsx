@@ -1,7 +1,11 @@
-import { DefaultLayout } from "@components/layouts/default";
+import { ShellLayout } from "@components/layouts/shell.layout";
 
 export default function Rendering() {
-	return (<DefaultLayout>
-		<h1>Adaptive Rendering</h1>
-		</DefaultLayout>);
+	return (
+		<ShellLayout>
+			<h1>Adaptive Rendering</h1>
+		</ShellLayout>
+	);
 }
+
+Rendering.getLayout = ShellLayout.single;

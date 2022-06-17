@@ -1,8 +1,8 @@
 import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import Head from "next/head";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { DefaultLayout } from "@components/layouts/default";
+import { ShellLayout } from "@components/layouts/shell.layout";
 import { AppState } from "@util/store";
 import styles from "./home.module.css";
 
@@ -46,6 +46,4 @@ export default function Home() {
 	);
 }
 
-Home.getLayout = function getLayout(page: ReactElement) {
-	return <DefaultLayout>{page}</DefaultLayout>;
-};
+Home.getLayout = ShellLayout.single;

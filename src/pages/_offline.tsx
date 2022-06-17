@@ -1,9 +1,11 @@
-import { DefaultLayout } from "@components/layouts/default";
+import { ShellLayout } from "@components/layouts/shell.layout";
 
 export default function Custom404() {
 	return (
-		<DefaultLayout>
+		<ShellLayout>
 			<h1>You are offline</h1>
-		</DefaultLayout>
+		</ShellLayout>
 	);
 }
+
+Custom404.getLayout = ShellLayout.single;

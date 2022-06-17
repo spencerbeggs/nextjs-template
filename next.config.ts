@@ -2,7 +2,6 @@ import { nanoid } from "nanoid";
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
-import nextSafe from "next-safe";
 import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
 import withPWA from "next-pwa";
 
@@ -39,6 +38,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			swcFileReading: true,
 			browsersListForSwc: true,
 			newNextLinkBehavior: true,
+			images: { layoutRaw: true, remotePatterns: [] },
 			modularizeImports: {
 				"lodash-es": {
 					transform: "lodash-es/{{member}}"
@@ -54,42 +54,15 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
-			domains: [hostname, "spencerbeggs.local"]
+			domains: [hostname, "tailwindui.com", "images.unsplash.com", "spencerbeggs.local"]
 		},
 		async headers() {
 			return [
-				{
-					source: "/:path*",
-					//@ts-ignore
-					headers: nextSafe({
-						contentTypeOptions: "nosniff",
-						contentSecurityPolicy: {
-							"base-uri": "'none'",
-							"child-src": "'none'",
-							"connect-src": "'self' https://vitals.vercel-insights.com",
-							"default-src": "'self'",
-							"font-src": "'self'",
-							"form-action": "'self'",
-							"frame-ancestors": "'none'",
-							"frame-src": "'none'",
-							"img-src": "'self' data:",
-							"manifest-src": "'self'",
-							"media-src": "'self'",
-							"object-src": "'none'",
-							"prefetch-src": "'self'",
-							"script-src": `'nonce-${nonce}' ${hostname}`,
-							"style-src": `'nonce-${nonce}' ${hostname}`,
-							"worker-src": "'self'",
-							reportOnly: false
-						},
-						frameOptions: "DENY",
-						permissionsPolicy: false,
-						permissionsPolicyDirectiveSupport: ["standard"],
-						isDev,
-						referrerPolicy: "no-referrer",
-						xssProtection: "1; mode=block"
-					})
-				}
+				// {
+				// 	source: "/:path*",
+				// 	//@ts-ignore
+				// 	headers: []
+				// }
 			];
 		},
 		webpack: (config, { webpack }) => {

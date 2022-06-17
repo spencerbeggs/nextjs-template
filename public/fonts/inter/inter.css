@@ -1,0 +1,188 @@
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src: url("inter-thin.woff2?v=3.19") format("woff2"), url("inter-thin.woff?v=3.19") format("woff");
+}
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 100;
+	font-display: swap;
+	src: url("inter-thinitalic.woff2?v=3.19") format("woff2"), url("inter-thinitalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 200;
+	font-display: swap;
+	src: url("inter-extralight.woff2?v=3.19") format("woff2"), url("inter-extralight.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 200;
+	font-display: swap;
+	src: url("inter-extralightitalic.woff2?v=3.19") format("woff2"), url("inter-extralightitalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("inter-light.woff2?v=3.19") format("woff2"), url("inter-light.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 300;
+	font-display: swap;
+	src: url("inter-lightitalic.woff2?v=3.19") format("woff2"), url("inter-lightitalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("inter-regular.woff2?v=3.19") format("woff2"), url("inter-regular.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("inter-italic.woff2?v=3.19") format("woff2"), url("inter-italic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("inter-medium.woff2?v=3.19") format("woff2"), url("inter-medium.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("inter-mediumitalic.woff2?v=3.19") format("woff2"), url("inter-mediumitalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("inter-semibold.woff2?v=3.19") format("woff2"), url("inter-semibold.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+	src: url("inter-semibolditalic.woff2?v=3.19") format("woff2"), url("inter-semibolditalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("inter-bold.woff2?v=3.19") format("woff2"), url("inter-bold.woff?v=3.19") format("woff");
+}
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("inter-bolditalic.woff2?v=3.19") format("woff2"), url("inter-bolditalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+	src: url("inter-extrabold.woff2?v=3.19") format("woff2"), url("inter-extrabold.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 800;
+	font-display: swap;
+	src: url("inter-extrabolditalic.woff2?v=3.19") format("woff2"), url("inter-extrabolditalic.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url("inter-black.woff2?v=3.19") format("woff2"), url("inter-black.woff?v=3.19") format("woff");
+}
+
+@font-face {
+	font-family: "inter";
+	font-style: italic;
+	font-weight: 900;
+	font-display: swap;
+	src: url("inter-blackitalic.woff2?v=3.19") format("woff2"), url("inter-blackitalic.woff?v=3.19") format("woff");
+}
+
+/* -------------------------------------------------------
+variable font.
+usage:
+
+  html { font-family: 'inter', sans-serif; }
+  @supports (font-variation-settings: normal) {
+    html { font-family: 'inter var', sans-serif; }
+  }
+*/
+@font-face {
+	font-family: "inter var";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: normal;
+	font-named-instance: "regular";
+	src: url("inter-roman.var.woff2?v=3.19") format("woff2");
+}
+@font-face {
+	font-family: "inter var";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: italic;
+	font-named-instance: "italic";
+	src: url("inter-italic.var.woff2?v=3.19") format("woff2");
+}
+
+/* --------------------------------------------------------------------------
+[experimental] multi-axis, single variable font.
+
+slant axis is not yet widely supported (as of february 2019) and thus this
+multi-axis single variable font is opt-in rather than the default.
+
+when using this, you will probably need to set font-variation-settings
+explicitly, e.g.
+
+  * { font-variation-settings: "slnt" 0deg }
+  .italic { font-variation-settings: "slnt" 10deg }
+
+*/
+@font-face {
+	font-family: "inter var experimental";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: oblique 0deg 10deg;
+	src: url("inter.var.woff2?v=3.19") format("woff2");
+}

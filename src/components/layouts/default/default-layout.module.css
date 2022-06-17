@@ -1,9 +1,0 @@
-.main {
-	@apply relative min-h-screen w-screen;
-}
-
-.layout {
-	@apply flex min-h-screen flex-col items-center overflow-y-hidden bg-white-default;
-	min-height: calc(100vh - 64px);
-	padding-top: 64px;
-}

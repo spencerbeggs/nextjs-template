@@ -1,14 +1,21 @@
-import Document, { Head, Html, Main, NextScript } from "next/document";
+import Document, { provideComponents } from "@next-safe/middleware/dist/document";
+import { DocumentContext, Html, Main } from "next/document";
 
-export default class extends Document {
+export default class CustomDocument extends Document {
+	static async getInitialProps(ctx: DocumentContext) {
+		const initialProps = await Document.getInitialProps(ctx);
+		return initialProps;
+	}
+
 	render() {
-		//const { Head, NextScript } = provideComponents(this.props);
+		// those components are automagically wired with strictDynamic
+		const { Head, NextScript } = provideComponents(this.props);
 		return (
 			<Html lang="en-US">
-				<Head nonce={process.env.NONCE} />
+				<Head />
 				<body>
 					<Main />
-					<NextScript nonce={process.env.NONCE} />
+					<NextScript />
 				</body>
 			</Html>
 		);

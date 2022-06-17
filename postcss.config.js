@@ -3,7 +3,7 @@ module.exports = {
 		"postcss-import": {
 			plugins: ["stylelint"]
 		},
-		"tailwindcss/nesting": {},
+		"@tailwindcss/nesting": {},
 		"postcss-url": {},
 		tailwindcss: {},
 		autoprefixer: {}
