@@ -32,8 +32,11 @@ const userNavigation = [
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(" ");
 }
+type Props = {
+	children?: React.ReactNode;
+};
 
-export function ShellLayout({ children }) {
+export function ShellLayout({ children }: Props) {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	return (
