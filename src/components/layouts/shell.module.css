@@ -7,7 +7,11 @@
 }
 
 .logo {
-	@apply relative flex flex-shrink-0 items-center px-4;
+	@apply flex h-8 w-full flex-shrink-0 px-4;
+
+	&_image {
+		@apply relative flex h-full w-32  items-start;
+	}
 }
 
 .sidebar {
@@ -23,6 +27,38 @@
 						@apply h-8 w-auto object-contain;
 					}
 				}
+			}
+			&_content {
+				@apply flex flex-1 flex-col overflow-y-auto;
+				&_nav {
+					@apply flex-1 space-y-1 px-2 py-4;
+					&_link {
+						@apply flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white;
+						&_active {
+							@apply bg-gray-900 text-white;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.layout {
+	@apply min-h-screen;
+}
+
+.main {
+	@apply flex-1;
+	&_inner {
+		@apply py-6;
+		&_content {
+			@apply mx-auto max-w-7xl px-4 sm:px-6 md:px-8;
+		}
+		&_target {
+			@apply py-4;
+			&_area {
+				@apply h-96 rounded-lg border-4 border-dashed border-gray-200;
 			}
 		}
 	}
