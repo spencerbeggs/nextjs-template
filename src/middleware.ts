@@ -25,7 +25,10 @@ const nextSafeMiddleware = nextSafe((req: NextRequest) => {
 			"img-src": "'self'",
 			"object-src": "'none'"
 		},
-		tellSupported: new UAParser(req.headers.get("user-agent") || undefined)
+		tellSupported: new UAParser(req.headers.get("user-agent") || undefined),
+		referrerPolicy:  "no-referrer",
+		xssProtection: "1; mode=block",
+		frameOptions: "DENY"
 	};
 });
 
