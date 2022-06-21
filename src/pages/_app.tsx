@@ -59,11 +59,13 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 };
 
 MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx: { req, res } }) => {
-	const { default: UAParser } = await import("ua-parser-js");
-	const UA = new UAParser(req?.headers["user-agent"]);
-	const result = UA.getDevice();
-	res?.setHeader("X-Device", result.type ?? "desktop");
-	store.dispatch(setDevice(result));
+	if (req?.headers) {
+		const { default: UAParser } = await import("ua-parser-js");
+		const UA = new UAParser(req?.headers["user-agent"]);
+		const result = UA.getDevice();
+		res?.setHeader("X-Device", result.type ?? "desktop");
+		store.dispatch(setDevice(result));
+	}
 	return { pageProps: {} };
 });
 

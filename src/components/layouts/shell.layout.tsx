@@ -6,6 +6,7 @@ import {
 	ChatAlt2Icon,
 	DocumentTextIcon,
 	TerminalIcon,
+	CogIcon,
 	XIcon
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
@@ -13,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {  Fragment, ReactElement, useState } from "react";
 import { SidebarItem } from "./components/sidebar-item";
-import styles from "./shell.module.css";
+import logo from "./logo.svg";
 
 const navigation = [
 	{ name: "Home", href: "/", Icon: HomeIcon, current: true },
@@ -30,6 +31,7 @@ const userNavigation = [
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(" ");
 }
+
 type Props = {
 	children?: React.ReactNode;
 };
@@ -39,9 +41,9 @@ export function ShellLayout({ children }: Props) {
 
 	return (
 		<>
-			<div className={styles.layout}>
+			<div data-x="shell-layout" className="min-h-screen">
 				<Transition.Root show={sidebarOpen} as={Fragment}>
-					<Dialog as="div" className={styles.dialog} onClose={setSidebarOpen}>
+					<Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
 						<Transition.Child
 							as={Fragment}
 							enter="transition-opacity ease-linear duration-300"
@@ -85,14 +87,9 @@ export function ShellLayout({ children }: Props) {
 											</button>
 										</div>
 									</Transition.Child>
-									<div className={styles.logo}>
-										<div className={styles.logo_image}>
-											<Image
-												layout="fill"
-												className="h-8 w-auto"
-												src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-												alt="Workflow"
-											/>
+									<div data-x="logo" className="flex h-8 w-full flex-shrink-0 px-4">
+										<div data-x="logo-container" className="relative flex h-full w-32  items-start">
+											<Image layout="fill" className="h-8 w-auto" src={logo} alt="Workflow" />
 										</div>
 									</div>
 									<div className="mt-5 h-0 flex-1 overflow-y-auto">
@@ -134,23 +131,18 @@ export function ShellLayout({ children }: Props) {
 				</Transition.Root>
 
 				{/* Static sidebar for desktop */}
-				<div className={styles.sidebar_desktop}>
+				<div data-x="sidebar-desktop" className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
 					{/* Sidebar component, swap this element with another sidebar if you like */}
-					<div className={styles.sidebar_desktop_component}>
-						<div className={styles.sidebar_desktop_component_logo}>
-							<div className={styles.sidebar_desktop_component_logo_image}>
-								<Image
-									className={styles.sidebar_desktop_component_logo_image_img}
-									layout="fill"
-									src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-									alt="Workflow"
-								/>
+					<div className="flex min-h-0 flex-1 flex-col bg-gray-800">
+						<div data-x="logo" className="box-content flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
+							<div data-x="image-wrapper" className="relative flex h-full w-full">
+								<Image className="h-8 w-auto object-contain" layout="fill" src={logo} alt="Workflow" />
 							</div>
 						</div>
-						<div className={styles.sidebar_desktop_component_content}>
-							<nav className={styles.sidebar_desktop_component_content_nav}>
+						<div data-x="content" className="flex flex-1 flex-col overflow-y-auto">
+							<nav data-x="nav" className="flex-1 space-y-1 px-2 py-4">
 								{navigation.map((item) => (
-									<SidebarItem {...item} />
+									<SidebarItem key={item.href} {...item} />
 								))}
 							</nav>
 						</div>
@@ -198,14 +190,9 @@ export function ShellLayout({ children }: Props) {
 								{/* Profile dropdown */}
 								<Menu as="div" className="relative ml-3">
 									<div>
-										<Menu.Button className={styles.userMenu}>
+										<Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 											<span className="sr-only">Open user menu</span>
-											<Image
-												className="h-8 w-8 rounded-full"
-												layout="fill"
-												src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-												alt=""
-											/>
+											<CogIcon className="h-6 w-6" aria-hidden="true" />
 										</Menu.Button>
 									</div>
 									<Transition
@@ -240,12 +227,12 @@ export function ShellLayout({ children }: Props) {
 						</div>
 					</div>
 
-					<main className={styles.main}>
-						<div className={styles.main_inner}>
-							<div className={styles.main_inner_content}>
+					<main data-x="main" className="flex-1">
+						<div className="py-6">
+							<div data-x="content-area" className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
 								{children}
-								<div className={styles.main_inner_target}>
-									<div className={styles.main_inner_target_area} />
+								<div data-x="content-target" className="py-4">
+									<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
 								</div>
 								{/* /End replace */}
 							</div>
