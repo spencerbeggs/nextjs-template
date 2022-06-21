@@ -16,10 +16,11 @@ const adaptiveMiddleware: Middleware = (req, evt, res, next) => {
 };
 
 const nextSafeMiddleware = nextSafe((req: NextRequest) => {
+	const isProd = process.env.NODE_ENV === "production";
 	return {
 		isDev,
 		contentSecurityPolicy: {
-			reportOnly,
+			reportOnly: !isProd,
 			"frame-ancestors": "https://stackblitz.com"
 		},
 		"img-src": "'self'"

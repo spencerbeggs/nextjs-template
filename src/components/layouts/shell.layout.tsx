@@ -89,7 +89,13 @@ export function ShellLayout({ children }: Props) {
 									</Transition.Child>
 									<div data-x="logo" className="flex h-8 w-full flex-shrink-0 px-4">
 										<div data-x="logo-container" className="relative flex h-full w-32  items-start">
-											<Image layout="fill" className="h-8 w-auto" src={logo} alt="Workflow" />
+											<Image
+												layout="fill"
+												className="h-8 w-auto"
+												src={logo}
+												alt="Logo"
+												priority={true}
+											/>
 										</div>
 									</div>
 									<div className="mt-5 h-0 flex-1 overflow-y-auto">
@@ -136,7 +142,13 @@ export function ShellLayout({ children }: Props) {
 					<div className="flex min-h-0 flex-1 flex-col bg-gray-800">
 						<div data-x="logo" className="box-content flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
 							<div data-x="image-wrapper" className="relative flex h-full w-full">
-								<Image className="h-8 w-auto object-contain" layout="fill" src={logo} alt="Workflow" />
+								<Image
+									className="h-8 w-auto object-contain"
+									layout="fill"
+									src={logo}
+									alt="Logo"
+									priority={true}
+								/>
 							</div>
 						</div>
 						<div data-x="content" className="flex flex-1 flex-col overflow-y-auto">
