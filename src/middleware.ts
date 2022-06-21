@@ -33,7 +33,7 @@ const nextSafeMiddleware = nextSafe(() => {
 			reportOnly,
 			"default-src": ["'self' blob:", origin],
 			"img-src": ["'self'", origin],
-			"connect-src": ["'self'", origin],
+			"connect-src": ["'self'", "https://vitals.vercel-insights.com/v1/vitals", origin],
 			"style-src": ["'self'", "'unsafe-inline'", origin],
 			"style-src-elem": ["'self'", "'unsafe-inline'", origin],
 			"script-src": ["'self'", origin],
