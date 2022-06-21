@@ -1,4 +1,5 @@
 import "./_app.css";
+import { nanoid } from "nanoid";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -6,7 +7,7 @@ import { ReactElement, ReactNode } from "react";
 import { DeviceProvider } from "@contexts/device.context";
 import { useAdaptive } from "@hooks/use-adaptive";
 import { wrapper } from "@util/store";
-import { setDevice } from "@util/store/device";;
+import { setDevice } from "@util/store/device";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -15,7 +16,6 @@ type NextPageWithLayout = NextPage & {
 type AppPropsWithLayout = AppProps & {
 	Component: NextPageWithLayout;
 };
-
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 	const getLayout = Component.getLayout || ((page) => page);
@@ -63,7 +63,8 @@ MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx: { re
 		const { default: UAParser } = await import("ua-parser-js");
 		const UA = new UAParser(req?.headers["user-agent"]);
 		const result = UA.getDevice();
-		res?.setHeader("X-Device", result.type ?? "desktop");
+		res?.setHeader("x-device", result.type ?? "desktop");
+		res?.setHeader("csp-nonce", nanoid());
 		store.dispatch(setDevice(result));
 	}
 	return { pageProps: {} };

@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
@@ -8,19 +7,15 @@ import withPWA from "next-pwa";
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
-	const { hostname } = new URL(process.env.SITE_DOMAIN as string);
-	const nonce = nanoid();
+	const { hostname, origin } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
 	const config = withPWA({
-		assetPrefix: process.env.SITE_DOMAIN,
+		assetPrefix: origin,
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,
 		i18n: {
 			locales: ["en"],
 			defaultLocale: "en"
-		},
-		env: {
-			NONCE: nonce
 		},
 		pwa: {
 			dest: "public",
@@ -58,11 +53,31 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		async headers() {
 			return [
-				// {
-				// 	source: "/:path*",
-				// 	//@ts-ignore
-				// 	headers: []
-				// }
+				{
+					source: "/:path*",
+					headers: [
+						{
+							key: "vary",
+							value: "x-device,accept-encoding"
+						}
+					]
+				},
+				{
+					source: "/:path*",
+					has: [
+						{
+							type: "header",
+							key: "csp-nonce",
+							value: "(<nonce>.*)"
+						}
+					],
+					headers: [
+						{
+							key: "x-csp-nonce",
+							value: ":nonce"
+						}
+					]
+				}
 			];
 		},
 		webpack: (config, { webpack }) => {
@@ -93,7 +108,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			return config;
 		}
 	});
-	
+
 	//console.log(config);
 	return config;
 };
