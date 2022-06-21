@@ -1,7 +1,7 @@
 import { Middleware, strictDynamic, chain, nextSafe, reporting } from "@next-safe/middleware";
 // eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest, NextResponse } from "next/server";
-import UAParser from "ua-parser-js";
+import { UAParser } from "ua-parser-js";
 
 const isDev = process.env.NODE_ENV === "development";
 const reportOnly = !!process.env.CSP_REPORT_ONLY;
@@ -16,14 +16,16 @@ const adaptiveMiddleware: Middleware = (req, evt, res, next) => {
 };
 
 const nextSafeMiddleware = nextSafe((req: NextRequest) => {
-	const isProd = process.env.NODE_ENV === "production";
 	return {
 		isDev,
 		contentSecurityPolicy: {
-			reportOnly: !isProd,
-			"frame-ancestors": "https://stackblitz.com"
+			reportOnly,
+			"frame-ancestors": "none",
+			"script-src": `nonce-${process.env.NONCE}`,
+			"img-src": "'self'",
+			"object-src": "'none'"
 		},
-		"img-src": "'self'"
+		tellSupported: new UAParser(req.headers.get("user-agent") || undefined)
 	};
 });
 
@@ -44,6 +46,13 @@ const reportingMiddleware = reporting((req) => {
 	};
 });
 
-export default chain(nextSafeMiddleware, adaptiveMiddleware, strictDynamic(), reportingMiddleware);
+
+
+export default chain(
+	nextSafeMiddleware,
+	adaptiveMiddleware,
+	strictDynamic(),
+	reportingMiddleware
+);
 
 
