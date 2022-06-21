@@ -1,4 +1,12 @@
-import { Middleware, strictDynamic, chain, nextSafe, reporting } from "@next-safe/middleware";
+import {
+	Middleware,
+	strictDynamic,
+	chain,
+	nextSafe,
+	reporting,
+	pullCspFromResponse,
+	pushCspToResponse
+} from "@next-safe/middleware";
 // eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest, NextResponse } from "next/server";
 import { UAParser } from "ua-parser-js";
@@ -15,22 +23,38 @@ const adaptiveMiddleware: Middleware = (req, evt, res, next) => {
 	return next ? next(response) : response;
 };
 
-const nextSafeMiddleware = nextSafe((req: NextRequest) => {
+const nextSafeMiddleware = nextSafe(() => {
 	return {
 		isDev,
 		contentSecurityPolicy: {
-			reportOnly,
+			reportOnly: true,
 			"frame-ancestors": "none",
-			"script-src": `nonce-${process.env.NONCE}`,
+			"script-src": `'nonce-${process.env.NONCE}'`,
 			"img-src": "'self'",
 			"object-src": "'none'"
 		},
-		tellSupported: new UAParser(req.headers.get("user-agent") || undefined),
-		referrerPolicy:  "no-referrer",
+		referrerPolicy: "no-referrer",
 		xssProtection: "1; mode=block",
 		frameOptions: "DENY"
 	};
 });
+
+const clearCspDirectives: Middleware = (req, evt, res) => {
+	if (res) {
+		let csp = pullCspFromResponse(res);
+		if (csp) {
+			//@ts-ignore
+			csp["default-src"] = undefined;
+			//@ts-ignore
+			csp["font-src"] = undefined;
+			//@ts-ignore
+			csp["style-src"] = undefined;
+			//@ts-ignore
+			csp["img-src"] = undefined;
+			pushCspToResponse(csp, res);
+		}
+	}
+};
 
 const reportingMiddleware = reporting(() => {
 	const nextApiReportEndpoint = `/api/reporting`;
@@ -49,13 +73,12 @@ const reportingMiddleware = reporting(() => {
 	};
 });
 
-
-
 export default chain(
 	nextSafeMiddleware,
-	adaptiveMiddleware,
-	strictDynamic(),
-	reportingMiddleware
+	clearCspDirectives,
+	strictDynamic({
+		reportOnly: true
+	}),
+	reportingMiddleware,
+	adaptiveMiddleware
 );
-
-
