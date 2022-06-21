@@ -32,7 +32,7 @@ const nextSafeMiddleware = nextSafe((req: NextRequest) => {
 	};
 });
 
-const reportingMiddleware = reporting((req) => {
+const reportingMiddleware = reporting(() => {
 	const nextApiReportEndpoint = `/api/reporting`;
 	return {
 		csp: {

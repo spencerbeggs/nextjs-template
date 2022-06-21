@@ -1,4 +1,4 @@
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { IDevice } from "ua-parser-js";
 
@@ -40,7 +40,7 @@ const slice = createSlice({
 					tv : action.payload.type === "smarttv"
 				};
 			})
-			.addDefaultCase((state, action) => state);
+			.addDefaultCase((state) => state);
 	}
 });
 
