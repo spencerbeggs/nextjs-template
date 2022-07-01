@@ -1,14 +1,17 @@
-import { Action, configureStore,  Middleware, ThunkAction } from "@reduxjs/toolkit";
+import { IncomingMessage, ServerResponse } from "http";
+import { Action, configureStore,  Middleware, nanoid, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { default as logger } from "redux-logger";
-import device from "./device";
+import { createLogger } from "redux-logger";
+import device, { detectDevice } from "./device";
 import nav from "./nav";
 
 const makeStore = () => {
 	const isDev = process.env.NODE_ENV !== "production";
 	const middleware: Middleware[] = [];
 	if (isDev && typeof window !== "undefined") {
-		middleware.push(logger);
+		middleware.push(createLogger({
+			collapsed: true
+		}));
 	}
 	return configureStore({
 		reducer: {
@@ -21,10 +24,20 @@ const makeStore = () => {
 };
 
 
-export const wrapper = createWrapper<AppStore>(makeStore);
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore["getState"]>;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action>;
 
+export const wrapper = createWrapper<AppStore>(makeStore);
 
+export const serverSide = async (store: AppStore, req?: IncomingMessage, res?: ServerResponse) => {
+	if (res) {
+		res.setHeader("csp-nonce", nanoid());
+	}
+	if (req?.headers?.["user-agent"]) {
+		await store.dispatch(detectDevice(req.headers["user-agent"]));
+	} else {
+		console.log("__CLIENT__");
+	}
+};

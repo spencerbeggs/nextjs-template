@@ -5,7 +5,6 @@ import {
 	nextSafe,
 	reporting,
 } from "@next-safe/middleware";
-// eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextResponse } from "next/server";
 import { UAParser } from "ua-parser-js";
 
@@ -18,6 +17,7 @@ const adaptiveMiddleware: Middleware = (req, evt, res, next) => {
 	if (type?.startsWith("text/html")) {
 		const parser = new UAParser(req.headers.get("user-agent") || undefined);
 		const device = parser.getDevice();
+		req.headers.append("x-device", device.type ?? "desktop");
 		response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
 		response.headers.append("x-device", device.type ?? "desktop");
 		response.headers.append("vary", "x-device, accept-encoding");

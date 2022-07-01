@@ -27,8 +27,7 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		reactStrictMode: true,
 		experimental: {
-			runtime: "edge",
-			reactRoot: true,
+			runtime: "experimental-edge",
 			disablePostcssPresetEnv: false,
 			swcFileReading: true,
 			browsersListForSwc: true,

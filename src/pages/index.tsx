@@ -3,21 +3,27 @@ import Head from "next/head";
 import React from "react";
 import { useSelector } from "react-redux";
 import { ShellLayout } from "@components/layouts/shell.layout";
-import { AppState } from "@util/store";
+import { AppState, wrapper, serverSide } from "@util/store";
 import styles from "./home.module.css";
 
-export default function Home() {
+interface PageProps {
+	meta?: {
+		title?: string;
+		description: string;
+	};
+}
+
+function Home({ meta, ...rest }: PageProps) {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { store, props } = wrapper.useWrappedStore(rest);
 	const selectSelf = (state: AppState) => state;
 	const isMobile = useSelector(createDraftSafeSelector(selectSelf, (state) => state.device.mobile));
+
 	return (
 		<>
 			<Head>
-				<title key="title">{isMobile ? "mobile" : "desktop"}</title>
-				<meta
-					name="description"
-					key="description"
-					content="This repo is a GitHub template that can be used to deploy a barebones webapp with in minutes."
-				/>
+				<title key="title">{`${meta?.title} | ${isMobile ? "Mobile" : "Desktop"}`}</title>
+				<meta name="description" key="description" content={meta?.description} />
 			</Head>
 			<div className={styles.home}>
 				<article className={styles.article}>
@@ -46,4 +52,18 @@ export default function Home() {
 	);
 }
 
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
+	await serverSide(store, req, res);
+	return {
+		props: {
+			meta: {
+				title: "Home",
+				description: "This repo is a GitHub template that can be used to deploy a barebones webapp with in minutes."
+			}
+		}
+	};
+});
+
 Home.getLayout = ShellLayout.single;
+
+export default Home;

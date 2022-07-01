@@ -1,11 +1,47 @@
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
+import Head from "next/head";
+import { useSelector } from "react-redux";
 import { ShellLayout } from "@components/layouts/shell.layout";
+import { AppState, serverSide, wrapper } from "@util/store";
 
-export default function FAQ() {
+interface PageProps {
+	meta?: {
+		title?: string;
+		description: string;
+	};
+}
+
+function FAQ({ meta, ...rest }: PageProps) {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { store, props } = wrapper.useWrappedStore(rest);
+	const selectSelf = (state: AppState) => state;
+	const isMobile = useSelector(createDraftSafeSelector(selectSelf, (state) => state.device.mobile));
+
 	return (
-		<ShellLayout>
-			<h1>FAQ</h1>
-		</ShellLayout>
+		<>
+			<Head>
+				<title key="title">{`${meta?.title} | ${isMobile ? "Mobile" : "Desktop"}`}</title>
+				<meta name="description" key="description" content={meta?.description} />
+			</Head>
+			<div>
+				<h1>FAQ</h1>
+			</div>
+		</>
 	);
 }
 
-FAQ.getLayouut = ShellLayout.single;
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
+	await serverSide(store, req, res);
+	return {
+		props: {
+			meta: {
+				title: "FAQ",
+				description: "Frequently asked questions"
+			}
+		}
+	};
+});
+
+FAQ.getLayout = ShellLayout.single;
+
+export default FAQ;
