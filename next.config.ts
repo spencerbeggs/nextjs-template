@@ -22,7 +22,9 @@ export default async (phase: string): Promise<NextConfig> => {
 			register: isProd,
 			skipWaiting: true,
 			runtimeCaching,
-			buildExcludes: [/middleware-manifest.json$/],
+			buildExcludes: [
+				/middleware-manifest.json$/
+			],
 			disable: isDev
 		},
 		reactStrictMode: true,
