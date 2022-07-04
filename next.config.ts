@@ -1,3 +1,4 @@
+import os from "os";
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
@@ -22,9 +23,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			register: isProd,
 			skipWaiting: true,
 			runtimeCaching,
-			buildExcludes: [
-				/middleware-manifest.json$/
-			],
+			buildExcludes: [/middleware-manifest.json$/],
 			disable: isDev
 		},
 		reactStrictMode: true,
@@ -50,7 +49,7 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
-			domains: [hostname, "tailwindui.com", "images.unsplash.com", "spencerbeggs.local"]
+			domains: [hostname, isDev ? os.hostname() : ""].filter(part => Boolean(part))
 		},
 		async headers() {
 			return [
