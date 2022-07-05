@@ -8,9 +8,9 @@ import withPWA from "next-pwa";
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
-	const { hostname, origin } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
+	const { hostname } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
 	const config = withPWA({
-		assetPrefix: isProd || isProd ? origin : undefined,
+		//assetPrefix: isProd || isDev ? origin : undefined,
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,
@@ -29,11 +29,11 @@ export default async (phase: string): Promise<NextConfig> => {
 		reactStrictMode: true,
 		experimental: {
 			runtime: "experimental-edge",
-			disablePostcssPresetEnv: false,
+			//disablePostcssPresetEnv: false,
 			swcFileReading: true,
-			browsersListForSwc: true,
+			//browsersListForSwc: true,
 			newNextLinkBehavior: true,
-			images: { layoutRaw: true, remotePatterns: [] },
+			images: { remotePatterns: [] },
 			modularizeImports: {
 				"lodash-es": {
 					transform: "lodash-es/{{member}}"
