@@ -28,7 +28,7 @@ const adaptiveMiddleware: Middleware = async (req, evt, res, next) => {
 		};
 		const type = Object.keys(device).find((key) => state[key as keyof DeviceState] === true);
 		response.headers.append("x-device", type ?? "desktop");
-		response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
+		//response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
 	}
 	//const type = req.headers.get("Content-Type");
 	//response.headers.append("x-device", ua.device.type ?? "desktop");
