@@ -1,9 +1,7 @@
-import { type } from "os";
 import { Middleware, strictDynamic, chain, nextSafe, reporting } from "@next-safe/middleware";
-import next from "next";
 import { NextRequest, NextResponse, userAgent } from "next/server";
 import { UAParser } from "ua-parser-js";
-import device, { DeviceState, DeviceType } from "@util/store/device";
+import { DeviceState } from "@util/store/device";
 
 const isDev = process.env.NODE_ENV === "development";
 const reportOnly = process.env.CSP_REPORT_ONLY === "true" ? true : undefined;

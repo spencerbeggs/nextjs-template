@@ -1,3 +1,0 @@
-.mobile {
-	@apply fixed flex h-16 w-screen flex-row items-center bg-black pl-4 drop-shadow-lg filter;
-}

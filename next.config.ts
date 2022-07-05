@@ -10,7 +10,7 @@ export default async (phase: string): Promise<NextConfig> => {
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
 	const { hostname, origin } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
 	const config = withPWA({
-		assetPrefix: origin,
+		assetPrefix: isProd || isProd ? origin : undefined,
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,

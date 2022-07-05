@@ -12,10 +12,10 @@ const CSP_NONCE_HEADER = "csp-nonce";
 export default class CustomDocument extends Document {
 	static async getInitialProps(ctx: DocumentContext) {
 		const initialProps = await Document.getInitialProps(ctx);
-		//const nonce = getCtxHeader(ctx, CSP_NONCE_HEADER);
-		// if (nonce) {
-		// 	return { ...initialProps, nonce };
-		// }
+		const nonce = getCtxHeader(ctx, CSP_NONCE_HEADER);
+		if (nonce) {
+			return { ...initialProps, nonce };
+		}
 		return initialProps;
 	}
 
