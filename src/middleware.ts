@@ -1,27 +1,45 @@
-import {
-	Middleware,
-	strictDynamic,
-	chain,
-	nextSafe,
-	reporting,
-} from "@next-safe/middleware";
-import { NextResponse } from "next/server";
+import { type } from "os";
+import { Middleware, strictDynamic, chain, nextSafe, reporting } from "@next-safe/middleware";
+import next from "next";
+import { NextRequest, NextResponse, userAgent } from "next/server";
 import { UAParser } from "ua-parser-js";
+import device, { DeviceState, DeviceType } from "@util/store/device";
 
 const isDev = process.env.NODE_ENV === "development";
 const reportOnly = process.env.CSP_REPORT_ONLY === "true" ? true : undefined;
 
-const adaptiveMiddleware: Middleware = (req, evt, res, next) => {
-	const response = NextResponse.next();
-	const type = req.headers.get("Content-Type");
-	if (type?.startsWith("text/html")) {
-		const parser = new UAParser(req.headers.get("user-agent") || undefined);
-		const device = parser.getDevice();
-		req.headers.append("x-device", device.type ?? "desktop");
-		response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
-		response.headers.append("x-device", device.type ?? "desktop");
-		response.headers.append("vary", "x-device, accept-encoding");
+const isHtml = (req: NextRequest | undefined) => {
+	if (!req) {
+		return false;
 	}
+	const last = req.nextUrl.pathname.split("/").pop();
+	return last && !last.includes(".") && !req.nextUrl.pathname.startsWith("/_next/");
+};
+
+const adaptiveMiddleware: Middleware = async (req, evt, res, next) => {
+	const response = NextResponse.next();
+	if (isHtml(req)) {
+		const { ua } = userAgent(req);
+		const parser = new UAParser(ua);
+		const device = parser.getDevice();
+		const state: DeviceState = {
+			mobile: device.type === "mobile",
+			tablet: device.type === "tablet",
+			desktop: device.type === undefined,
+			tv: device.type === "smarttv"
+		};
+		const type = Object.keys(device).find((key) => state[key as keyof DeviceState] === true);
+		response.headers.append("x-device", type ?? "desktop");
+		response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
+	}
+	//const type = req.headers.get("Content-Type");
+	//response.headers.append("x-device", ua.device.type ?? "desktop");
+	// if (type?.startsWith("text/html")) {
+	// 	console.log("TYYYP");
+
+	// 	response.headers.append("x-device", device.type ?? "desktop");
+	// 	response.headers.append("vary", "x-device, accept-encoding");
+	// }
 	return next ? next(response) : response;
 };
 

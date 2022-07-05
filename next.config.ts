@@ -49,7 +49,7 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
-			domains: [hostname, isDev ? os.hostname() : ""].filter(part => Boolean(part))
+			domains: [hostname, isDev ? os.hostname() : ""].filter((part) => Boolean(part))
 		},
 		async headers() {
 			return [

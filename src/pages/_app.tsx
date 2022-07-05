@@ -26,7 +26,9 @@ const manifest = new URL("/site.webmanifest", process.env.NEXT_PUBLIC_SITE_DOMAI
 
 const MyApp: React.FC<AppPropsWithLayout> = ({ Component, ...rest }) => {
 	const getLayout = Component.getLayout || ((page) => page);
-	const { store, props } = wrapper.useWrappedStore(rest);
+	const { store, props } = wrapper.useWrappedStore({
+		...rest
+	});
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {

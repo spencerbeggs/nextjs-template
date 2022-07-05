@@ -11,25 +11,16 @@ export const detectDevice = createAsyncThunk("device/detect", async (ua: string)
 
 type DeviceDetected = null | boolean;
 
-export type DeviceState = {
-	mobile: DeviceDetected;
-	desktop: DeviceDetected;
-	tablet: DeviceDetected;
-	tv: DeviceDetected;
-};
+export type DeviceState = Record<"mobile" | "tablet" | "desktop" | "tv", DeviceDetected>;
+
+export type DeviceType = keyof DeviceState;
 
 const hydrate = createAction<{ device: IDevice }>(HYDRATE);
 
-const initialState: DeviceState = {
-	mobile: false,
-	tablet: false,
-	desktop: true,
-	tv: false
-};
 
 const slice = createSlice({
 	name: "device",
-	initialState,
+	initialState: {} as DeviceState,
 	reducers: {},
 	extraReducers: (builder) => {
 		builder

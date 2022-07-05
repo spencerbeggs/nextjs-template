@@ -1,8 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
-import { Action, configureStore,  Middleware, nanoid, ThunkAction } from "@reduxjs/toolkit";
+import { Action, configureStore,  Middleware, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { createLogger } from "redux-logger";
-import device, { detectDevice } from "./device";
+import device, { detectDevice, DeviceState } from "./device";
 import nav from "./nav";
 
 const makeStore = () => {
@@ -19,7 +19,7 @@ const makeStore = () => {
 			[nav.name]: nav.reducer
 		},
 		middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...middleware),
-		devTools: isDev && typeof window !== "undefined"
+		devTools: isDev && typeof window !== "undefined",
 	});
 };
 
@@ -38,6 +38,9 @@ export const serverSide = async (store: AppStore, req?: IncomingMessage, res?: S
 	}
 	if (req?.headers?.["user-agent"]) {
 		await store.dispatch(detectDevice(req.headers["user-agent"]));
+		const { device } = store.getState();
+		const type = Object.keys(device).find((key) => device[key as keyof DeviceState] === true);
+		res?.setHeader("x-device", type ?? "desktop");
 	} else {
 		console.log("__CLIENT__");
 	}
