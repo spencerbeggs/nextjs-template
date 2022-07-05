@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from "http";
-import { Action, configureStore,  Middleware, nanoid, ThunkAction } from "@reduxjs/toolkit";
+import { Action, configureStore, Middleware, nanoid, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { createLogger } from "redux-logger";
 import device, { detectDevice, DeviceState } from "./device";
@@ -9,9 +9,11 @@ const makeStore = () => {
 	const isDev = process.env.NODE_ENV !== "production";
 	const middleware: Middleware[] = [];
 	if (isDev && typeof window !== "undefined") {
-		middleware.push(createLogger({
-			collapsed: true
-		}));
+		middleware.push(
+			createLogger({
+				collapsed: true
+			})
+		);
 	}
 	return configureStore({
 		reducer: {
@@ -19,11 +21,9 @@ const makeStore = () => {
 			[nav.name]: nav.reducer
 		},
 		middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...middleware),
-		devTools: isDev && typeof window !== "undefined",
+		devTools: isDev && typeof window !== "undefined"
 	});
 };
-
-
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore["getState"]>;

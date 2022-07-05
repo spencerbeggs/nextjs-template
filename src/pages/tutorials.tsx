@@ -30,6 +30,10 @@ function Tutorials({ meta, ...rest }: PageProps) {
 	);
 }
 
+export const config = {
+	unstable_includeFiles: [".next/static/chunks/**/*.js"]
+};
+
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
 	await serverSide(store, req, res);
 	return {

@@ -1,4 +1,5 @@
 import { Middleware, strictDynamic, chain, nextSafe, reporting } from "@next-safe/middleware";
+import { NextURL } from "next/dist/server/web/next-url";
 import { NextRequest, NextResponse, userAgent } from "next/server";
 import { UAParser } from "ua-parser-js";
 import { DeviceState } from "@util/store/device";
@@ -6,17 +7,15 @@ import { DeviceState } from "@util/store/device";
 const isDev = process.env.NODE_ENV === "development";
 const reportOnly = process.env.CSP_REPORT_ONLY === "true" ? true : undefined;
 
-const isHtml = (req: NextRequest | undefined) => {
-	if (!req) {
-		return false;
-	}
-	const last = req.nextUrl.pathname.split("/").pop();
-	return last && !last.includes(".") && !req.nextUrl.pathname.startsWith("/_next/");
+const isHtml = (url: NextURL) => {
+	const last = url.pathname.split("/").pop();
+	return last && !last.includes(".") && !url.pathname.startsWith("/_next/");
 };
 
 const adaptiveMiddleware: Middleware = async (req, evt, res, next) => {
-	const response = NextResponse.next();
-	if (isHtml(req)) {
+	const url = req.nextUrl.clone();
+	let response = NextResponse.next();
+	if (isHtml(url)) {
 		const { ua } = userAgent(req);
 		const parser = new UAParser(ua);
 		const device = parser.getDevice();
@@ -26,7 +25,9 @@ const adaptiveMiddleware: Middleware = async (req, evt, res, next) => {
 			desktop: device.type === undefined,
 			tv: device.type === "smarttv"
 		};
-		const type = Object.keys(device).find((key) => state[key as keyof DeviceState] === true);
+		const type = Object.keys(state).find((key) => state[key as keyof DeviceState] === true);
+		url.searchParams.set("device", type ?? "desktop");
+		response = NextResponse.rewrite(url);
 		response.headers.append("x-device", type ?? "desktop");
 		//response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
 	}

@@ -6,7 +6,7 @@ import Head from "next/head";
 import { ReactElement, ReactNode, useEffect } from "react";
 import { Provider } from "react-redux";
 import { wrapper } from "@util/store";
-import { detectDevice } from "@util/store/device";
+import { detectDevice, setDevice } from "@util/store/device";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -29,6 +29,8 @@ const MyApp: React.FC<AppPropsWithLayout> = ({ Component, ...rest }) => {
 	const { store, props } = wrapper.useWrappedStore({
 		...rest
 	});
+
+	store.dispatch(setDevice(rest.router.query.device));
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
