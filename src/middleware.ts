@@ -91,17 +91,22 @@ const securityMiddleware = [
 			"img-src": ["self", origin],
 			"connect-src": ["self", "https://vitals.vercel-insights.com/v1/vitals", origin],
 			"style-src-elem": ["self", "unsafe-inline", origin],
+			"style-src-attr": ["self", "unsafe-inline", origin],
 			"script-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
 			"style-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
 			"script-src-elem": ["self", origin]
 		},
-		reportOnly: isDev,
+		reportOnly: isDev
 	}),
 	featurePolicyMiddleware,
 	strictDynamic({
 		extendScriptSrc: true
 	}),
-	reporting()
+	reporting({
+		csp: {
+			reportTo: new URL("/api/reporting", origin).href,
+		}
+	})
 ];
 
 export default chainMatch(isPageRequest)(adaptiveMiddleware, ...securityMiddleware);

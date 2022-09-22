@@ -13,7 +13,7 @@
 	"scripts": {
 		"dev": "yarn compile && PORT=3001 APP_ENV=local node --no-warnings --loader ts-node/esm --experimental-import-meta-resolve --experimental-vm-modules --experimental-specifier-resolution=node ./lib/scripts/server.ts",
 		"build": "yarn compile && APP_ENV=production npx --node-options='NODE_ENV=production --experimental-import-meta-resolve' next build",
-		"compile": "yarn run swc next.config.ts -o next.config.mjs -C module.type=es6 -C sourceMaps=inline",
+		"compile": "yarn run swc next.config.ts -o next.config.mjs --config-file .swc.next.config -s inline",
 		"engines": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node ./lib/scripts/engines.ts",
 		"lint": "eslint . --ext .ts,.tsx,.cjs,.mjs,.js",
 		"lint-fix": "eslint . --ext .ts,.tsx,.cjs,.mjs,.js --fix",

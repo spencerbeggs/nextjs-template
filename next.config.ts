@@ -3,13 +3,13 @@ import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
 import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
-import withPWA from "next-pwa";
+import nextPWA from "next-pwa";
 
-export default async (phase: string): Promise<NextConfig> => {
+export default nextPWA(async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
 	const { hostname } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
-	const config = withPWA({
+	const conf: NextConfig = {
 		//assetPrefix: isProd || isDev ? origin : undefined,
 		swcMinify: isProd,
 		compress: isProd,
@@ -18,18 +18,10 @@ export default async (phase: string): Promise<NextConfig> => {
 			locales: ["en"],
 			defaultLocale: "en"
 		},
-		pwa: {
-			dest: "public",
-			register: isProd,
-			skipWaiting: true,
-			runtimeCaching,
-			buildExcludes: [/middleware-manifest.json$/],
-			disable: isDev
-		},
 		reactStrictMode: true,
 		experimental: {
 			runtime: "experimental-edge",
-			//disablePostcssPresetEnv: false,
+			disablePostcssPresetEnv: false,
 			swcFileReading: true,
 			//browsersListForSwc: true,
 			modularizeImports: {
@@ -42,8 +34,8 @@ export default async (phase: string): Promise<NextConfig> => {
 			removeConsole: isDev
 				? false
 				: {
-						exclude: ["error"]
-				  }
+					exclude: ["error"]
+				}
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
@@ -66,7 +58,7 @@ export default async (phase: string): Promise<NextConfig> => {
 							value: "x-device,accept-encoding"
 						}
 					]
-				},
+				}
 				// {
 				// 	source: "/:path*",
 				// 	has: [
@@ -112,8 +104,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			//config.infrastructureLogging = { debug: /PackFileCache/ };
 			return config;
 		}
-	});
+	};
 
-	//console.log(config);
-	return config;
-};
+	return conf;
+});

@@ -1,10 +1,9 @@
-import type { NextConfig } from "next";
-import { GenerateSW, InjectManifest, RuntimeCacheRule } from "workbox-webpack-plugin";
+import type { NextConfig, NextConfigObject, NextConfigFunction } from "next";
+import {  RuntimeCacheRule , GenerateSW, InjectManifest, RuntimeCacheRule } from "workbox-webpack-plugin";
 
 export declare module "next-pwa" {
 
-	interface ConfigOptions extends Partial<GenerateSW>, Partial<InjectManifest>, NextConfig {
-		pwa: {
+	interface NextPWAOptions {
 			dest: string;
 			swSrc?: string;
 			disable?: boolean;
@@ -16,27 +15,13 @@ export declare module "next-pwa" {
 			skipWaiting?: boolean;
 			runtimeCaching?: RuntimeCacheRule;
 			subdomainPrefix?: string;
-		};
 	}
 
-	declare function withPwa(nextConfig: ConfigOptions): {
-		webpack(
-			config: ConfigOptions,
-			options?: {
-				buildId: string;
-				dev: boolean;
-				isServer: boolean;
-				defaultLoaders: {
-					babel: {
-						cacheDirectory: boolean;
-						cacheIdentifier: string;
-						cacheCompression: boolean;
-						customize: string | null;
-					};
-				};
-			}
-		): ConfigOptions;
-	};
+	interface ConfigOptions extends NextConfig, Partial<GenerateSW>, Partial<InjectManifest> {
+		pwa: NextPWAOptions;
+	}
+
+	declare function withPwa(func: (phase: string) => Promise<NextConfig>): ConfigOptions;
 	export default withPwa;
 }
 
