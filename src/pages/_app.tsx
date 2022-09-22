@@ -22,7 +22,6 @@ const icons = {
 	icon16x16: new URL("/favicon-16x16.png", process.env.NEXT_PUBLIC_SITE_DOMAIN).href
 };
 
-const manifest = new URL("/site.webmanifest", process.env.NEXT_PUBLIC_SITE_DOMAIN).href;
 
 const MyApp: React.FC<AppPropsWithLayout> = ({ Component, ...rest }) => {
 	const getLayout = Component.getLayout || ((page) => page);

@@ -1,3 +1,4 @@
+import { gsspWithNonce } from "@next-safe/middleware/dist/document";
 import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -41,7 +42,7 @@ export const config = {
 	unstable_includeFiles: [".next/static/chunks/**/*.js"]
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => gsspWithNonce(async ({ req, res }) => {
 	await serverSide(store, req, res);
 	return {
 		props: {
@@ -51,7 +52,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
 			}
 		}
 	};
-});
+}));
 
 Docs.getLayout = ShellLayout.single;
 
