@@ -1,8 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
-import { Action, configureStore, Middleware, nanoid, ThunkAction } from "@reduxjs/toolkit";
+import { Action, configureStore, Middleware, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { createLogger } from "redux-logger";
-import device, { detectDevice, DeviceState } from "./device";
+import device, { detectDevice } from "./device";
 import nav from "./nav";
 
 const makeStore = () => {

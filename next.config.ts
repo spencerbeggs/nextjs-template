@@ -67,22 +67,22 @@ export default async (phase: string): Promise<NextConfig> => {
 						}
 					]
 				},
-				{
-					source: "/:path*",
-					has: [
-						{
-							type: "header",
-							key: "csp-nonce",
-							value: "(<nonce>.*)"
-						}
-					],
-					headers: [
-						{
-							key: "x-csp-nonce",
-							value: ":nonce"
-						}
-					]
-				}
+				// {
+				// 	source: "/:path*",
+				// 	has: [
+				// 		{
+				// 			type: "header",
+				// 			key: "csp-nonce",
+				// 			value: "(<nonce>.*)"
+				// 		}
+				// 	],
+				// 	headers: [
+				// 		{
+				// 			key: "x-csp-nonce",
+				// 			value: ":nonce"
+				// 		}
+				// 	]
+				// }
 			];
 		},
 		webpack: (config, { webpack }) => {
