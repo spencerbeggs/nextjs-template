@@ -5,7 +5,6 @@ import {
 	csp,
 	reporting,
 	CspSource,
-	nextSafe,
 	ChainableMiddleware
 } from "@next-safe/middleware";
 import { NextResponse, userAgent } from "next/server";
@@ -95,13 +94,14 @@ const securityMiddleware = [
 			"script-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
 			"style-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
 			"script-src-elem": ["self", origin]
-		}
-		//reportOnly: isDev,
+		},
+		reportOnly: isDev,
 	}),
+	featurePolicyMiddleware,
 	strictDynamic({
 		extendScriptSrc: true
 	}),
 	reporting()
 ];
 
-export default chainMatch(isPageRequest)(adaptiveMiddleware, featurePolicyMiddleware, ...securityMiddleware);
+export default chainMatch(isPageRequest)(adaptiveMiddleware, ...securityMiddleware);
