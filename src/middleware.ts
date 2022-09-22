@@ -94,7 +94,8 @@ const securityMiddleware = [
 			"style-src-attr": ["self", "unsafe-inline", origin],
 			"script-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
 			"style-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
-			"script-src-elem": ["self", origin]
+			"script-src-elem": ["self", origin],
+			"require-trusted-types-for": ["script"],
 		},
 		reportOnly: isDev
 	}),
