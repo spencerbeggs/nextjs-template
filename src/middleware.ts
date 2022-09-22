@@ -4,6 +4,7 @@ import { UAParser } from "ua-parser-js";
 import { DeviceState } from "@util/store/device";
 
 const isDev = process.env.NODE_ENV === "development";
+	const origin = process.env.NEXT_PUBLIC_SITE_DOMAIN as CspSource;
 
 
 const adaptiveMiddleware = (
@@ -40,7 +41,6 @@ const adaptiveMiddleware = (
 };
 
 const nextSafeMiddleware = () => {
-	const origin = process.env.NEXT_PUBLIC_SITE_DOMAIN as CspSource;
 	return csp({
 		isDev,
 		directives: {
@@ -56,4 +56,15 @@ const nextSafeMiddleware = () => {
 };
 
 
-export default chain(adaptiveMiddleware, chainMatch(isPageRequest)(nextSafeMiddleware(), strictDynamic(), reporting()));
+export default chain(adaptiveMiddleware, chainMatch(isPageRequest)(csp({
+		isDev,
+		directives: {
+			"default-src": ["self", "blob:", origin],
+			"img-src": ["self", origin],
+			"connect-src": ["self", "https://vitals.vercel-insights.com/v1/vitals", origin],
+			"style-src": ["self", "unsafe-inline", origin],
+			"style-src-elem": ["self", "unsafe-inline", origin],
+			"script-src": ["self", origin],
+			"script-src-elem": ["self", origin]
+		}
+	}), nextSafeMiddleware(), strictDynamic(), reporting()));
