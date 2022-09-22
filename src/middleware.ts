@@ -31,6 +31,7 @@ const adaptiveMiddleware: ChainableMiddleware = async (req, evt, ctx) => {
 	const response = ctx.res.get();
 	if (response instanceof NextResponse) {
 		response.headers.append("x-device", type ?? "desktop");
+		response.headers.set("Vary", "Accept-Encoding,x-device");
 	}
 };
 
@@ -64,7 +65,7 @@ const featurePolicyMiddleware: ChainableMiddleware = async (req, evt, ctx) => {
 		"xr-spatial-tracking": []
 	};
 	const parseValues = (values: string[]) => {
-if (values.includes("*")) {
+		if (values.includes("*")) {
 			return "*";
 		}
 		return values.map((value) => `'${value}'`).join(" ");
