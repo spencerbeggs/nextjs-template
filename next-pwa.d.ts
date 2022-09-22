@@ -1,4 +1,4 @@
-import type { NextConfig, NextConfigObject, NextConfigFunction } from "next";
+import type { NextConfig } from "next";
 import {  RuntimeCacheRule , GenerateSW, InjectManifest, RuntimeCacheRule } from "workbox-webpack-plugin";
 
 export declare module "next-pwa" {

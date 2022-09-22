@@ -30,12 +30,20 @@ export default nextPWA(async (phase: string): Promise<NextConfig> => {
 				}
 			}
 		},
+		pwa: {
+			dest: "public",
+			register: isProd,
+			skipWaiting: true,
+			runtimeCaching,
+			buildExcludes: [/middleware-manifest.json$/],
+			disable: isDev
+		},
 		compiler: {
 			removeConsole: isDev
 				? false
 				: {
-					exclude: ["error"]
-				}
+						exclude: ["error"]
+				  }
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
