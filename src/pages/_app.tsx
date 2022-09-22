@@ -59,7 +59,7 @@ const MyApp: React.FC<AppPropsWithLayout> = ({ Component, ...rest }) => {
 				<link key="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href={icons.icon180x180}></link>
 				<link key="icon-32x32" rel="icon" type="image/png" sizes="32x32" href={icons.icon32x32}></link>
 				<link key="icon-16x16" rel="icon" type="image/png" sizes="16x16" href={icons.icon16x16}></link>
-				<link key="manifest" rel="manifest" href={manifest}></link>
+				<link key="manifest" rel="manifest" href="/api/manifest"></link>
 			</Head>
 			{getLayout(<Component {...props.pageProps} />)}
 		</Provider>
