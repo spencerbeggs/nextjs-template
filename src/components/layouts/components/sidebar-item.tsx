@@ -37,21 +37,23 @@ export const SidebarItem: FC<SideItemProps> = ({ name, href, Icon }) => {
 		<Link
 			data-x="sidebar-item"
 			href={href}
-			className={TW.cn(
+
+		>
+			<a className={TW.cn(
 				"flex items-center rounded-md px-2 py-2 text-sm font-medium hover:bg-gray-700",
 				[active, "cursor-default bg-gray-700 text-white"],
-				[!active, "text-gray-300 hover:text-white hover:bg-gray-900"]
-			)}
-		>
-			<Icon
-				className={TW.cn(
-					"mr-3 h-6 w-6 flex-shrink-0",
-					[active, "text-gray-400 group-hover:text-gray-300"],
-					[!active, "text-gray-400 group-hover:text-gray-300"]
-				)}
-				aria-hidden="true"
-			/>
-			<span>{name}</span>
+				[!active, "text-gray-300 hover:bg-gray-900 hover:text-white"]
+			)}>
+				<Icon
+					className={TW.cn(
+						"mr-3 h-6 w-6 flex-shrink-0",
+						[active, "text-gray-400 group-hover:text-gray-300"],
+						[!active, "text-gray-400 group-hover:text-gray-300"]
+					)}
+					aria-hidden="true"
+				/>
+				<span>{name}</span>
+			</a>
 		</Link>
 	);
 };

@@ -2,15 +2,15 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
 	BellIcon,
 	HomeIcon,
-	MenuAlt2Icon,
-	ChatAlt2Icon,
+	Bars3BottomLeftIcon,
+	ChatBubbleLeftEllipsisIcon,
 	DocumentTextIcon,
-	TerminalIcon,
+	CommandLineIcon,
 	CogIcon,
-	XIcon
-} from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
-import Image from "next/image";
+	XMarkIcon,
+} from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import Image from "next/future/image";
 import Link from "next/link";
 import {  Fragment, ReactElement, useState } from "react";
 import { SidebarItem } from "./components/sidebar-item";
@@ -19,8 +19,8 @@ import logo from "./logo.svg";
 const navigation = [
 	{ name: "Home", href: "/", Icon: HomeIcon, current: true },
 	{ name: "Docs", href: "/docs", Icon: DocumentTextIcon, current: false },
-	{ name: "FAQ", href: "/faq", Icon: ChatAlt2Icon, current: false },
-	{ name: "Tutorials", href: "/tutorials", Icon: TerminalIcon, current: false }
+	{ name: "FAQ", href: "/faq", Icon: ChatBubbleLeftEllipsisIcon, current: false },
+	{ name: "Tutorials", href: "/tutorials", Icon: CommandLineIcon, current: false }
 ];
 const userNavigation = [
 	{ name: "Your Profile", href: "#" },
@@ -83,50 +83,46 @@ export function ShellLayout({ children }: Props) {
 												onClick={() => setSidebarOpen(false)}
 											>
 												<span className="sr-only">Close sidebar</span>
-												<XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+												<XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
 											</button>
 										</div>
 									</Transition.Child>
 									<div data-x="logo" className="flex h-8 w-full flex-shrink-0 px-4">
-										<Link
-											href="/"
-											data-x="logo-container"
-											className="relative flex h-full w-32  items-start"
-										>
-											<Image
-												layout="fill"
-												className="h-8 w-auto"
-												src={logo}
-												alt="Logo"
-												priority={true}
-											/>
+										<Link href="/" data-x="logo-container">
+											<a className="relative flex h-full w-32  items-start">
+												<Image
+													style={{ maxWidth: "100%", height: "auto" }}
+													className="h-8 w-auto"
+													src={logo}
+													alt="Logo"
+													priority={true}
+												/>
+											</a>
 										</Link>
 									</div>
 									<div className="mt-5 h-0 flex-1 overflow-y-auto">
 										<nav className="space-y-1 px-2">
-											{navigation.map((item) => (
-												<Link
-													key={item.name}
-													href={item.href}
-													className={classNames(
-														item.current
-															? "bg-gray-900 text-white"
-															: "text-gray-300 hover:bg-gray-700 hover:text-white",
-														"group flex items-center rounded-md px-2 py-2 text-base font-medium"
-													)}
-												>
-													<>
-														<item.Icon
+											{navigation.map(({ name, href, current, Icon }) => (
+												<Link key={name} href={href}>
+													<a
+														className={classNames(
+															current
+																? "bg-gray-900 text-white"
+																: "text-gray-300 hover:bg-gray-700 hover:text-white",
+															"group flex items-center rounded-md px-2 py-2 text-base font-medium"
+														)}
+													>
+														<Icon
 															className={classNames(
-																item.current
+																current
 																	? "text-gray-300"
 																	: "text-gray-400 group-hover:text-gray-300",
 																"mr-4 h-6 w-6 flex-shrink-0"
 															)}
 															aria-hidden="true"
 														/>
-														{item.name}
-													</>
+														<span>{name}</span>
+													</a>
 												</Link>
 											))}
 										</nav>
@@ -146,13 +142,15 @@ export function ShellLayout({ children }: Props) {
 					<div className="flex min-h-0 flex-1 flex-col bg-gray-800">
 						<div data-x="logo" className="box-content flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
 							<Link href="/" data-x="image-wrapper" className="relative flex h-full w-full">
-								<Image
-									className="h-8 w-auto object-contain"
-									layout="fill"
-									src={logo}
-									alt="Logo"
-									priority={true}
-								/>
+								<a>
+									<Image
+										className="h-8 object-contain"
+										style={{ maxWidth: "100%", height: "auto" }}
+										src={logo}
+										alt="Logo"
+										priority={true}
+									/>
+								</a>
 							</Link>
 						</div>
 						<div data-x="content" className="flex flex-1 flex-col overflow-y-auto">
@@ -172,7 +170,7 @@ export function ShellLayout({ children }: Props) {
 							onClick={() => setSidebarOpen(true)}
 						>
 							<span className="sr-only">Open sidebar</span>
-							<MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
+							<Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
 						</button>
 						<div className="flex flex-1 justify-between px-4">
 							<div className="flex flex-1">
@@ -182,7 +180,7 @@ export function ShellLayout({ children }: Props) {
 									</label>
 									<div className="relative w-full text-gray-400 focus-within:text-gray-600">
 										<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-											<SearchIcon className="h-5 w-5" aria-hidden="true" />
+											<MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
 										</div>
 										<input
 											id="search-field"

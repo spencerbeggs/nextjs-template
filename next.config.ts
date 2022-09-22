@@ -32,8 +32,6 @@ export default async (phase: string): Promise<NextConfig> => {
 			//disablePostcssPresetEnv: false,
 			swcFileReading: true,
 			//browsersListForSwc: true,
-			newNextLinkBehavior: true,
-			images: { remotePatterns: [] },
 			modularizeImports: {
 				"lodash-es": {
 					transform: "lodash-es/{{member}}"
@@ -55,6 +53,13 @@ export default async (phase: string): Promise<NextConfig> => {
 			return [
 				{
 					source: "/:path*",
+					has: [
+						{
+							type: "header",
+							key: "x-device",
+							value: "(<nonce>.*)"
+						}
+					],
 					headers: [
 						{
 							key: "vary",

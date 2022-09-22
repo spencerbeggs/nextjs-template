@@ -1,21 +1,9 @@
-import Document, { provideComponents } from "@next-safe/middleware/dist/document";
-import { DocumentContext, Html, Main } from "next/document";
-
-// weirdness: when running on Vercel, the response header set by middleware
-// will be found in req, when serving a prod build with next start, it will be in res
-const getCtxHeader = (ctx: DocumentContext, header: string) => {
-	return (ctx.res?.getHeader(header) || ctx.req?.headers[header] || "").toString();
-};
-
-const CSP_NONCE_HEADER = "csp-nonce";
+import { getCspInitialProps, provideComponents } from "@next-safe/middleware/dist/document";
+import Document, { DocumentContext, Html, Main } from "next/document";
 
 export default class CustomDocument extends Document {
 	static async getInitialProps(ctx: DocumentContext) {
-		const initialProps = await Document.getInitialProps(ctx);
-		const nonce = getCtxHeader(ctx, CSP_NONCE_HEADER);
-		if (nonce) {
-			return { ...initialProps, nonce };
-		}
+		const initialProps = await getCspInitialProps({ ctx });
 		return initialProps;
 	}
 

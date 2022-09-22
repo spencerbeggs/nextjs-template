@@ -1,5 +1,4 @@
 import { createAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { set } from "lodash-es";
 import { HYDRATE } from "next-redux-wrapper";
 import { IDevice } from "ua-parser-js";
 
