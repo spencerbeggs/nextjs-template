@@ -5,7 +5,7 @@ import {
 	csp,
 	reporting,
 	CspSource,
-	ChainableMiddleware
+	ChainableMiddleware,
 } from "@next-safe/middleware";
 import { NextResponse, userAgent } from "next/server";
 import { UAParser } from "ua-parser-js";
@@ -94,8 +94,9 @@ const securityMiddleware = [
 			"style-src-attr": ["self", "unsafe-inline", origin],
 			"script-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
 			"style-src": isDev ? ["self", "unsafe-inline", "unsafe-eval"] : [origin],
-			"script-src-elem": ["self", origin],
-			"require-trusted-types-for": ["script"],
+			"script-src-elem": ["self", origin]
+			// broken at the moment, see: https://github.com/nibtime/next-safe-middleware/pull/76
+			//"require-trusted-types-for": ["script"],
 		},
 		reportOnly: isDev
 	}),
@@ -105,7 +106,9 @@ const securityMiddleware = [
 	}),
 	reporting({
 		csp: {
-			reportTo: new URL("/api/reporting", origin).href,
+			// @ts-ignore
+			reportUri: new URL("/api/reporting", origin).href,
+			reportTo: "'default'"
 		}
 	})
 ];

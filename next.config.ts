@@ -5,7 +5,7 @@ import runtimeCaching from "next-pwa/cache.js";
 import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
 import nextPWA from "next-pwa";
 
-export default nextPWA(async (phase: string): Promise<NextConfig> => {
+export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
 	const { hostname } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
@@ -29,14 +29,6 @@ export default nextPWA(async (phase: string): Promise<NextConfig> => {
 					transform: "lodash-es/{{member}}"
 				}
 			}
-		},
-		pwa: {
-			dest: "public",
-			register: isProd,
-			skipWaiting: true,
-			runtimeCaching,
-			buildExcludes: [/middleware-manifest.json$/],
-			disable: isDev
 		},
 		compiler: {
 			removeConsole: isDev
@@ -114,5 +106,12 @@ export default nextPWA(async (phase: string): Promise<NextConfig> => {
 		}
 	};
 
-	return conf;
-});
+	return nextPWA({
+			dest: new URL("public/", import.meta.url).pathname,
+			register: isProd,
+			skipWaiting: true,
+			runtimeCaching,
+			buildExcludes: [/middleware-manifest\.json$/, /middleware.*manifest\.js$/],
+			disable: isDev
+		})(conf);
+};

@@ -21,7 +21,7 @@ export declare module "next-pwa" {
 		pwa: NextPWAOptions;
 	}
 
-	declare function withPwa(func: (phase: string) => Promise<NextConfig>): ConfigOptions;
+	declare function withPwa(NextConfig): (NextConfig) => ConfigOptions;
 	export default withPwa;
 }
 
