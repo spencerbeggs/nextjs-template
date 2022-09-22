@@ -1,18 +1,19 @@
-import { Middleware, strictDynamic, chain, nextSafe, reporting } from "@next-safe/middleware";
+import { chain, strictDynamic, chainMatch, isPageRequest, csp, reporting, CspSource } from "@next-safe/middleware";
 import { NextURL } from "next/dist/server/web/next-url";
-import { NextRequest, NextResponse, userAgent } from "next/server";
+import {  NextRequest, NextResponse, userAgent } from "next/server";
 import { UAParser } from "ua-parser-js";
 import { DeviceState } from "@util/store/device";
 
 const isDev = process.env.NODE_ENV === "development";
-const reportOnly = process.env.CSP_REPORT_ONLY === "true" ? true : undefined;
 
 const isHtml = (url: NextURL) => {
 	const last = url.pathname.split("/").pop();
 	return last && !last.includes(".") && !url.pathname.startsWith("/_next/");
 };
 
-const adaptiveMiddleware: Middleware = async (req, evt, res, next) => {
+const adaptiveMiddleware = (
+	req: NextRequest
+) => {
 	const url = req.nextUrl.clone();
 	let response = NextResponse.next();
 	if (isHtml(url)) {
@@ -39,46 +40,24 @@ const adaptiveMiddleware: Middleware = async (req, evt, res, next) => {
 	// 	response.headers.append("x-device", device.type ?? "desktop");
 	// 	response.headers.append("vary", "x-device, accept-encoding");
 	// }
-	return next ? next(response) : response;
+	return response;
 };
 
-const nextSafeMiddleware = nextSafe(() => {
-	const origin = process.env.NEXT_PUBLIC_SITE_DOMAIN as string;
-	return {
+const nextSafeMiddleware = () => {
+	const origin = process.env.NEXT_PUBLIC_SITE_DOMAIN as CspSource;
+	return csp({
 		isDev,
-		contentSecurityPolicy: {
-			reportOnly,
-			"default-src": ["'self' blob:", origin],
-			"img-src": ["'self'", origin],
-			"connect-src": ["'self'", "https://vitals.vercel-insights.com/v1/vitals", origin],
-			"style-src": ["'self'", "'unsafe-inline'", origin],
-			"style-src-elem": ["'self'", "'unsafe-inline'", origin],
-			"script-src": ["'self'", origin],
-			"script-src-elem": ["'self'", origin]
-		},
-		permissionsPolicy: false,
-		permissionsPolicyDirectiveSupport: ["standard"],
-		referrerPolicy: "no-referrer",
-		xssProtection: "1; mode=block",
-		frameOptions: "DENY"
-	};
-});
-
-const reportingMiddleware = reporting(() => {
-	const { href } = new URL("/api/reporting", process.env.NEXT_PUBLIC_SITE_DOMAIN);
-	return {
-		csp: {
-			reportUri: process.env.CSP_REPORT_URI || href
-		},
-		reportTo: {
-			max_age: 1800,
-			endpoints: [
-				{
-					url: process.env.REPORT_TO_ENDPOINT_DEFAULT || href
-				}
-			]
+		directives: {
+			"default-src": ["self", "blob:", origin],
+			"img-src": ["self", origin],
+			"connect-src": ["self", "https://vitals.vercel-insights.com/v1/vitals", origin],
+			"style-src": ["self", "unsafe-inline", origin],
+			"style-src-elem": ["self", "unsafe-inline", origin],
+			"script-src": ["self", origin],
+			"script-src-elem": ["self", origin]
 		}
-	};
-});
+	});
+};
 
-export default chain(adaptiveMiddleware, nextSafeMiddleware, strictDynamic(), reportingMiddleware);
+
+export default chain(adaptiveMiddleware, chainMatch(isPageRequest)(nextSafeMiddleware(), strictDynamic(), reporting()));
