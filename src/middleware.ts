@@ -1,22 +1,17 @@
 import { chain, strictDynamic, chainMatch, isPageRequest, csp, reporting, CspSource } from "@next-safe/middleware";
-import { NextURL } from "next/dist/server/web/next-url";
 import {  NextRequest, NextResponse, userAgent } from "next/server";
 import { UAParser } from "ua-parser-js";
 import { DeviceState } from "@util/store/device";
 
 const isDev = process.env.NODE_ENV === "development";
 
-const isHtml = (url: NextURL) => {
-	const last = url.pathname.split("/").pop();
-	return last && !last.includes(".") && !url.pathname.startsWith("/_next/");
-};
 
 const adaptiveMiddleware = (
 	req: NextRequest
 ) => {
-	const url = req.nextUrl.clone();
 	let response = NextResponse.next();
-	if (isHtml(url)) {
+	if (isPageRequest(req)) {
+		const url = req.nextUrl.clone();
 		const { ua } = userAgent(req);
 		const parser = new UAParser(ua);
 		const device = parser.getDevice();
@@ -30,6 +25,7 @@ const adaptiveMiddleware = (
 		url.searchParams.set("device", type ?? "desktop");
 		response = NextResponse.rewrite(url);
 		response.headers.append("x-device", type ?? "desktop");
+		//console.log(response);
 		//response.headers.append("cache-control", "public, s-maxage=300, stale-while-revalidate=59");
 	}
 	//const type = req.headers.get("Content-Type");
