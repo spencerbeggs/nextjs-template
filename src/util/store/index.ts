@@ -33,14 +33,14 @@ export const wrapper = createWrapper<AppStore>(makeStore);
 
 export const serverSide = async (store: AppStore, req?: IncomingMessage, res?: ServerResponse) => {
 	if (res) {
-		res.setHeader("csp-nonce", nanoid());
-		res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=259200");
+		//res.setHeader("csp-nonce", nanoid());
+		//res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=259200");
 	}
 	if (req?.headers?.["user-agent"]) {
 		await store.dispatch(detectDevice(req.headers["user-agent"]));
-		const { device } = store.getState();
-		const type = Object.keys(device).find((key) => device[key as keyof DeviceState] === true);
-		res?.setHeader("x-device", type ?? "desktop");
+		//const { device } = store.getState();
+		//const type = Object.keys(device).find((key) => device[key as keyof DeviceState] === true);
+		//res?.setHeader("x-device", type ?? "desktop");
 	} else {
 		console.log("__CLIENT__");
 	}
