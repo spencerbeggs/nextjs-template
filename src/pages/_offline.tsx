@@ -1,11 +1,10 @@
-import { gsspWithNonce } from "@next-safe/middleware/dist/document";
 import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import { NextPage } from "next";
 import Head from "next/head";
 import { ReactElement, ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { ShellLayout } from "@components/layouts/shell.layout";
-import { AppState, serverSide, wrapper } from "@util/store";
+import { AppState, wrapper } from "@util/store";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -41,17 +40,16 @@ export const config = {
 	unstable_includeFiles: [".next/static/chunks/**/*.js"]
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => gsspWithNonce(async ({ req, res }) => {
-	await serverSide(store, req, res);
+export const getStaticProps = wrapper.getStaticProps(() => async () => {
 	return {
 		props: {
 			meta: {
-				title: "Docs",
-				description: "Read the docs."
+				title: "404 - Page not found",
+				description: "The requested URL was not found on this server."
 			}
 		}
 	};
-}));
+});
 
 Offline.getLayout = ShellLayout.single;
 

@@ -2,12 +2,13 @@ import os from "os";
 import type { NextConfig } from "next";
 //@ts-ignore
 import runtimeCaching from "next-pwa/cache.js";
-import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD, PHASE_PRODUCTION_SERVER } from "next/constants.js";
 import nextPWA from "next-pwa";
 
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD;
+	const isProdServer = phase === PHASE_PRODUCTION_SERVER;
 	const { hostname } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
 	const conf: NextConfig = {
 		//assetPrefix: isProd || isDev ? origin : undefined,
@@ -21,9 +22,8 @@ export default async (phase: string): Promise<NextConfig> => {
 		reactStrictMode: true,
 		experimental: {
 			runtime: "experimental-edge",
-			disablePostcssPresetEnv: false,
+			//disablePostcssPresetEnv: false,
 			swcFileReading: true,
-			//browsersListForSwc: true,
 			modularizeImports: {
 				"lodash-es": {
 					transform: "lodash-es/{{member}}"
@@ -106,12 +106,15 @@ export default async (phase: string): Promise<NextConfig> => {
 		}
 	};
 
-	return nextPWA({
-			dest: new URL("public/", import.meta.url).pathname,
+	return nextPWA(
+		{
+			dest: "public/",
 			register: isProd,
 			skipWaiting: true,
 			runtimeCaching,
-			buildExcludes: [/middleware-manifest\.json$/, /middleware.*manifest\.js$/],
+			buildExcludes: [/middleware-manifest\.json$/],
 			disable: isDev
-		})(conf);
+		},
+		conf
+	)();
 };

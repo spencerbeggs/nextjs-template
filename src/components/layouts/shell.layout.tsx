@@ -7,12 +7,12 @@ import {
 	DocumentTextIcon,
 	CommandLineIcon,
 	CogIcon,
-	XMarkIcon,
+	XMarkIcon
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import Image from "next/future/image";
+import Image from "next/image";
 import Link from "next/link";
-import {  Fragment, ReactElement, useState } from "react";
+import { Fragment, ReactElement, useState } from "react";
 import { SidebarItem } from "./components/sidebar-item";
 import logo from "./logo.svg";
 
@@ -88,41 +88,43 @@ export function ShellLayout({ children }: Props) {
 										</div>
 									</Transition.Child>
 									<div data-x="logo" className="flex h-8 w-full flex-shrink-0 px-4">
-										<Link href="/" data-x="logo-container">
-											<a className="relative flex h-full w-32  items-start">
-												<Image
-													style={{ maxWidth: "100%", height: "auto" }}
-													className="h-8 w-auto"
-													src={logo}
-													alt="Logo"
-													priority={true}
-												/>
-											</a>
+										<Link
+											className="relative flex h-full w-32  items-start"
+											href="/"
+											data-x="logo-container"
+										>
+											<Image
+												style={{ maxWidth: "100%", height: "auto" }}
+												className="h-8 w-auto"
+												src={logo}
+												alt="Logo"
+												priority={true}
+											/>
 										</Link>
 									</div>
 									<div className="mt-5 h-0 flex-1 overflow-y-auto">
 										<nav className="space-y-1 px-2">
 											{navigation.map(({ name, href, current, Icon }) => (
-												<Link key={name} href={href}>
-													<a
+												<Link
+													className={classNames(
+														current
+															? "bg-gray-900 text-white"
+															: "text-gray-300 hover:bg-gray-700 hover:text-white",
+														"group flex items-center rounded-md px-2 py-2 text-base font-medium"
+													)}
+													key={name}
+													href={href}
+												>
+													<Icon
 														className={classNames(
 															current
-																? "bg-gray-900 text-white"
-																: "text-gray-300 hover:bg-gray-700 hover:text-white",
-															"group flex items-center rounded-md px-2 py-2 text-base font-medium"
+																? "text-gray-300"
+																: "text-gray-400 group-hover:text-gray-300",
+															"mr-4 h-6 w-6 flex-shrink-0"
 														)}
-													>
-														<Icon
-															className={classNames(
-																current
-																	? "text-gray-300"
-																	: "text-gray-400 group-hover:text-gray-300",
-																"mr-4 h-6 w-6 flex-shrink-0"
-															)}
-															aria-hidden="true"
-														/>
-														<span>{name}</span>
-													</a>
+														aria-hidden="true"
+													/>
+													<span>{name}</span>
 												</Link>
 											))}
 										</nav>
@@ -142,15 +144,13 @@ export function ShellLayout({ children }: Props) {
 					<div className="flex min-h-0 flex-1 flex-col bg-gray-800">
 						<div data-x="logo" className="box-content flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
 							<Link href="/" data-x="image-wrapper" className="relative flex h-full w-full">
-								<a>
-									<Image
-										className="h-8 object-contain"
-										style={{ maxWidth: "100%", height: "auto" }}
-										src={logo}
-										alt="Logo"
-										priority={true}
-									/>
-								</a>
+								<Image
+									className="h-8 object-contain"
+									style={{ maxWidth: "100%", height: "auto" }}
+									src={logo}
+									alt="Logo"
+									priority={true}
+								/>
 							</Link>
 						</div>
 						<div data-x="content" className="flex flex-1 flex-col overflow-y-auto">
@@ -256,7 +256,7 @@ export function ShellLayout({ children }: Props) {
 			</div>
 		</>
 	);
-};
+}
 
 ShellLayout.single = function getLayout(page: ReactElement) {
 	return <ShellLayout>{page}</ShellLayout>;
