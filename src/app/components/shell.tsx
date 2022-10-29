@@ -1,3 +1,4 @@
+"use client";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
 	BellIcon,
@@ -12,9 +13,9 @@ import {
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, ReactElement, useState } from "react";
-import { SidebarItem } from "./components/sidebar-item";
+import { Fragment, useState } from "react";
 import logo from "./logo.svg";
+import { SidebarItem } from "./sidebar-item";
 
 const navigation = [
 	{ name: "Home", href: "/", Icon: HomeIcon, current: true },
@@ -137,7 +138,6 @@ export function ShellLayout({ children }: Props) {
 						</div>
 					</Dialog>
 				</Transition.Root>
-
 				{/* Static sidebar for desktop */}
 				<div data-x="sidebar-desktop" className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
 					{/* Sidebar component, swap this element with another sidebar if you like */}
@@ -240,24 +240,9 @@ export function ShellLayout({ children }: Props) {
 							</div>
 						</div>
 					</div>
-
-					<main data-x="main" className="flex-1">
-						<div className="py-6">
-							<div data-x="content-area" className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-								{children}
-								<div data-x="content-target" className="py-4">
-									<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
-								</div>
-								{/* /End replace */}
-							</div>
-						</div>
-					</main>
 				</div>
+				{children}
 			</div>
 		</>
 	);
 }
-
-ShellLayout.single = function getLayout(page: ReactElement) {
-	return <ShellLayout>{page}</ShellLayout>;
-};

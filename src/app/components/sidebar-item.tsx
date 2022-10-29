@@ -1,5 +1,6 @@
+"use client";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { FC, SVGProps, useEffect, useState } from "react";
 
 type SideItemProps = {
@@ -26,7 +27,7 @@ class TW {
 }
 
 export const SidebarItem: FC<SideItemProps> = ({ name, href, Icon }) => {
-	const { pathname } = useRouter();
+	const pathname  = usePathname();
 	const [active, setActive] = useState(pathname === href);
 
 	useEffect(() => {

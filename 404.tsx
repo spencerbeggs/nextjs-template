@@ -1,10 +1,7 @@
-import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import { NextPage } from "next";
 import Head from "next/head";
 import { ReactElement, ReactNode } from "react";
-import { useSelector } from "react-redux";
-import { ShellLayout } from "@components/layouts/shell.layout";
-import { AppState, wrapper } from "@util/store";
+import {  wrapper } from "@util/store";
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -17,20 +14,17 @@ interface PageProps {
 	};
 }
 
-const Offline: NextPageWithLayout = ({ meta, ...rest }: PageProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { store, props } = wrapper.useWrappedStore(rest);
-	const selectSelf = (state: AppState) => state;
-	const isMobile = useSelector(createDraftSafeSelector(selectSelf, (state) => state.device.mobile));
+const Custom404: NextPageWithLayout = ({ meta, ...rest }: PageProps) => {
+
 
 	return (
 		<>
 			<Head>
-				<title key="title">{`${meta?.title} | ${isMobile ? "Mobile" : "Desktop"}`}</title>
+				<title key="title">{meta?.title}</title>
 				<meta name="description" key="description" content={meta?.description} />
 			</Head>
 			<div>
-				<h1>Offline</h1>
+				<h1>404</h1>
 			</div>
 		</>
 	);
@@ -51,6 +45,5 @@ export const getStaticProps = wrapper.getStaticProps(() => async () => {
 	};
 });
 
-Offline.getLayout = ShellLayout.single;
 
-export default Offline;
+export default Custom404;

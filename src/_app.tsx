@@ -1,4 +1,3 @@
-import "./_app.css";
 import { throttle } from "lodash-es";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";

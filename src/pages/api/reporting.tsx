@@ -1,5 +1,15 @@
-import { reporting } from "@next-safe/middleware/dist/api";
+import type { NextRequest } from "next/server";
 
-const consoleLogReporter = (data: Record<string, unknown>) => console.log(JSON.stringify(data, undefined, 2));
+export const config = {
+	runtime: "experimental-edge"
+};
 
-export default reporting(consoleLogReporter);
+export default function handler(req: NextRequest) {
+	if (req.method === "POST") {
+		return new Response(null, { status: 200 });
+
+	} else {
+		return new Response(null, { status: 404 });
+	}
+}
+

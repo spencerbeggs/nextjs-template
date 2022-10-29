@@ -1,49 +1,58 @@
 {
-	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-	"editor.formatOnSave": false,
-	"[markdown]": {
-		"editor.formatOnSave": false
-	},
-	"search.exclude": {
-		"**/node_modules": true,
-		"**/.next": true,
-		"**/.ssl": true,
-		"**/.yarn": true,
-		"yarn.lock": true,
-		".gitignore": true,
-		".eslintignore": true,
-		".eslintrc": true,
-		"README.md": true
-	},
-	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true,
-		"source.fixAll.markdownlint": true,
-		"source.addMissingImports": true,
-		"source.fixAll.stylelint": true
-	},
-	"prettier.enable": true,
-	"prettier.configPath": "prettier.config.js",
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"[css]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"[tailwindcss]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"files.associations": {
-		"*.css": "tailwindcss"
-	},
-	"css.validate": false,
-	"less.validate": false,
-	"scss.validate": false,
-	"npm.packageManager": "yarn",
-	"stylelint.enable": true,
-	"stylelint.validate": ["css", "scss"],
-	"stylelint.configFile": ".stylelintrc.json",
-	"typescript.tsdk": "node_modules/typescript/lib"
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.formatOnSave": false,
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.ssl": true,
+    "**/.yarn": true,
+    "yarn.lock": true,
+    ".gitignore": true,
+    ".eslintignore": true,
+    ".eslintrc": true,
+    "README.md": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.markdownlint": true,
+    "source.addMissingImports": true,
+    "source.fixAll.stylelint": true
+  },
+  "prettier.enable": true,
+  "prettier.configPath": "prettier.config.js",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "npm.packageManager": "yarn",
+  "stylelint.enable": true,
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
+  "stylelint.configFile": ".stylelintrc.json",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

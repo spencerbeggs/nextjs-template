@@ -121,3 +121,4 @@ dotenv/config.js
 **/public/fallback-*.js
 .vercel
 .env.*.local
+.vscode
