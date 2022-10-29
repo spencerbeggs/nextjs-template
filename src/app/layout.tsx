@@ -15,7 +15,7 @@ const assets = {
 	manifest: new URL("/api/manifest", process.env.NEXT_PUBLIC_SITE_DOMAIN).href
 };
 
-const inter = Inter();
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: Props) {
 	return (
@@ -29,9 +29,7 @@ export default function RootLayout({ children }: Props) {
 				<link key="manifest" rel="manifest" href={assets.manifest}></link>
 			</head>
 			<body>
-
-								<ShellLayout>{children}</ShellLayout>
-
+				<ShellLayout>{children}</ShellLayout>
 			</body>
 		</html>
 	);
