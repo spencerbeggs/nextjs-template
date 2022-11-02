@@ -1,6 +1,5 @@
 import { useEffect, useContext } from "react";
 import { TopNavContext } from "@contexts/nav.context";
-import styles from "./content.module.css";
 
 interface ContentProps {
 	section: string;
@@ -15,8 +14,8 @@ export const Content: React.FC<ContentProps> = ({ section, title }) => {
 	}, [section, title, update]);
 
 	return (
-		<section className={styles.content}>
-			<h1 className={styles.contentTitle}>{title}</h1>
+		<section className="container mx-auto py-5 px-5">
+			<h1>{title}</h1>
 		</section>
 	);
 };
