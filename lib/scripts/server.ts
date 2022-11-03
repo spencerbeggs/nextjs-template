@@ -81,14 +81,6 @@ server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse & Server
 	}
 });
 
-server.on("upgrade", (req, socket, head) => {
-	const url = new URL(req.url, site.origin);
-	if (url.pathname === "/_next/webpack-hmr") {
-		console.log(req.url);
-	}
-	//console.log("someone connected!", req);
-});
-
 server.listen(app.port, app.hostname, () => {
 	log(`${chalk.green("ready")} - dev server available at https://${app.hostname}:${app.port} -> ${site.origin}`);
 });
