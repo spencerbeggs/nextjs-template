@@ -40,8 +40,7 @@
 		"src/**/*.ts",
 		"src/**/*.tsx",
 		".next/types/**/*.ts",
-		"error.tsx",
-		"_error.tsx"
+		"middleware.ts"
 	],
 	"exclude": ["node_modules", "public"],
 	"ts-node": {

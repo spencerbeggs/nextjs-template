@@ -6,7 +6,13 @@
 		"moduleResolution": "node",
 		"noEmit": true,
 		"declaration": false,
-		"typeRoots": ["types", "node_modules/@types"]
+		"typeRoots": ["types", "node_modules/@types"],
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		]
 	},
 	"include": ["lib/**/*.ts", "tailwind.config.js", "postcss.config.js", "prettier.config.js"]
 }

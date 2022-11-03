@@ -1,6 +1,6 @@
 import "./config";
-import { IncomingMessage, ServerResponse } from "http";
-import { createSecureServer, Http2ServerRequest, Http2ServerResponse } from "http2";
+import  { IncomingMessage, ServerResponse } from "http";
+import  { createSecureServer, Http2ServerRequest, Http2ServerResponse  } from "http2";
 import { hostname } from "os";
 import process from "process";
 import chalk from "chalk";
@@ -20,19 +20,6 @@ const { credentials } = await sslCredentials({
 	folder: new URL("../../.ssl/", import.meta.url)
 });
 
-// configure Next.js
-const app = next({
-	dev: true,
-	port,
-	hostname: hostname(),
-	customServer: true
-});
-// @ts-ignore
-await cjsHack();
-// @ts-ignore
-await app.prepare();
-const handle = app.getRequestHandler();
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isHttp1Request = (req: any): req is IncomingMessage => {
 	return req.httpVersion !== "2.0";
@@ -46,14 +33,31 @@ const isHttp1Response = (res: any): res is ServerResponse => {
 const server = createSecureServer({
 	...credentials,
 	allowHTTP1: true,
+	origins: ["spencerbeggs.local:3001"],
 	settings: {
 		enableConnectProtocol: true
 	}
 });
 
+// configure Next.js
+const app = next({
+	dev: true,
+	port,
+	isNextDevCommand: false,
+	hostname: hostname(),
+	customServer: true,
+});
+
+// @ts-ignore
+await cjsHack();
+// @ts-ignore
+await app.prepare();
+const handle = app.getRequestHandler();
+
 server.on("unknownProtocol", (socket) => {
 	console.log("unknownProtocol", socket);
 });
+
 
 server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse & ServerResponse) => {
 	if (isHttp1Request(req) && isHttp1Response(res)) {
@@ -75,6 +79,14 @@ server.on("request", (req: Http2ServerRequest, res: Http2ServerResponse & Server
 		}
 		return handle(req, res);
 	}
+});
+
+server.on("upgrade", (req, socket, head) => {
+	const url = new URL(req.url, site.origin);
+	if (url.pathname === "/_next/webpack-hmr") {
+		console.log(req.url);
+	}
+	//console.log("someone connected!", req);
 });
 
 server.listen(app.port, app.hostname, () => {
