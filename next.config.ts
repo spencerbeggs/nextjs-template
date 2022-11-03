@@ -1,10 +1,9 @@
 import type { NextConfig } from "next";
-import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD, PHASE_PRODUCTION_SERVER } from "next/constants.js";
 
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
-	const isProd = phase === PHASE_PRODUCTION_BUILD;
-	//const isProdServer = phase === PHASE_PRODUCTION_SERVER;
+	const isProd = phase === PHASE_PRODUCTION_BUILD || phase ===  PHASE_PRODUCTION_SERVER;
 	const { hostname, origin } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
 	let imageDomains = [hostname];
 	if (isDev) {
