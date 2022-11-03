@@ -16,8 +16,8 @@ export default async (phase: string): Promise<NextConfig> => {
 		compress: isProd,
 		poweredByHeader: false,
 		i18n: {
-			locales: ["en"],
-			defaultLocale: "en"
+			locales: ["en-US"],
+			defaultLocale: "en-US"
 		},
 		reactStrictMode: true,
 		experimental: {
@@ -84,7 +84,7 @@ export default async (phase: string): Promise<NextConfig> => {
 					loader: "string-replace-loader",
 					options: {
 						search: "${url}/_next/webpack-hmr",
-						replace: `wss://${new URL(process.env.DEV_ASSET_PREFIX as string).host}/_next/webpack-hmr`,
+						replace: `wss://${new URL(process.env.DEV_ASSET_PREFIX as string).host}/_next/webpack-hmr`
 					}
 				});
 			}

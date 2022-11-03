@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
+		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"module": "ESNext",
 		"baseUrl": ".",
@@ -40,7 +40,7 @@
 		"src/**/*.ts",
 		"src/**/*.tsx",
 		".next/types/**/*.ts",
-		"middleware.ts"
+		"old.middleware.ts"
 	],
 	"exclude": ["node_modules", "public"],
 	"ts-node": {

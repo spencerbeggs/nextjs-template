@@ -5,7 +5,7 @@ module.exports = {
 	"printWidth": 125,
 	"plugins": [require("prettier-plugin-tailwindcss"), require("stylelint-prettier")],
 	"overrides": [{
-			"files": [".eslintrc", "public/site.manifest"],
+			"files": [".eslintrc", ".swc.next.config"],
 			"options": {
 				"parser": "json"
 			}
