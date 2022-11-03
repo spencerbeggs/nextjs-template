@@ -15,10 +15,6 @@ export default async (phase: string): Promise<NextConfig> => {
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,
-		i18n: {
-			locales: ["en-US"],
-			defaultLocale: "en-US"
-		},
 		reactStrictMode: true,
 		experimental: {
 			runtime: "experimental-edge",
