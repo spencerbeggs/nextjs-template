@@ -10,7 +10,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"esModuleInterop": true,
-		"moduleResolution": "NodeNext",
+		"moduleResolution": "node",
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,

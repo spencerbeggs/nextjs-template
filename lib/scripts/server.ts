@@ -1,13 +1,13 @@
-import "./config";
+import "./config.js";
 import  { IncomingMessage, ServerResponse } from "http";
 import  { createSecureServer, Http2ServerRequest, Http2ServerResponse  } from "http2";
 import { hostname } from "os";
 import process from "process";
 import chalk from "chalk";
 import next from "next";
-import { cjsHack } from "../helpers/cjs-hack";
-import { log } from "../helpers/deep-log";
-import { sslCredentials } from "../helpers/pem";
+import { cjsHack } from "../helpers/cjs-hack.js";
+import { log } from "../helpers/deep-log.js";
+import { sslCredentials } from "../helpers/pem.js";
 
 const site = new URL(process.env.SITE_DOMAIN as string);
 const port = Number(process.env.PORT) || 3000;
@@ -40,12 +40,13 @@ const server = createSecureServer({
 });
 
 // configure Next.js
+// @ts-ignore
 const app = next({
 	dev: true,
 	port,
 	isNextDevCommand: false,
 	hostname: hostname(),
-	customServer: true,
+	customServer: true
 });
 
 // @ts-ignore
