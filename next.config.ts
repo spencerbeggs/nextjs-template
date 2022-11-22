@@ -11,7 +11,7 @@ export default async (phase: string): Promise<NextConfig> => {
 		imageDomains.push(os.hostname());
 	}
 	return {
-		assetPrefix: origin,
+		//assetPrefix: origin,
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,
@@ -74,13 +74,14 @@ export default async (phase: string): Promise<NextConfig> => {
 			];
 		},
 		webpack: (config, { webpack }) => {
-			if (isDev) {
+			if (isDev && process.env.APP_ENV === "local") { 
+				const localhost = new URL(process.env.DEV_ASSET_PREFIX as string).host;
 				config.module.rules.push({
 					test: /\.js$/,
 					loader: "string-replace-loader",
 					options: {
 						search: "${url}/_next/webpack-hmr",
-						replace: `wss://${new URL(process.env.DEV_ASSET_PREFIX as string).host}/_next/webpack-hmr`
+						replace: `wss://${localhost}/_next/webpack-hmr`
 					}
 				});
 			}
