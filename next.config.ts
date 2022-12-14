@@ -11,7 +11,7 @@ export default async (phase: string): Promise<NextConfig> => {
 		imageDomains.push(os.hostname());
 	}
 	return {
-		assetPrefix: origin,
+		//assetPrefix: origin,
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,
