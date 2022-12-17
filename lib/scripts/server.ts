@@ -86,7 +86,8 @@ const app = next({
 	hostname: hostname(),
 	customServer: true,
 	// @ts-ignore
-	httpServer: server
+	httpServer: server,
+	dir: new URL("../../", import.meta.url).pathname
 });
 
 // @ts-ignore

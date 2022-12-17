@@ -37,6 +37,7 @@ type Props = {
 	children?: React.ReactNode;
 };
 
+
 export function ShellLayout({ children }: Props) {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 

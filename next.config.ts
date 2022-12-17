@@ -11,7 +11,6 @@ export default async (phase: string): Promise<NextConfig> => {
 		imageDomains.push(os.hostname());
 	}
 	return {
-		assetPrefix: origin,
 		swcMinify: isProd,
 		compress: isProd,
 		poweredByHeader: false,
@@ -35,7 +34,9 @@ export default async (phase: string): Promise<NextConfig> => {
 		},
 		images: {
 			formats: ["image/avif", "image/webp"],
-			domains: imageDomains
+			domains: imageDomains,
+			dangerouslyAllowSVG: true,
+			contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
 		},
 		async headers() {
 			return [
@@ -74,7 +75,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			];
 		},
 		webpack: (config, { webpack }) => {
-			if (isDev && process.env.APP_ENV === "local") { 
+			if (isDev && process.env.APP_ENV === "local") {
 				const localhost = new URL(process.env.DEV_ASSET_PREFIX as string).host;
 				config.module.rules.push({
 					test: /\.js$/,
