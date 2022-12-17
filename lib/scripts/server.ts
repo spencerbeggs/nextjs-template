@@ -115,6 +115,11 @@ const handle = app.getRequestHandler();
 // 	}
 // });
 
+// server.on("connection", (socket) => {
+// 	console.log(socket);
+// 	socket.end();
+// });
+
 server.listen(app.port, app.hostname, () => {
 	log(`${chalk.green("ready")} - dev server available at https://${app.hostname}:${app.port} -> ${site.origin}`);
 });
