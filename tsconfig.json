@@ -2,7 +2,9 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"lib": ["dom", "dom.iterable", "esnext"],
-		"module": "ESNext",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"rootDir": ".",
 		"baseUrl": ".",
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -10,7 +12,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,

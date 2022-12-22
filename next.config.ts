@@ -4,7 +4,7 @@ import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD, PHASE_PRODUCTION_SERV
 export default async (phase: string): Promise<NextConfig> => {
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 	const isProd = phase === PHASE_PRODUCTION_BUILD || phase ===  PHASE_PRODUCTION_SERVER;
-	const { hostname, origin } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
+	const { hostname } = new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
 	let imageDomains = [hostname];
 	if (isDev) {
 		const os = await import("os");
@@ -36,7 +36,8 @@ export default async (phase: string): Promise<NextConfig> => {
 			formats: ["image/avif", "image/webp"],
 			domains: imageDomains,
 			dangerouslyAllowSVG: true,
-			contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
+			contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+			path: "./next"
 		},
 		async headers() {
 			return [
