@@ -19,10 +19,10 @@ export default async (phase: string): Promise<NextConfig> => {
 			runtime: "experimental-edge",
 			appDir: true,
 			swcFileReading: true,
-			modularizeImports: {
-				"lodash-es": {
-					transform: "lodash-es/{{member}}"
-				}
+		},
+		modularizeImports: {
+			"lodash-es": {
+				transform: "lodash-es/{{member}}"
 			}
 		},
 		compiler: {
@@ -36,8 +36,7 @@ export default async (phase: string): Promise<NextConfig> => {
 			formats: ["image/avif", "image/webp"],
 			domains: imageDomains,
 			dangerouslyAllowSVG: true,
-			contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-			path: "./next"
+			contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
 		},
 		async headers() {
 			return [

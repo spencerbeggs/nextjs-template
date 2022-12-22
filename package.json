@@ -12,7 +12,8 @@
 	},
 	"scripts": {
 		"dev": "yarn compile && PORT=3001 APP_ENV=local node --no-warnings --loader ts-node/esm --experimental-import-meta-resolve --experimental-vm-modules --experimental-specifier-resolution=node ./lib/scripts/server.ts",
-		"build": "yarn compile && APP_ENV=production npx --node-options='NODE_ENV=production --experimental-import-meta-resolve --experimental-import-meta-resolve --experimental-vm-modules' next build",
+		"build": "yarn compile && APP_ENV=production npx --node-options='NODE_ENV=production --experimental-import-meta-resolve --experimental-import-meta-resolve --experimental-vm-modules' next build && yarn move-static",
+		"move-static": "cp -r static/* .next/static && rm -rf static",
 		"compile": "yarn run swc next.config.ts -o next.config.mjs --config-file .swc.next.config -s inline",
 		"engines": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node ./lib/scripts/engines.ts",
 		"lint": "eslint . --ext .ts,.tsx,.cjs,.mjs,.js",
@@ -107,7 +108,7 @@
 		"eslint-config-next": "^13.0.7",
 		"eslint-plugin-unused-imports": "^2.0.0",
 		"lodash-es": "^4.17.21",
-		"next": "^13.0.7",
+		"next": "13.0.8-canary.3",
 		"next-pwa": "^5.6.0",
 		"next-redux-wrapper": "^8.0.0",
 		"postcss-nesting": "^10.2.0",
