@@ -24,3 +24,5 @@ export default function Home() {
 		</article>
 	);
 }
+
+export const revalidate = 600;

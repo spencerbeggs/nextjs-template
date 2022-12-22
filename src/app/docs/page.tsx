@@ -8,3 +8,4 @@ export default function Docs() {
 	);
 };
 
+export const revalidate = 600;

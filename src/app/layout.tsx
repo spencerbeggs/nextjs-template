@@ -22,10 +22,16 @@ export default function RootLayout({ children }: Props) {
 		<html lang="en-US" className={inter.className}>
 			<head>
 				<meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
-				<meta key="theme-color" name="theme-color" content="#fb31aa" />
-				<link key="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href={assets.icons.icon180x180} />
-				<link key="icon-32x32" rel="icon" type="image/png" sizes="32x32" href={assets.icons.icon32x32} />
 				<link key="icon-16x16" rel="icon" type="image/png" sizes="16x16" href={assets.icons.icon16x16} />
+				<link key="icon-32x32" rel="icon" type="image/png" sizes="32x32" href={assets.icons.icon32x32} />
+				<link
+					key="apple-touch-icon"
+					type="image/png"
+					rel="apple-touch-icon"
+					sizes="180x180"
+					href={assets.icons.icon180x180}
+				/>
+				<meta key="theme-color" name="theme-color" content="#fb31aa" />
 				<link key="manifest" rel="manifest" href={assets.manifest}></link>
 			</head>
 			<body>
@@ -34,3 +40,5 @@ export default function RootLayout({ children }: Props) {
 		</html>
 	);
 }
+
+export const revalidate = 600;

@@ -8,4 +8,5 @@ export default function Tutorials() {
 	);
 }
 
+export const revalidate = 600;
 

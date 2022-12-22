@@ -7,3 +7,5 @@ export default function FAQ() {
 		</article>
 	);
 }
+
+export const revalidate = 600;
