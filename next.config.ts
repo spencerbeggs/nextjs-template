@@ -41,11 +41,11 @@ export default async (phase: string): Promise<NextConfig> => {
 		async headers() {
 			return [
 				{
-					source: "/:path",
+					source: "/:path*",
 					headers: [
 						{
 							key: "Cache-Control",
-							value: "public, max-age=600, stale-while-revalidate"
+							value: "public,s-max-age=600,stale-while-revalidate"
 						}
 					]
 				},
