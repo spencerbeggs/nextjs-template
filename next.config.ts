@@ -41,6 +41,15 @@ export default async (phase: string): Promise<NextConfig> => {
 		async headers() {
 			return [
 				{
+					source: "/:path",
+					headers: [
+						{
+							key: "Cache-Control",
+							value: "public, max-age=600, stale-while-revalidate"
+						}
+					]
+				},
+				{
 					source: "/:path*",
 					has: [
 						{
